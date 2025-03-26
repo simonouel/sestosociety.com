@@ -21,12 +21,12 @@
   </style>
 </head>
 <body>
-  <img id="imgurImage" src="" alt="Random Imgur Image">
+  <img id="imgurMeme" src="" alt="Random Imgur Meme">
 
   <script>
     const clientId = 'WillyOuelletOuiAllo'; // Replace with your Imgur Client ID
 
-    fetch('https://api.imgur.com/3/gallery/t/meme/random/1', {
+    fetch('https://api.imgur.com/3/gallery/search/time/1?q=meme', { //Search for meme
       headers: {
         Authorization: `Client-ID ${clientId}`
       }
@@ -34,16 +34,36 @@
     .then(response => response.json())
     .then(data => {
       if (data.success && data.data && data.data.length > 0) {
-        const imageUrl = data.data[0].link;
-        document.getElementById('imgurImage').src = imageUrl;
+        let imageUrl;
+        let validImageFound = false;
+        let attempt = 0;
+        while(validImageFound === false && attempt < data.data.length) {
+          if(data.data[attempt].images){
+            imageUrl = data.data[attempt].images[0].link;
+          } else {
+            imageUrl = data.data[attempt].link;
+          }
+
+          if(imageUrl && (imageUrl.endsWith(".jpg") || imageUrl.endsWith(".png") || imageUrl.endsWith(".gif"))){
+            validImageFound = true;
+          }
+          attempt++;
+        }
+
+        if(validImageFound){
+          document.getElementById('imgurMeme').src = imageUrl;
+        } else {
+          document.getElementById('imgurMeme').src = "https://via.placeholder.com/800x600?text=Imgur+Meme+Error";
+        }
+
       } else {
-        console.error('Error fetching Imgur image:', data);
-        document.getElementById('imgurImage').src = "https://via.placeholder.com/800x600?text=Imgur+Image+Error";
+        console.error('Error fetching Imgur meme:', data);
+        document.getElementById('imgurMeme').src = "https://via.placeholder.com/800x600?text=Imgur+Meme+Error";
       }
     })
     .catch(error => {
-      console.error('Error fetching Imgur image:', error);
-      document.getElementById('imgurImage').src = "https://via.placeholder.com/800x600?text=Imgur+Image+Error";
+      console.error('Error fetching Imgur meme:', error);
+      document.getElementById('imgurMeme').src = "https://via.placeholder.com/800x600?text=Imgur+Meme+Error";
     });
   </script>
 </body>
