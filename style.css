@@ -1,0 +1,72 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    background-color: #f0f0f0; /* Light background */
+}
+
+.header, main, footer {
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 800px;
+}
+
+header h1 {
+    color: #333;
+    font-size: 2.5em;
+}
+
+.news-container, .image-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.news-item {
+    text-decoration: none;
+    color: #333;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 8px;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.news-item img, .image-container img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+.background-tiles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-image: url('tile-sesto.png'); /* Create this tile image */
+    background-repeat: repeat;
+    opacity: 0.3; /* Subtle tile effect */
+}
+
+footer {
+    background-color: #eee;
+    padding: 10px;
+    margin-top: 50px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .news-container, .image-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .news-item {
+        width: 90%;
+    }
+}
