@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Random Image</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+    }
+    img {
+      max-width: 80%;
+      max-height: 80%;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <img id="randomImage" src="" alt="Random Image">
+
+  <script>
+    function getRandomImageUrl() {
+      // Use a service like Unsplash Source or Picsum Photos for random images.
+      // Unsplash Source:
+      // return "https://source.unsplash.com/random/800x600"; // Random 800x600 image
+
+      // Picsum Photos:
+      const width = Math.floor(Math.random() * 800) + 200; // Random width between 200 and 1000
+      const height = Math.floor(Math.random() * 600) + 200; // Random height between 200 and 800
+      return `https://picsum.photos/${width}/${height}`; // Random image with generated dimensions
+
+      // you can also use a local array of image paths if you prefer.
+      // const images = ["image1.jpg", "image2.png", "image3.gif"];
+      // const randomIndex = Math.floor(Math.random() * images.length);
+      // return images[randomIndex];
+    }
+
+    const randomImage = document.getElementById("randomImage");
+    randomImage.src = getRandomImageUrl();
+  </script>
+</body>
+</html>
