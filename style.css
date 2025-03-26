@@ -49,9 +49,31 @@ header h1 {
     width: 100%;
     height: 100%;
     z-index: -1;
-    background-image: url('tile-sesto.png'); /* Create this tile image */
-    background-repeat: repeat;
-    opacity: 0.3; /* Subtle tile effect */
+    background-image: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 1px,
+        rgba(0, 0, 0, 0.1) 1px, /* Adjust opacity as needed */
+        rgba(0, 0, 0, 0.1) 20px /* Adjust spacing as needed */
+    );
+    background-size: auto 50px; /* Adjust vertical spacing */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em; /* Adjust font size */
+    color: rgba(0, 0, 0, 0.1); /* Match the gradient color */
+    white-space: pre-wrap; /* Preserve spaces and line breaks */
+    pointer-events: none; /* Prevent interaction */
+}
+
+.background-tiles::before {
+    content: "sestosociety.com\A".repeat(50); /* Repeat the text, adjust as needed*/
+}
+
+header, main, footer {
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 800px;
 }
 
 footer {
