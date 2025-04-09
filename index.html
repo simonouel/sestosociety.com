@@ -9,163 +9,193 @@
     <title>Sesto Society - Carousel</title>
 
     <style>
+      /* Style for carousel items to provide background */
+      .carousel-item {
+         background-color: white; /* White background for empty space */
+         /* Ensure the item itself respects the max-height potentially set for images */
+         /* You might need to adjust this if images have varying heights */
+         /* height: 600px; /* Or keep it flexible */
+      }
+
+      /* Adjust image display: fit within container, keep aspect ratio */
+      .carousel-item img {
+        max-height: 600px; /* Adjust this value as needed */
+        width: 100%; /* Let width adjust based on height and contain */
+        height: 600px; /* Match max-height to ensure container has size for contain */
+        object-fit: contain; /* Scale image down to fit, keep aspect ratio */
+        object-position: center; /* Center the image within the frame */
+        display: block; /* Ensure proper block display */
+        margin: 0 auto; /* Center image horizontally */
+      }
+      
       /* Style for the overlay text */
       .carousel-caption h5 {
-        font-size: 3rem; /* Make text larger */
+        font-size: 2.5rem; /* Slightly smaller text */
         font-weight: bold;
         /* Add a subtle shadow to make text more readable on various images */
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); 
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); 
+        /* You might need to adjust text color if background is white */
+        /* color: #333; /* Example: Darker text color */
       }
       /* Ensure caption is always visible */
       .carousel-caption {
-        /* Override Bootstrap defaults that might hide it on small screens */
         display: block !important; 
-        right: 15%; /* Default */
-        left: 15%; /* Default */
-        bottom: 1.25rem; /* Default */
-        padding-top: 1.25rem; /* Default */
-        padding-bottom: 1.25rem; /* Default */
-        color: #fff; /* Default */
-        text-align: center; /* Default */
+        right: 15%; 
+        left: 15%; 
+        bottom: 1.25rem; 
+        padding-top: 1.25rem; 
+        padding-bottom: 1.25rem; 
+        color: #fff; /* Keeping white text, might need adjustment */
+        text-align: center; 
       }
     </style>
   </head>
   <body>
 
-    <div id="sestoCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="bg-dark text-white p-3 text-center mb-4">
+      <h1 class="display-4">Welcome to the Sesto Society</h1>
+    </div>
+
+    <div class="text-center mb-3">
+      <h2>Les Sestos de l'heure</h2>
+    </div>
+
+    <div class="container" style="max-width: 960px;"> 
       
-      <div class="carousel-indicators">
-        <button type="button" data-bs-target="#sestoCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#sestoCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#sestoCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-        <button type="button" data-bs-target="#sestoCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
-        <button type="button" data-bs-target="#sestoCarousel" data-bs-slide-to="4" aria-label="Slide 5"></button>
-        <button type="button" data-bs-target="#sestoCarousel" data-bs-slide-to="5" aria-label="Slide 6"></button>
-        <button type="button" data-bs-target="#sestoCarousel" data-bs-slide-to="6" aria-label="Slide 7"></button>
-        <button type="button" data-bs-target="#sestoCarousel" data-bs-slide-to="7" aria-label="Slide 8"></button>
-        <button type="button" data-bs-target="#sestoCarousel" data-bs-slide-to="8" aria-label="Slide 9"></button>
-      </div>
-
-      <div class="carousel-inner">
+      <div id="sestoCarousel" class="carousel slide" data-bs-ride="carousel">
         
-        <div class="carousel-item active">
-          <img 
-            src="https://sestosociety.com/images/Chris_01.png" 
-            class="d-block w-100" 
-            alt="Slide Sesto Jean-Christophe 1"
-            onerror="this.onerror=null; this.src='https://placehold.co/1200x500/007bff/ffffff?text=Image+Jean-Christophe+1+Indisponible';"
-          >
-          <div class="carousel-caption">
-            <h5>Sesto Jean-Christophe</h5>
-          </div>
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#sestoCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#sestoCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#sestoCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          <button type="button" data-bs-target="#sestoCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+          <button type="button" data-bs-target="#sestoCarousel" data-bs-slide-to="4" aria-label="Slide 5"></button>
+          <button type="button" data-bs-target="#sestoCarousel" data-bs-slide-to="5" aria-label="Slide 6"></button>
+          <button type="button" data-bs-target="#sestoCarousel" data-bs-slide-to="6" aria-label="Slide 7"></button>
+          <button type="button" data-bs-target="#sestoCarousel" data-bs-slide-to="7" aria-label="Slide 8"></button>
+          <button type="button" data-bs-target="#sestoCarousel" data-bs-slide-to="8" aria-label="Slide 9"></button>
         </div>
 
-        <div class="carousel-item">
-          <img 
-            src="https://sestosociety.com/images/Chris_02.png" 
-            class="d-block w-100" 
-            alt="Slide Sesto Jean-Christophe 2"
-            onerror="this.onerror=null; this.src='https://placehold.co/1200x500/007bff/ffffff?text=Image+Jean-Christophe+2+Indisponible';"
-          >
-          <div class="carousel-caption">
-            <h5>Sesto Jean-Christophe</h5>
+        <div class="carousel-inner">
+          
+          <div class="carousel-item active">
+            <img 
+              src="https://sestosociety.com/images/Chris_01.png" 
+              class="d-block w-100" 
+              alt="Jean-Christophe 1"
+              onerror="this.onerror=null; this.src='https://placehold.co/1200x500/cccccc/000000?text=Image+Jean-Christophe+1+Indisponible';"
+            >
+            <div class="carousel-caption">
+              <h5>Jean-Christophe</h5>
+            </div>
           </div>
-        </div>
 
-        <div class="carousel-item">
-          <img 
-            src="https://sestosociety.com/images/Chris_03.png" 
-            class="d-block w-100" 
-            alt="Slide Sesto Jean-Christophe 3"
-            onerror="this.onerror=null; this.src='https://placehold.co/1200x500/007bff/ffffff?text=Image+Jean-Christophe+3+Indisponible';"
-          >
-          <div class="carousel-caption">
-            <h5>Sesto Jean-Christophe</h5>
+          <div class="carousel-item">
+            <img 
+              src="https://sestosociety.com/images/Chris_02.png" 
+              class="d-block w-100" 
+              alt="Jean-Christophe 2"
+              onerror="this.onerror=null; this.src='https://placehold.co/1200x500/cccccc/000000?text=Image+Jean-Christophe+2+Indisponible';"
+            >
+            <div class="carousel-caption">
+              <h5>Jean-Christophe</h5>
+            </div>
           </div>
-        </div>
 
-        <div class="carousel-item">
-          <img 
-            src="https://sestosociety.com/images/Chris_04.png" 
-            class="d-block w-100" 
-            alt="Slide Sesto Jean-Christophe 4"
-            onerror="this.onerror=null; this.src='https://placehold.co/1200x500/007bff/ffffff?text=Image+Jean-Christophe+4+Indisponible';"
-          >
-          <div class="carousel-caption">
-            <h5>Sesto Jean-Christophe</h5>
+          <div class="carousel-item">
+            <img 
+              src="https://sestosociety.com/images/Chris_03.png" 
+              class="d-block w-100" 
+              alt="Jean-Christophe 3"
+              onerror="this.onerror=null; this.src='https://placehold.co/1200x500/cccccc/000000?text=Image+Jean-Christophe+3+Indisponible';"
+            >
+            <div class="carousel-caption">
+              <h5>Jean-Christophe</h5>
+            </div>
           </div>
-        </div>
 
-        <div class="carousel-item">
-          <img 
-            src="https://sestosociety.com/images/Chris_05.png" 
-            class="d-block w-100" 
-            alt="Slide Sesto Jean-Christophe 5"
-            onerror="this.onerror=null; this.src='https://placehold.co/1200x500/007bff/ffffff?text=Image+Jean-Christophe+5+Indisponible';"
-          >
-          <div class="carousel-caption">
-            <h5>Sesto Jean-Christophe</h5>
+          <div class="carousel-item">
+            <img 
+              src="https://sestosociety.com/images/Chris_04.png" 
+              class="d-block w-100" 
+              alt="Jean-Christophe 4"
+              onerror="this.onerror=null; this.src='https://placehold.co/1200x500/cccccc/000000?text=Image+Jean-Christophe+4+Indisponible';"
+            >
+            <div class="carousel-caption">
+              <h5>Jean-Christophe</h5>
+            </div>
           </div>
-        </div>
 
-        <div class="carousel-item">
-          <img 
-            src="https://sestosociety.com/images/Dom_01.png" 
-            class="d-block w-100" 
-            alt="Slide Sesto Jean-Dominique 1"
-            onerror="this.onerror=null; this.src='https://placehold.co/1200x500/6c757d/ffffff?text=Image+Jean-Dominique+1+Indisponible';"
-          >
-          <div class="carousel-caption">
-            <h5>Sesto Jean-Dominique</h5>
+          <div class="carousel-item">
+            <img 
+              src="https://sestosociety.com/images/Chris_05.png" 
+              class="d-block w-100" 
+              alt="Jean-Christophe 5"
+              onerror="this.onerror=null; this.src='https://placehold.co/1200x500/cccccc/000000?text=Image+Jean-Christophe+5+Indisponible';"
+            >
+            <div class="carousel-caption">
+              <h5>Jean-Christophe</h5>
+            </div>
           </div>
-        </div>
 
-        <div class="carousel-item">
-          <img 
-            src="https://sestosociety.com/images/Dom_02.png" 
-            class="d-block w-100" 
-            alt="Slide Sesto Jean-Dominique 2"
-            onerror="this.onerror=null; this.src='https://placehold.co/1200x500/6c757d/ffffff?text=Image+Jean-Dominique+2+Indisponible';"
-          >
-          <div class="carousel-caption">
-            <h5>Sesto Jean-Dominique</h5>
+          <div class="carousel-item">
+            <img 
+              src="https://sestosociety.com/images/Dom_01.png" 
+              class="d-block w-100" 
+              alt="Jean-Dominique 1"
+              onerror="this.onerror=null; this.src='https://placehold.co/1200x500/cccccc/000000?text=Image+Jean-Dominique+1+Indisponible';"
+            >
+            <div class="carousel-caption">
+              <h5>Jean-Dominique</h5>
+            </div>
           </div>
-        </div>
 
-        <div class="carousel-item">
-          <img 
-            src="https://sestosociety.com/images/Dom_03.png" 
-            class="d-block w-100" 
-            alt="Slide Sesto Jean-Dominique 3"
-            onerror="this.onerror=null; this.src='https://placehold.co/1200x500/6c757d/ffffff?text=Image+Jean-Dominique+3+Indisponible';"
-          >
-          <div class="carousel-caption">
-            <h5>Sesto Jean-Dominique</h5>
+          <div class="carousel-item">
+            <img 
+              src="https://sestosociety.com/images/Dom_02.png" 
+              class="d-block w-100" 
+              alt="Jean-Dominique 2"
+              onerror="this.onerror=null; this.src='https://placehold.co/1200x500/cccccc/000000?text=Image+Jean-Dominique+2+Indisponible';"
+            >
+            <div class="carousel-caption">
+              <h5>Jean-Dominique</h5>
+            </div>
           </div>
-        </div>
 
-        <div class="carousel-item">
-          <img 
-            src="https://sestosociety.com/images/Ben_01.png" 
-            class="d-block w-100" 
-            alt="Slide Sesto Jean-Benoît"
-            onerror="this.onerror=null; this.src='https://placehold.co/1200x500/198754/ffffff?text=Image+Jean-Benoît+Indisponible';"
-          >
-          <div class="carousel-caption">
-            <h5>Sesto Jean-Benoît</h5>
+          <div class="carousel-item">
+            <img 
+              src="https://sestosociety.com/images/Dom_03.png" 
+              class="d-block w-100" 
+              alt="Jean-Dominique 3"
+              onerror="this.onerror=null; this.src='https://placehold.co/1200x500/cccccc/000000?text=Image+Jean-Dominique+3+Indisponible';"
+            >
+            <div class="carousel-caption">
+              <h5>Jean-Dominique</h5>
+            </div>
           </div>
-        </div>
 
-      </div> <button class="carousel-control-prev" type="button" data-bs-target="#sestoCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Précédent</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#sestoCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Suivant</span>
-      </button>
+          <div class="carousel-item">
+            <img 
+              src="https://sestosociety.com/images/Ben_01.png" 
+              class="d-block w-100" 
+              alt="Jean-Benoît"
+              onerror="this.onerror=null; this.src='https://placehold.co/1200x500/cccccc/000000?text=Image+Jean-Benoît+Indisponible';"
+            >
+            <div class="carousel-caption">
+              <h5>Jean-Benoît</h5>
+            </div>
+          </div>
 
-    </div> <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        </div> <button class="carousel-control-prev" type="button" data-bs-target="#sestoCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Précédent</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#sestoCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Suivant</span>
+        </button>
+
+      </div> </div> <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
     <script>
       // Initialize the carousel (though data-bs-ride="carousel" does this automatically)
