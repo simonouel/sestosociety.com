@@ -17,7 +17,7 @@
         font-family: 'Nunito', sans-serif;
       }
       .sesto-card-img {
-        height: 250px; /* Default height for larger screens */
+        height: 250px; 
         object-fit: cover; 
         cursor: pointer; 
          border-radius: var(--bs-card-inner-border-radius); 
@@ -35,68 +35,85 @@
         position: relative; 
       }
       
-      /* Simple Scale-Fade Animation Keyframes */
-      @keyframes scale-fade-in {
-        0% {
-          transform: scale(0.7); 
-          opacity: 0;
-        }
-        100% {
-          transform: scale(1);
-          opacity: 1;
-        }
-      }
+      @keyframes scale-fade-in { 0% { transform: scale(0.7); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+      #imageModal.modal.show .modal-dialog { 
+          animation: scale-fade-in 0.5s ease-out; 
+      } 
 
-      /* Apply simple CSS animation to the modal dialog */
-      .modal.show .modal-dialog {
-        animation: scale-fade-in 0.5s ease-out; 
-      }
-
-      /* Modal Image Styling: Force 100% width, auto height */
       #modalImage {
-          width: 100%; 
-          height: auto; 
-          display: block;
-          margin: 0 auto; 
+          width: 100%; height: auto; display: block; margin: 0 auto; 
+          max-height: calc(85vh - 130px); 
+          object-fit: contain; 
       }
        .modal-content {
-           overflow: hidden; 
-           background-color: var(--bs-body-bg); 
+           overflow: hidden; background-color: var(--bs-body-bg); 
+           min-height: 85vh; display: flex; flex-direction: column;
        }
-       /* Section heading style */
+       #cartModal .modal-content {
+           min-height: auto; 
+       }
+       .modal-body {
+            overflow-y: auto; flex-grow: 1; display: flex; 
+            align-items: center; justify-content: center; padding: 1rem; 
+       }
+       #cartModal .modal-body {
+           display: block; 
+           align-items: normal;
+           justify-content: normal;
+       }
+        .modal-footer {
+            flex-shrink: 0; border-top: 1px solid var(--bs-border-color-translucent); 
+            padding-top: 1rem; padding-bottom: 1rem;
+        }
        .section-heading {
-           border-bottom: 1px solid var(--bs-border-color-translucent);
-           padding-bottom: 0.5rem;
+           border-bottom: 1px solid var(--bs-border-color-translucent); padding-bottom: 0.5rem;
+           color: var(--bs-body-color); 
        }
-       /* Ensure modal body allows scrolling if needed */
-        .modal-body {
-            overflow-y: auto; 
-        }
+       #cart-count { font-size: 0.7em; }
+       #cartModalBody ul { list-style: none; padding: 0; margin-bottom: 0;} 
+       #cartModalBody li { display: flex; 
+                           justify-content: space-between; 
+                           align-items: center; 
+                           padding: 0.75rem 0; 
+                           border-bottom: 1px solid var(--bs-border-color-translucent); }
+       #cartModalBody li:last-child { border-bottom: none; }
+       .cart-item-thumbnail { 
+           width: 50px; height: 50px; object-fit: cover;
+           border-radius: 0.25rem; margin-right: 1rem; 
+           flex-shrink: 0; 
+       }
+       .cart-item-details { flex-grow: 1; margin-right: 1rem; word-break: break-word; } 
+       .remove-item-btn { flex-shrink: 0; } 
+       #checkoutBtn .spinner-border { vertical-align: text-bottom; }
 
-      /* --- Mobile Specific Styles --- */
+
       @media (max-width: 575.98px) {
-        .sesto-card-img {
-          height: 150px; /* Reduced height for card images on mobile */
-        }
-        .display-4 {
-            font-size: 2.25rem; /* Smaller H1 on mobile */
-        }
-         h2 {
-            font-size: 1.6rem; /* Smaller H2 on mobile */
-         }
-         h3.section-heading {
-             font-size: 1.4rem; /* Smaller H3 on mobile */
-             margin-top: 2rem !important; /* Adjust spacing */
-         }
+        .sesto-card-img { height: 150px; }
+        .display-4 { font-size: 2.25rem; }
+         h2 { font-size: 1.6rem; }
+         h3.section-heading { font-size: 1.4rem; margin-top: 2rem !important; }
+         #imageModal .modal-footer { flex-direction: column; align-items: stretch; }
+         #imageModal .modal-footer .btn { margin-top: 0.5rem; margin-bottom: 0; margin-left: 0 !important; margin-right: 0 !important; }
+         #imageModal .modal-footer .btn:first-child { margin-top: 0; } 
+          #modalImage { max-height: calc(75vh - 160px); }
+          #cartModalFooter { flex-direction: column; align-items: stretch; }
+          #cartModalFooter > div:first-child { margin-bottom: 0.5rem; text-align: center;}
+          #cartModalFooter > div:last-child { display: flex; flex-direction: column; }
+          #cartModalFooter > div:last-child .btn { margin-top: 0.5rem;}
+          #cartModalFooter > div:last-child .btn:first-child { margin-top: 0;}
       }
     </style>
   </head>
   <body>
 
-    <div class="bg-dark text-white p-3 text-center mb-4"> 
-      <h1 class="display-4">
-        Welcome to the Sesto Society
-      </h1>
+    <div class="bg-dark text-white p-3 text-center mb-4 position-relative"> 
+      <h1 class="display-4">SestoSociety.com</h1> 
+      <div class="position-absolute top-50 end-0 translate-middle-y pe-3">
+          <button type="button" class="btn btn-outline-light position-relative border-0" data-bs-toggle="modal" data-bs-target="#cartModal" aria-label="Voir le panier">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+              <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="display: none;">0</span>
+          </button>
+      </div>
     </div>
 
     <div class="text-center mb-4"> 
@@ -104,174 +121,39 @@
     </div>
 
     <div class="container mt-4"> 
-
-      <h3 class="mb-3 mt-4 section-heading">Jean-Christophe</h3>
+      <h3 class="mb-3 mt-4 section-heading">Jean-Christophe :: Sesto Typic</h3>
       <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 g-3 g-sm-5" id="sestoGridChris"> 
-        <div class="col">
-          <div class="card h-100"> 
-             <img 
-              src="https://sestosociety.com/images/Chris_01.png" 
-              class="card-img-top sesto-card-img" 
-              alt="Jean-Christophe 1" 
-              onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';"
-              data-bs-toggle="modal" 
-              data-bs-target="#imageModal"
-              data-img-src="https://sestosociety.com/images/Chris_01.png"
-              data-img-name="Jean-Christophe">
-            </div>
-        </div>
-        <div class="col">
-          <div class="card h-100">
-             <img 
-              src="https://sestosociety.com/images/Chris_02.png" 
-              class="card-img-top sesto-card-img" 
-              alt="Jean-Christophe 2" 
-              onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';"
-              data-bs-toggle="modal" 
-              data-bs-target="#imageModal"
-              data-img-src="https://sestosociety.com/images/Chris_02.png"
-              data-img-name="Jean-Christophe">
-            </div>
-        </div>
-        <div class="col">
-          <div class="card h-100">
-             <img 
-              src="https://sestosociety.com/images/Chris_03.png" 
-              class="card-img-top sesto-card-img" 
-              alt="Jean-Christophe 3" 
-              onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';"
-              data-bs-toggle="modal" 
-              data-bs-target="#imageModal"
-              data-img-src="https://sestosociety.com/images/Chris_03.png"
-              data-img-name="Jean-Christophe">
-            </div>
-        </div>
-        <div class="col">
-          <div class="card h-100">
-             <img 
-              src="https://sestosociety.com/images/Chris_04.png" 
-              class="card-img-top sesto-card-img" 
-              alt="Jean-Christophe 4" 
-              onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';"
-              data-bs-toggle="modal" 
-              data-bs-target="#imageModal"
-              data-img-src="https://sestosociety.com/images/Chris_04.png"
-              data-img-name="Jean-Christophe">
-            </div>
-        </div>
-        <div class="col">
-          <div class="card h-100">
-             <img 
-              src="https://sestosociety.com/images/Chris_05.png" 
-              class="card-img-top sesto-card-img" 
-              alt="Jean-Christophe 5" 
-              onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';"
-              data-bs-toggle="modal" 
-              data-bs-target="#imageModal"
-              data-img-src="https://sestosociety.com/images/Chris_05.png"
-              data-img-name="Jean-Christophe">
-            </div>
-        </div>
-      </div> <h3 class="mb-3 mt-5 section-heading">Jean-Dominique</h3>
+        <div class="col"> <div class="card h-100"> <img src="https://sestosociety.com/images/Chris_01.png" class="card-img-top sesto-card-img" alt="Jean-Christophe :: Sesto Typic 1" onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';" data-bs-toggle="modal" data-bs-target="#imageModal" data-img-src="https://sestosociety.com/images/Chris_01.png" data-img-name="Jean-Christophe :: Sesto Typic"> </div> </div>
+        <div class="col"> <div class="card h-100"> <img src="https://sestosociety.com/images/Chris_02.png" class="card-img-top sesto-card-img" alt="Jean-Christophe :: Sesto Typic 2" onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';" data-bs-toggle="modal" data-bs-target="#imageModal" data-img-src="https://sestosociety.com/images/Chris_02.png" data-img-name="Jean-Christophe :: Sesto Typic"> </div> </div>
+        <div class="col"> <div class="card h-100"> <img src="https://sestosociety.com/images/Chris_03.png" class="card-img-top sesto-card-img" alt="Jean-Christophe :: Sesto Typic 3" onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';" data-bs-toggle="modal" data-bs-target="#imageModal" data-img-src="https://sestosociety.com/images/Chris_03.png" data-img-name="Jean-Christophe :: Sesto Typic"> </div> </div>
+      </div> 
+
+      <h3 class="mb-3 mt-5 section-heading">Jean-Dominique :: Ultra Sess</h3>
       <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 g-3 g-sm-5" id="sestoGridDom">
-         <div class="col">
-          <div class="card h-100">
-             <img 
-              src="https://sestosociety.com/images/Dom_01.png" 
-              class="card-img-top sesto-card-img" 
-              alt="Jean-Dominique 1" 
-              onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';"
-              data-bs-toggle="modal" 
-              data-bs-target="#imageModal"
-              data-img-src="https://sestosociety.com/images/Dom_01.png"
-              data-img-name="Jean-Dominique">
-            </div>
-        </div>
-        <div class="col">
-          <div class="card h-100">
-             <img 
-              src="https://sestosociety.com/images/Dom_02.png" 
-              class="card-img-top sesto-card-img" 
-              alt="Jean-Dominique 2" 
-              onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';"
-              data-bs-toggle="modal" 
-              data-bs-target="#imageModal"
-              data-img-src="https://sestosociety.com/images/Dom_02.png"
-              data-img-name="Jean-Dominique">
-            </div>
-        </div>
-        <div class="col">
-          <div class="card h-100">
-             <img 
-              src="https://sestosociety.com/images/Dom_03.png" 
-              class="card-img-top sesto-card-img" 
-              alt="Jean-Dominique 3" 
-              onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';"
-              data-bs-toggle="modal" 
-              data-bs-target="#imageModal"
-              data-img-src="https://sestosociety.com/images/Dom_03.png"
-              data-img-name="Jean-Dominique">
-            </div>
-        </div>
-      </div> <h3 class="mb-3 mt-5 section-heading">Jean-Benoît</h3>
-      <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 g-3 g-sm-5" id="sestoGridBen">
-         <div class="col">
-          <div class="card h-100">
-             <img 
-              src="https://sestosociety.com/images/Ben_01.png" 
-              class="card-img-top sesto-card-img" 
-              alt="Jean-Benoît" 
-              onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';"
-              data-bs-toggle="modal" 
-              data-bs-target="#imageModal"
-              data-img-src="https://sestosociety.com/images/Ben_01.png"
-              data-img-name="Jean-Benoît">
-            </div>
-        </div>
-      </div> <h3 class="mb-3 mt-5 section-heading">Jean-Arthur</h3>
-      <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 g-3 g-sm-5" id="sestoGridArthur">
-         <div class="col">
-          <div class="card h-100">
-             <img 
-              src="https://sestosociety.com/images/Arthur_01.png" 
-              class="card-img-top sesto-card-img" 
-              alt="Jean-Arthur 1" 
-              onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';"
-              data-bs-toggle="modal" 
-              data-bs-target="#imageModal"
-              data-img-src="https://sestosociety.com/images/Arthur_01.png"
-              data-img-name="Jean-Arthur">
-            </div>
-        </div>
-         <div class="col">
-          <div class="card h-100">
-             <img 
-              src="https://sestosociety.com/images/Arthur_02.png" 
-              class="card-img-top sesto-card-img" 
-              alt="Jean-Arthur 2" 
-              onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';"
-              data-bs-toggle="modal" 
-              data-bs-target="#imageModal"
-              data-img-src="https://sestosociety.com/images/Arthur_02.png"
-              data-img-name="Jean-Arthur">
-            </div>
-        </div>
-      </div> <h3 class="mb-3 mt-5 section-heading">Jean-Benîto Grand Chef Sesto</h3> 
-      <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 g-3 g-sm-5" id="sestoGridBenito">
-         <div class="col">
-          <div class="card h-100">
-             <img 
-              src="https://sestosociety.com/images/Benito_01.png" 
-              class="card-img-top sesto-card-img" 
-              alt="Jean-Benîto Grand Chef Sesto" 
-              onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';"
-              data-bs-toggle="modal" 
-              data-bs-target="#imageModal"
-              data-img-src="https://sestosociety.com/images/Benito_01.png"
-              data-img-name="Jean-Benîto Grand Chef Sesto"> 
-            </div>
-        </div>
-      </div> </div> <footer class="py-4 mt-5 text-center text-body-secondary"> 
+         <div class="col"> <div class="card h-100"> <img src="https://sestosociety.com/images/Dom_01.png" class="card-img-top sesto-card-img" alt="Jean-Dominique :: Ultra Sess 1" onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';" data-bs-toggle="modal" data-bs-target="#imageModal" data-img-src="https://sestosociety.com/images/Dom_01.png" data-img-name="Jean-Dominique :: Ultra Sess"> </div> </div>
+         <div class="col"> <div class="card h-100"> <img src="https://sestosociety.com/images/Dom_02.png" class="card-img-top sesto-card-img" alt="Jean-Dominique :: Ultra Sess 2" onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';" data-bs-toggle="modal" data-bs-target="#imageModal" data-img-src="https://sestosociety.com/images/Dom_02.png" data-img-name="Jean-Dominique :: Ultra Sess"> </div> </div>
+         <div class="col"> <div class="card h-100"> <img src="https://sestosociety.com/images/Dom_03.png" class="card-img-top sesto-card-img" alt="Jean-Dominique :: Ultra Sess 3" onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';" data-bs-toggle="modal" data-bs-target="#imageModal" data-img-src="https://sestosociety.com/images/Dom_03.png" data-img-name="Jean-Dominique :: Ultra Sess"> </div> </div>
+      </div> 
+
+      <h3 class="mb-3 mt-5 section-heading">Jean-Benîto :: Père fondateur</h3> 
+       <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 g-3 g-sm-5" id="sestoGridBenito">
+         <div class="col"> <div class="card h-100"> <img src="https://sestosociety.com/images/Benito_01.png" class="card-img-top sesto-card-img" alt="Jean-Benîto :: Père fondateur" onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';" data-bs-toggle="modal" data-bs-target="#imageModal" data-img-src="https://sestosociety.com/images/Benito_01.png" data-img-name="Jean-Benîto :: Père fondateur"> </div> </div>
+      </div> 
+
+      <h3 class="mb-3 mt-5 section-heading">Jean-Arthur :: Ti-Sess</h3>
+       <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 g-3 g-sm-5" id="sestoGridArthur">
+         <div class="col"> <div class="card h-100"> <img src="https://sestosociety.com/images/Arthur_01.png" class="card-img-top sesto-card-img" alt="Jean-Arthur :: Ti-Sess 1" onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';" data-bs-toggle="modal" data-bs-target="#imageModal" data-img-src="https://sestosociety.com/images/Arthur_01.png" data-img-name="Jean-Arthur :: Ti-Sess"> </div> </div>
+         <div class="col"> <div class="card h-100"> <img src="https://sestosociety.com/images/Arthur_02.png" class="card-img-top sesto-card-img" alt="Jean-Arthur :: Ti-Sess 2" onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';" data-bs-toggle="modal" data-bs-target="#imageModal" data-img-src="https://sestosociety.com/images/Arthur_02.png" data-img-name="Jean-Arthur :: Ti-Sess"> </div> </div>
+      </div> 
+       
+      <h3 class="mb-3 mt-5 section-heading">Jean-Ben :: Pépé-Sesto</h3>
+       <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 g-3 g-sm-5" id="sestoGridBen">
+         <div class="col"> <div class="card h-100"> <img src="https://sestosociety.com/images/Ben_01.png" class="card-img-top sesto-card-img" alt="Jean-Ben :: Pépé-Sesto" onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';" data-bs-toggle="modal" data-bs-target="#imageModal" data-img-src="https://sestosociety.com/images/Ben_01.png" data-img-name="Jean-Ben :: Pépé-Sesto"> </div> </div>
+      </div> 
+       
+    </div> 
+
+     <footer class="py-4 mt-5 text-center text-body-secondary"> 
         <p>&copy; 2025 Sesto Society</p>
      </footer>
 
@@ -285,41 +167,241 @@
           <div class="modal-body text-center">
              <img src="" id="modalImage" class="img-fluid" alt="Image agrandie"> 
           </div>
+          <div class="modal-footer justify-content-center border-top pt-3"> 
+            <a href="#" id="btnModalPrint" class="btn btn-outline-info mx-1 mx-sm-2" data-product-type="Print" data-price="14.99">Ajouter Print au panier</a>
+            <a href="#" id="btnModalTshirt" class="btn btn-outline-info mx-1 mx-sm-2" data-product-type="T-Shirt" data-price="24.99">Ajouter T-Shirt au panier</a>
+            <a href="#" id="btnModalCap" class="btn btn-outline-info mx-1 mx-sm-2" data-product-type="Casquette" data-price="19.99">Ajouter Casquette au panier</a>
+          </div>
         </div>
       </div>
     </div>
 
+    <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-scrollable"> 
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="cartModalLabel">Votre Panier Sesto</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body" id="cartModalBody">
+             <p id="emptyCartMsg">Votre panier est vide.</p>
+             <ul id="cartItemsList"></ul>
+          </div>
+          <div class="modal-footer flex-column flex-sm-row justify-content-between" id="cartModalFooter"> 
+             <div class="mb-2 mb-sm-0 text-center text-sm-start"> 
+                 <strong>Total: <span id="cartTotal">0.00</span> $</strong>
+             </div>
+             <div class="d-flex flex-column flex-sm-row justify-content-end w-100 w-sm-auto"> 
+                <button type="button" class="btn btn-outline-secondary mb-2 mb-sm-0 me-sm-2" id="clearCartBtn">Vider le Panier</button>
+                <button type="button" class="btn btn-success" id="checkoutBtn">
+                    <span class="checkout-text">Passer la commande</span>
+                    <span class="spinner-border spinner-border-sm checkout-spinner" role="status" aria-hidden="true" style="display: none;"></span>
+                </button> 
+             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
     <script>
-      const modalElement = document.getElementById('imageModal');
+      // --- Configuration ---
+      const CART_STORAGE_KEY = 'sestoCart';
+
+      // --- DOM Elements ---
+      const imageModalElement = document.getElementById('imageModal');
       const modalImage = document.getElementById('modalImage');
       const modalTitle = document.getElementById('imageModalLabel'); 
+      const btnPrint = document.getElementById('btnModalPrint');
+      const btnTshirt = document.getElementById('btnModalTshirt');
+      const btnCap = document.getElementById('btnModalCap');
+      const cartModalElement = document.getElementById('cartModal');
+      const cartCountBadge = document.getElementById('cart-count');
+      const cartItemsList = document.getElementById('cartItemsList');
+      const cartTotalSpan = document.getElementById('cartTotal');
+      const emptyCartMsg = document.getElementById('emptyCartMsg');
+      const clearCartBtn = document.getElementById('clearCartBtn');
+      const checkoutBtn = document.getElementById('checkoutBtn'); 
+      const checkoutBtnText = checkoutBtn ? checkoutBtn.querySelector('.checkout-text') : null;
+      const checkoutSpinner = checkoutBtn ? checkoutBtn.querySelector('.checkout-spinner') : null;
       
-      if (modalElement) {
-        modalElement.addEventListener('show.bs.modal', event => {
+      // --- Cart State ---
+      let cart = [];
+
+      // --- Functions ---
+      function loadCart() { /* ... (unchanged) ... */ 
+          const storedCart = localStorage.getItem(CART_STORAGE_KEY);
+          cart = storedCart ? JSON.parse(storedCart) : [];
+          updateCartDisplay();
+      }
+      function saveCart() { /* ... (unchanged) ... */ 
+          localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
+      }
+      function addToCart(item) { 
+          item.id = Date.now() + Math.random(); 
+          const triggerImage = document.querySelector(`.sesto-card-img[data-img-name="${item.name}"]`);
+          item.image = triggerImage ? triggerImage.getAttribute('src') : 'https://placehold.co/50x50/cccccc/000000?text=?'; 
+          
+          cart.push(item);
+          console.log('Added to cart:', item);
+          saveCart();
+          updateCartDisplay();
+      }
+      function removeFromCart(itemId) { /* ... (unchanged) ... */ 
+          console.log('Removing item with ID:', itemId);
+          const idToRemove = parseFloat(itemId); 
+          cart = cart.filter(item => item.id !== idToRemove);
+          saveCart();
+          updateCartDisplay();
+      }
+      function clearCart() { /* ... (unchanged) ... */ 
+          cart = [];
+          saveCart();
+          updateCartDisplay();
+      }
+      function updateCartDisplay() { /* ... (unchanged) ... */ 
+          if (cartCountBadge) {
+              if (cart.length > 0) {
+                  cartCountBadge.textContent = cart.length;
+                  cartCountBadge.style.display = 'inline-block';
+              } else {
+                  cartCountBadge.style.display = 'none';
+              }
+          }
+          if (cartItemsList && cartTotalSpan && emptyCartMsg) {
+               cartItemsList.innerHTML = ''; 
+               let total = 0;
+               if (cart.length === 0) {
+                   emptyCartMsg.style.display = 'block';
+               } else {
+                   emptyCartMsg.style.display = 'none';
+                   cart.forEach(item => {
+                       total += parseFloat(item.price || 0);
+                       const li = document.createElement('li');
+                       const imageSrc = item.image || 'https://placehold.co/50x50/cccccc/000000?text=?'; 
+                       const displayName = item.name || 'Sesto'; 
+                       li.innerHTML = `
+                           <img src="${imageSrc}" alt="${displayName}" class="cart-item-thumbnail"> 
+                           <div class="cart-item-details">
+                               <strong>${item.type || 'Article'}</strong> - ${displayName} 
+                               ($${parseFloat(item.price || 0).toFixed(2)})
+                           </div>
+                           <button class="btn btn-sm btn-outline-danger remove-item-btn" data-item-id="${item.id}">X</button>
+                       `;
+                       cartItemsList.appendChild(li);
+                   });
+               }
+               cartTotalSpan.textContent = total.toFixed(2);
+          }
+      }
+      
+      // --- Event Listeners ---
+
+      // Populate Image Modal & Set Button Data (unchanged logic, data comes from attributes)
+      if (imageModalElement) { 
+        imageModalElement.addEventListener('show.bs.modal', event => {
           const triggerElement = event.relatedTarget; 
           const imgSrc = triggerElement.getAttribute('data-img-src');
-          const imgName = triggerElement.getAttribute('data-img-name');
-
-          if (modalTitle) {
-            modalTitle.textContent = imgName || 'Image Sesto'; 
-          }
+          const imgName = triggerElement.getAttribute('data-img-name'); 
+          if (modalTitle) modalTitle.textContent = imgName || 'Image Sesto'; 
           if (modalImage) {
             modalImage.src = imgSrc || ''; 
             modalImage.alt = imgName ? `Image agrandie de ${imgName}` : 'Image agrandie';
           }
+          if(imgName) {
+              if (btnPrint) btnPrint.setAttribute('data-sesto-name', imgName);
+              if (btnTshirt) btnTshirt.setAttribute('data-sesto-name', imgName);
+              if (btnCap) btnCap.setAttribute('data-sesto-name', imgName);
+          }
         });
-
-         modalElement.addEventListener('hide.bs.modal', event => {
-             if (modalImage) {
-                 modalImage.src = ''; 
-             }
+         imageModalElement.addEventListener('hide.bs.modal', event => {
+             if (modalImage) modalImage.src = ''; 
+             if (btnPrint) btnPrint.removeAttribute('data-sesto-name');
+             if (btnTshirt) btnTshirt.removeAttribute('data-sesto-name');
+             if (btnCap) btnCap.removeAttribute('data-sesto-name');
          });
-      } else {
-          console.error("Modal element #imageModal not found.");
+      } else { console.error("Image Modal element #imageModal not found."); }
+
+      // Add to Cart Button Clicks (unchanged logic)
+      const imageModalFooter = document.querySelector('#imageModal .modal-footer');
+      if (imageModalFooter) { /* ... (unchanged) ... */ 
+          imageModalFooter.addEventListener('click', (event) => {
+              const targetButton = event.target.closest('.btn'); 
+              if (targetButton && targetButton.hasAttribute('data-product-type')) {
+                  event.preventDefault(); 
+                  const productType = targetButton.getAttribute('data-product-type');
+                  const price = targetButton.getAttribute('data-price');
+                  const sestoName = targetButton.getAttribute('data-sesto-name'); 
+                  
+                  if (sestoName) {
+                       const triggerImage = document.querySelector(`.sesto-card-img[data-img-name="${sestoName}"]`);
+                       const imgSrc = triggerImage ? triggerImage.getAttribute('src') : null; 
+
+                      addToCart({ type: productType, name: sestoName, price: price, image: imgSrc }); 
+                      const originalText = targetButton.textContent;
+                      targetButton.textContent = 'Ajouté!';
+                      targetButton.disabled = true; 
+                      setTimeout(() => { 
+                          targetButton.textContent = originalText; 
+                          targetButton.disabled = false; 
+                      }, 1500);
+                  } else { console.error("Sesto name not found for adding to cart."); }
+              }
+          });
       }
-      console.log('Page loaded! Simple modal script ready.');
+
+      // Cart Modal: Remove Item Button Clicks (unchanged)
+       if (cartItemsList) { /* ... (unchanged) ... */ 
+           cartItemsList.addEventListener('click', (event) => {
+               const removeButton = event.target.closest('.remove-item-btn');
+               if (removeButton) {
+                   const itemId = removeButton.getAttribute('data-item-id');
+                   removeFromCart(itemId);
+               }
+           });
+       }
+
+      // Cart Modal: Clear Cart Button (unchanged)
+      if (clearCartBtn) { /* ... (unchanged) ... */ 
+          clearCartBtn.addEventListener('click', clearCart);
+      }
+      
+      // Cart Modal: Checkout Button - Message on button logic (unchanged)
+      if (checkoutBtn && clearCartBtn && checkoutBtnText && checkoutSpinner) {
+
+          checkoutBtn.addEventListener('click', () => {
+              if (cart.length === 0) {
+                  alert('Votre panier est vide !'); 
+                  return; 
+              }
+
+              checkoutBtn.disabled = true;
+              clearCartBtn.disabled = true;
+              checkoutBtnText.style.display = 'none';
+              checkoutSpinner.style.display = 'inline-block';
+              
+              setTimeout(() => { 
+                  checkoutSpinner.style.display = 'none';
+                  checkoutBtnText.innerHTML = 'Ben non, t\'es juste un sesto 🙃😘'; 
+                  checkoutBtnText.style.display = 'inline-block'; 
+                                                    
+                  setTimeout(() => {
+                      checkoutBtnText.textContent = 'Passer la commande'; 
+                      checkoutBtn.disabled = false; 
+                      clearCartBtn.disabled = false;
+                  }, 3500); 
+
+              }, 2500); 
+          });
+      } else {
+          console.error("Required elements for checkout simulation (spinner/button text version) not found.");
+      }
+
+      // --- Initial Load ---
+      document.addEventListener('DOMContentLoaded', loadCart);
+      
+      console.log('Page loaded! Cart script updated with message on button.');
     </script>
   </body>
 </html>
