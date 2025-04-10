@@ -16,17 +16,20 @@
       /* Apply Nunito font to the body */
       body {
         font-family: 'Nunito', sans-serif;
-        /* IMPORTANT: Add padding-top equal to or greater than the height of the sticky banner */
-        /* This prevents content from being hidden underneath the fixed banner */
-        /* Adjust this value if the banner height changes */
-        padding-top: 80px; /* Default padding for larger screens */
+        /* IMPORTANT: Add padding-top to prevent content from hiding under the sticky banner */
+        /* Ensure this value is >= banner height. Reverted to 80px. */
+        padding-top: 80px;
       }
       /* Ensure background color applies correctly in dark mode */
       html[data-bs-theme="dark"] body {
         background-color: var(--bs-body-bg);
       }
 
-      /* Removed the custom .sesto-sticky-banner class */
+      /* CRITICAL NOTE FOR STICKY POSITIONING: */
+      /* For 'position: sticky' to work correctly, no parent element */
+      /* (including <html> or <body> or any wrapper divs) should have */
+      /* 'overflow: hidden;', 'overflow: scroll;', or 'overflow: auto;' set. */
+      /* Check this if the banner doesn't stick. */
 
       /* Style for card images */
       .sesto-card-img {
@@ -206,6 +209,7 @@
       /* --- Mobile Specific Styles --- */
       @media (max-width: 575.98px) {
         /* Adjust body padding for smaller banner height on mobile */
+        /* Reverted to 70px */
         body { padding-top: 70px; }
         /* Adjust card image height */
         .sesto-card-img { height: 150px; }
@@ -490,7 +494,6 @@
       const checkoutBtn = document.getElementById('checkoutBtn');
       const checkoutBtnText = checkoutBtn ? checkoutBtn.querySelector('.checkout-text') : null;
       const checkoutSpinner = checkoutBtn ? checkoutBtn.querySelector('.checkout-spinner') : null;
-      // Removed sestoOfTheHourTitle as it wasn't used directly in JS logic shown
 
       let cart = []; // Initialize cart array
 
