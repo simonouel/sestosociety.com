@@ -17,7 +17,7 @@
         font-family: 'Nunito', sans-serif;
       }
       .sesto-card-img {
-        height: 250px; 
+        height: 250px; /* Default height for larger screens */
         object-fit: cover; 
         cursor: pointer; 
          border-radius: var(--bs-card-inner-border-radius); 
@@ -27,7 +27,6 @@
         transition: transform 0.15s ease-in-out; 
          background-color: var(--bs-card-bg); 
          border-radius: var(--bs-card-border-radius);
-         /* Added overflow hidden directly to card */
          overflow: hidden; 
       }
       .card:hover {
@@ -55,11 +54,10 @@
 
       /* Modal Image Styling: Force 100% width, auto height */
       #modalImage {
-          width: 100%; /* Force image to fill container width */
-          height: auto; /* Adjust height to maintain aspect ratio */
+          width: 100%; 
+          height: auto; 
           display: block;
           margin: 0 auto; 
-          /* No max-height, image scales based on width */
       }
        .modal-content {
            overflow: hidden; 
@@ -74,6 +72,24 @@
         .modal-body {
             overflow-y: auto; 
         }
+
+      /* --- Mobile Specific Styles --- */
+      /* Target extra small screens (Bootstrap's default breakpoint for single column) */
+      @media (max-width: 575.98px) {
+        .sesto-card-img {
+          height: 200px; /* Reduced height for card images on mobile */
+        }
+        .display-4 {
+            font-size: 2.5rem; /* Smaller H1 on mobile */
+        }
+         h2 {
+            font-size: 1.75rem; /* Smaller H2 on mobile */
+         }
+         h3.section-heading {
+             font-size: 1.5rem; /* Smaller H3 on mobile */
+             margin-top: 2rem !important; /* Adjust spacing */
+         }
+      }
     </style>
   </head>
   <body>
@@ -91,14 +107,14 @@
     <div class="container mt-4"> 
 
       <h3 class="mb-3 mt-4 section-heading">Jean-Christophe</h3>
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-5" id="sestoGridChris"> 
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 g-sm-5" id="sestoGridChris"> 
         <div class="col">
           <div class="card h-100"> 
              <img 
               src="https://sestosociety.com/images/Chris_01.png" 
               class="card-img-top sesto-card-img" 
               alt="Jean-Christophe 1" 
-              onerror="this.onerror=null; this.src='https://placehold.co/400x250/cccccc/000000?text=Image+Indisponible';"
+              onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Image+Indisponible';"
               data-bs-toggle="modal" 
               data-bs-target="#imageModal"
               data-img-src="https://sestosociety.com/images/Chris_01.png"
@@ -111,7 +127,7 @@
               src="https://sestosociety.com/images/Chris_02.png" 
               class="card-img-top sesto-card-img" 
               alt="Jean-Christophe 2" 
-              onerror="this.onerror=null; this.src='https://placehold.co/400x250/cccccc/000000?text=Image+Indisponible';"
+              onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Image+Indisponible';"
               data-bs-toggle="modal" 
               data-bs-target="#imageModal"
               data-img-src="https://sestosociety.com/images/Chris_02.png"
@@ -124,7 +140,7 @@
               src="https://sestosociety.com/images/Chris_03.png" 
               class="card-img-top sesto-card-img" 
               alt="Jean-Christophe 3" 
-              onerror="this.onerror=null; this.src='https://placehold.co/400x250/cccccc/000000?text=Image+Indisponible';"
+              onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Image+Indisponible';"
               data-bs-toggle="modal" 
               data-bs-target="#imageModal"
               data-img-src="https://sestosociety.com/images/Chris_03.png"
@@ -137,7 +153,7 @@
               src="https://sestosociety.com/images/Chris_04.png" 
               class="card-img-top sesto-card-img" 
               alt="Jean-Christophe 4" 
-              onerror="this.onerror=null; this.src='https://placehold.co/400x250/cccccc/000000?text=Image+Indisponible';"
+              onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Image+Indisponible';"
               data-bs-toggle="modal" 
               data-bs-target="#imageModal"
               data-img-src="https://sestosociety.com/images/Chris_04.png"
@@ -150,7 +166,7 @@
               src="https://sestosociety.com/images/Chris_05.png" 
               class="card-img-top sesto-card-img" 
               alt="Jean-Christophe 5" 
-              onerror="this.onerror=null; this.src='https://placehold.co/400x250/cccccc/000000?text=Image+Indisponible';"
+              onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Image+Indisponible';"
               data-bs-toggle="modal" 
               data-bs-target="#imageModal"
               data-img-src="https://sestosociety.com/images/Chris_05.png"
@@ -158,14 +174,14 @@
             </div>
         </div>
       </div> <h3 class="mb-3 mt-5 section-heading">Jean-Dominique</h3>
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-5" id="sestoGridDom">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 g-sm-5" id="sestoGridDom">
          <div class="col">
           <div class="card h-100">
              <img 
               src="https://sestosociety.com/images/Dom_01.png" 
               class="card-img-top sesto-card-img" 
               alt="Jean-Dominique 1" 
-              onerror="this.onerror=null; this.src='https://placehold.co/400x250/cccccc/000000?text=Image+Indisponible';"
+              onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Image+Indisponible';"
               data-bs-toggle="modal" 
               data-bs-target="#imageModal"
               data-img-src="https://sestosociety.com/images/Dom_01.png"
@@ -178,7 +194,7 @@
               src="https://sestosociety.com/images/Dom_02.png" 
               class="card-img-top sesto-card-img" 
               alt="Jean-Dominique 2" 
-              onerror="this.onerror=null; this.src='https://placehold.co/400x250/cccccc/000000?text=Image+Indisponible';"
+              onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Image+Indisponible';"
               data-bs-toggle="modal" 
               data-bs-target="#imageModal"
               data-img-src="https://sestosociety.com/images/Dom_02.png"
@@ -191,7 +207,7 @@
               src="https://sestosociety.com/images/Dom_03.png" 
               class="card-img-top sesto-card-img" 
               alt="Jean-Dominique 3" 
-              onerror="this.onerror=null; this.src='https://placehold.co/400x250/cccccc/000000?text=Image+Indisponible';"
+              onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Image+Indisponible';"
               data-bs-toggle="modal" 
               data-bs-target="#imageModal"
               data-img-src="https://sestosociety.com/images/Dom_03.png"
@@ -199,14 +215,14 @@
             </div>
         </div>
       </div> <h3 class="mb-3 mt-5 section-heading">Jean-Benoît</h3>
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-5" id="sestoGridBen">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 g-sm-5" id="sestoGridBen">
          <div class="col">
           <div class="card h-100">
              <img 
               src="https://sestosociety.com/images/Ben_01.png" 
               class="card-img-top sesto-card-img" 
               alt="Jean-Benoît" 
-              onerror="this.onerror=null; this.src='https://placehold.co/400x250/cccccc/000000?text=Image+Indisponible';"
+              onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Image+Indisponible';"
               data-bs-toggle="modal" 
               data-bs-target="#imageModal"
               data-img-src="https://sestosociety.com/images/Ben_01.png"
@@ -214,14 +230,14 @@
             </div>
         </div>
       </div> <h3 class="mb-3 mt-5 section-heading">Jean-Arthur</h3>
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-5" id="sestoGridArthur">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 g-sm-5" id="sestoGridArthur">
          <div class="col">
           <div class="card h-100">
              <img 
               src="https://sestosociety.com/images/Arthur_01.png" 
               class="card-img-top sesto-card-img" 
               alt="Jean-Arthur 1" 
-              onerror="this.onerror=null; this.src='https://placehold.co/400x250/cccccc/000000?text=Image+Indisponible';"
+              onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Image+Indisponible';"
               data-bs-toggle="modal" 
               data-bs-target="#imageModal"
               data-img-src="https://sestosociety.com/images/Arthur_01.png"
@@ -234,7 +250,7 @@
               src="https://sestosociety.com/images/Arthur_02.png" 
               class="card-img-top sesto-card-img" 
               alt="Jean-Arthur 2" 
-              onerror="this.onerror=null; this.src='https://placehold.co/400x250/cccccc/000000?text=Image+Indisponible';"
+              onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Image+Indisponible';"
               data-bs-toggle="modal" 
               data-bs-target="#imageModal"
               data-img-src="https://sestosociety.com/images/Arthur_02.png"
@@ -242,14 +258,14 @@
             </div>
         </div>
       </div> <h3 class="mb-3 mt-5 section-heading">Jean-Benîto Grand Chef Sesto</h3> 
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-5" id="sestoGridBenito">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 g-sm-5" id="sestoGridBenito">
          <div class="col">
           <div class="card h-100">
              <img 
               src="https://sestosociety.com/images/Benito_01.png" 
               class="card-img-top sesto-card-img" 
               alt="Jean-Benîto Grand Chef Sesto" 
-              onerror="this.onerror=null; this.src='https://placehold.co/400x250/cccccc/000000?text=Image+Indisponible';"
+              onerror="this.onerror=null; this.src='https://placehold.co/400x200/cccccc/000000?text=Image+Indisponible';"
               data-bs-toggle="modal" 
               data-bs-target="#imageModal"
               data-img-src="https://sestosociety.com/images/Benito_01.png"
