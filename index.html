@@ -20,16 +20,15 @@
         height: 250px; 
         object-fit: cover; 
         cursor: pointer; 
-        /* Make image borders match card borders if card has borders */
          border-radius: var(--bs-card-inner-border-radius); 
       }
       
       .card {
         transition: transform 0.15s ease-in-out; 
-        /* Remove potential default padding if card body is gone */
-        /* padding: 0; */ 
-        /* Ensure background applies correctly if needed */
          background-color: var(--bs-card-bg); 
+         border-radius: var(--bs-card-border-radius);
+         /* Added overflow hidden directly to card */
+         overflow: hidden; 
       }
       .card:hover {
         transform: scale(1.05); 
@@ -54,22 +53,27 @@
         animation: scale-fade-in 0.5s ease-out; 
       }
 
+      /* Modal Image Styling: Force 100% width, auto height */
       #modalImage {
-          max-height: 80vh; 
-          width: auto; 
-          max-width: 100%; 
+          width: 100%; /* Force image to fill container width */
+          height: auto; /* Adjust height to maintain aspect ratio */
           display: block;
           margin: 0 auto; 
+          /* No max-height, image scales based on width */
       }
        .modal-content {
            overflow: hidden; 
+           background-color: var(--bs-body-bg); 
        }
        /* Section heading style */
        .section-heading {
            border-bottom: 1px solid var(--bs-border-color-translucent);
            padding-bottom: 0.5rem;
        }
-       /* Removed .card-body min-height rule */
+       /* Ensure modal body allows scrolling if needed */
+        .modal-body {
+            overflow-y: auto; 
+        }
     </style>
   </head>
   <body>
@@ -87,9 +91,10 @@
     <div class="container mt-4"> 
 
       <h3 class="mb-3 mt-4 section-heading">Jean-Christophe</h3>
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4" id="sestoGridChris">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-5" id="sestoGridChris"> 
         <div class="col">
-          <div class="card h-100 overflow-hidden"> <img 
+          <div class="card h-100"> 
+             <img 
               src="https://sestosociety.com/images/Chris_01.png" 
               class="card-img-top sesto-card-img" 
               alt="Jean-Christophe 1" 
@@ -101,7 +106,7 @@
             </div>
         </div>
         <div class="col">
-          <div class="card h-100 overflow-hidden">
+          <div class="card h-100">
              <img 
               src="https://sestosociety.com/images/Chris_02.png" 
               class="card-img-top sesto-card-img" 
@@ -114,7 +119,7 @@
             </div>
         </div>
         <div class="col">
-          <div class="card h-100 overflow-hidden">
+          <div class="card h-100">
              <img 
               src="https://sestosociety.com/images/Chris_03.png" 
               class="card-img-top sesto-card-img" 
@@ -127,7 +132,7 @@
             </div>
         </div>
         <div class="col">
-          <div class="card h-100 overflow-hidden">
+          <div class="card h-100">
              <img 
               src="https://sestosociety.com/images/Chris_04.png" 
               class="card-img-top sesto-card-img" 
@@ -140,7 +145,7 @@
             </div>
         </div>
         <div class="col">
-          <div class="card h-100 overflow-hidden">
+          <div class="card h-100">
              <img 
               src="https://sestosociety.com/images/Chris_05.png" 
               class="card-img-top sesto-card-img" 
@@ -153,9 +158,9 @@
             </div>
         </div>
       </div> <h3 class="mb-3 mt-5 section-heading">Jean-Dominique</h3>
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4" id="sestoGridDom">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-5" id="sestoGridDom">
          <div class="col">
-          <div class="card h-100 overflow-hidden">
+          <div class="card h-100">
              <img 
               src="https://sestosociety.com/images/Dom_01.png" 
               class="card-img-top sesto-card-img" 
@@ -168,7 +173,7 @@
             </div>
         </div>
         <div class="col">
-          <div class="card h-100 overflow-hidden">
+          <div class="card h-100">
              <img 
               src="https://sestosociety.com/images/Dom_02.png" 
               class="card-img-top sesto-card-img" 
@@ -181,7 +186,7 @@
             </div>
         </div>
         <div class="col">
-          <div class="card h-100 overflow-hidden">
+          <div class="card h-100">
              <img 
               src="https://sestosociety.com/images/Dom_03.png" 
               class="card-img-top sesto-card-img" 
@@ -194,9 +199,9 @@
             </div>
         </div>
       </div> <h3 class="mb-3 mt-5 section-heading">Jean-Benoît</h3>
-       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4" id="sestoGridBen">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-5" id="sestoGridBen">
          <div class="col">
-          <div class="card h-100 overflow-hidden">
+          <div class="card h-100">
              <img 
               src="https://sestosociety.com/images/Ben_01.png" 
               class="card-img-top sesto-card-img" 
@@ -208,12 +213,55 @@
               data-img-name="Jean-Benoît">
             </div>
         </div>
+      </div> <h3 class="mb-3 mt-5 section-heading">Jean-Arthur</h3>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-5" id="sestoGridArthur">
+         <div class="col">
+          <div class="card h-100">
+             <img 
+              src="https://sestosociety.com/images/Arthur_01.png" 
+              class="card-img-top sesto-card-img" 
+              alt="Jean-Arthur 1" 
+              onerror="this.onerror=null; this.src='https://placehold.co/400x250/cccccc/000000?text=Image+Indisponible';"
+              data-bs-toggle="modal" 
+              data-bs-target="#imageModal"
+              data-img-src="https://sestosociety.com/images/Arthur_01.png"
+              data-img-name="Jean-Arthur">
+            </div>
+        </div>
+         <div class="col">
+          <div class="card h-100">
+             <img 
+              src="https://sestosociety.com/images/Arthur_02.png" 
+              class="card-img-top sesto-card-img" 
+              alt="Jean-Arthur 2" 
+              onerror="this.onerror=null; this.src='https://placehold.co/400x250/cccccc/000000?text=Image+Indisponible';"
+              data-bs-toggle="modal" 
+              data-bs-target="#imageModal"
+              data-img-src="https://sestosociety.com/images/Arthur_02.png"
+              data-img-name="Jean-Arthur">
+            </div>
+        </div>
+      </div> <h3 class="mb-3 mt-5 section-heading">Jean-Benîto Grand Chef Sesto</h3> 
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-5" id="sestoGridBenito">
+         <div class="col">
+          <div class="card h-100">
+             <img 
+              src="https://sestosociety.com/images/Benito_01.png" 
+              class="card-img-top sesto-card-img" 
+              alt="Jean-Benîto Grand Chef Sesto" 
+              onerror="this.onerror=null; this.src='https://placehold.co/400x250/cccccc/000000?text=Image+Indisponible';"
+              data-bs-toggle="modal" 
+              data-bs-target="#imageModal"
+              data-img-src="https://sestosociety.com/images/Benito_01.png"
+              data-img-name="Jean-Benîto Grand Chef Sesto"> 
+            </div>
+        </div>
       </div> </div> <footer class="py-4 mt-5 text-center text-body-secondary"> 
         <p>&copy; 2025 Sesto Society</p>
      </footer>
 
     <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-dialog modal-xl modal-dialog-centered"> 
         <div class="modal-content"> 
           <div class="modal-header">
             <h5 class="modal-title" id="imageModalLabel">Image Sesto</h5> 
