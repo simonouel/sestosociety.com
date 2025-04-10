@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="fr">
+<html lang="fr" data-bs-theme="dark">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,27 +15,29 @@
     <style>
       body {
         font-family: 'Nunito', sans-serif;
-        background-color: #f8f9fa; 
       }
       .sesto-card-img {
         height: 250px; 
         object-fit: cover; 
         cursor: pointer; 
+        /* Make image borders match card borders if card has borders */
+         border-radius: var(--bs-card-inner-border-radius); 
       }
-      .banner-icon {
-        height: 1em; width: 1em; vertical-align: -0.125em; margin-right: 0.2em; 
-      }
+      
       .card {
-        transition: transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out; 
+        transition: transform 0.15s ease-in-out; 
+        /* Remove potential default padding if card body is gone */
+        /* padding: 0; */ 
+        /* Ensure background applies correctly if needed */
+         background-color: var(--bs-card-bg); 
       }
       .card:hover {
         transform: scale(1.05); 
-        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important; 
         z-index: 10; 
         position: relative; 
       }
       
-      /* Simple Scale-Fade Animation Keyframes (Re-added) */
+      /* Simple Scale-Fade Animation Keyframes */
       @keyframes scale-fade-in {
         0% {
           transform: scale(0.7); 
@@ -47,7 +49,7 @@
         }
       }
 
-      /* Apply simple CSS animation to the modal dialog (Re-added) */
+      /* Apply simple CSS animation to the modal dialog */
       .modal.show .modal-dialog {
         animation: scale-fade-in 0.5s ease-out; 
       }
@@ -62,14 +64,18 @@
        .modal-content {
            overflow: hidden; 
        }
-       /* Removed .is-flipping class style */
+       /* Section heading style */
+       .section-heading {
+           border-bottom: 1px solid var(--bs-border-color-translucent);
+           padding-bottom: 0.5rem;
+       }
+       /* Removed .card-body min-height rule */
     </style>
   </head>
   <body>
 
-    <div class="bg-primary text-white p-3 text-center mb-4 shadow-sm"> 
+    <div class="bg-dark text-white p-3 text-center mb-4"> 
       <h1 class="display-4">
-        <img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/laugh.svg" alt="Icône rire" class="banner-icon">
         Welcome to the Sesto Society
       </h1>
     </div>
@@ -79,11 +85,11 @@
     </div>
 
     <div class="container mt-4"> 
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4" id="sestoGrid">
 
+      <h3 class="mb-3 mt-4 section-heading">Jean-Christophe</h3>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4" id="sestoGridChris">
         <div class="col">
-          <div class="card h-100 shadow-sm">
-             <img 
+          <div class="card h-100 overflow-hidden"> <img 
               src="https://sestosociety.com/images/Chris_01.png" 
               class="card-img-top sesto-card-img" 
               alt="Jean-Christophe 1" 
@@ -92,13 +98,10 @@
               data-bs-target="#imageModal"
               data-img-src="https://sestosociety.com/images/Chris_01.png"
               data-img-name="Jean-Christophe">
-            <div class="card-body text-center">
-              <h5 class="card-title">Jean-Christophe</h5>
             </div>
-          </div>
         </div>
         <div class="col">
-          <div class="card h-100 shadow-sm">
+          <div class="card h-100 overflow-hidden">
              <img 
               src="https://sestosociety.com/images/Chris_02.png" 
               class="card-img-top sesto-card-img" 
@@ -108,13 +111,10 @@
               data-bs-target="#imageModal"
               data-img-src="https://sestosociety.com/images/Chris_02.png"
               data-img-name="Jean-Christophe">
-            <div class="card-body text-center">
-              <h5 class="card-title">Jean-Christophe</h5>
             </div>
-          </div>
         </div>
         <div class="col">
-          <div class="card h-100 shadow-sm">
+          <div class="card h-100 overflow-hidden">
              <img 
               src="https://sestosociety.com/images/Chris_03.png" 
               class="card-img-top sesto-card-img" 
@@ -124,13 +124,10 @@
               data-bs-target="#imageModal"
               data-img-src="https://sestosociety.com/images/Chris_03.png"
               data-img-name="Jean-Christophe">
-            <div class="card-body text-center">
-              <h5 class="card-title">Jean-Christophe</h5>
             </div>
-          </div>
         </div>
         <div class="col">
-          <div class="card h-100 shadow-sm">
+          <div class="card h-100 overflow-hidden">
              <img 
               src="https://sestosociety.com/images/Chris_04.png" 
               class="card-img-top sesto-card-img" 
@@ -140,13 +137,10 @@
               data-bs-target="#imageModal"
               data-img-src="https://sestosociety.com/images/Chris_04.png"
               data-img-name="Jean-Christophe">
-            <div class="card-body text-center">
-              <h5 class="card-title">Jean-Christophe</h5>
             </div>
-          </div>
         </div>
         <div class="col">
-          <div class="card h-100 shadow-sm">
+          <div class="card h-100 overflow-hidden">
              <img 
               src="https://sestosociety.com/images/Chris_05.png" 
               class="card-img-top sesto-card-img" 
@@ -156,13 +150,12 @@
               data-bs-target="#imageModal"
               data-img-src="https://sestosociety.com/images/Chris_05.png"
               data-img-name="Jean-Christophe">
-            <div class="card-body text-center">
-              <h5 class="card-title">Jean-Christophe</h5>
             </div>
-          </div>
         </div>
-        <div class="col">
-          <div class="card h-100 shadow-sm">
+      </div> <h3 class="mb-3 mt-5 section-heading">Jean-Dominique</h3>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4" id="sestoGridDom">
+         <div class="col">
+          <div class="card h-100 overflow-hidden">
              <img 
               src="https://sestosociety.com/images/Dom_01.png" 
               class="card-img-top sesto-card-img" 
@@ -172,13 +165,10 @@
               data-bs-target="#imageModal"
               data-img-src="https://sestosociety.com/images/Dom_01.png"
               data-img-name="Jean-Dominique">
-            <div class="card-body text-center">
-              <h5 class="card-title">Jean-Dominique</h5>
             </div>
-          </div>
         </div>
         <div class="col">
-          <div class="card h-100 shadow-sm">
+          <div class="card h-100 overflow-hidden">
              <img 
               src="https://sestosociety.com/images/Dom_02.png" 
               class="card-img-top sesto-card-img" 
@@ -188,13 +178,10 @@
               data-bs-target="#imageModal"
               data-img-src="https://sestosociety.com/images/Dom_02.png"
               data-img-name="Jean-Dominique">
-            <div class="card-body text-center">
-              <h5 class="card-title">Jean-Dominique</h5>
             </div>
-          </div>
         </div>
         <div class="col">
-          <div class="card h-100 shadow-sm">
+          <div class="card h-100 overflow-hidden">
              <img 
               src="https://sestosociety.com/images/Dom_03.png" 
               class="card-img-top sesto-card-img" 
@@ -204,13 +191,12 @@
               data-bs-target="#imageModal"
               data-img-src="https://sestosociety.com/images/Dom_03.png"
               data-img-name="Jean-Dominique">
-            <div class="card-body text-center">
-              <h5 class="card-title">Jean-Dominique</h5>
             </div>
-          </div>
         </div>
-        <div class="col">
-          <div class="card h-100 shadow-sm">
+      </div> <h3 class="mb-3 mt-5 section-heading">Jean-Benoît</h3>
+       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4" id="sestoGridBen">
+         <div class="col">
+          <div class="card h-100 overflow-hidden">
              <img 
               src="https://sestosociety.com/images/Ben_01.png" 
               class="card-img-top sesto-card-img" 
@@ -220,19 +206,15 @@
               data-bs-target="#imageModal"
               data-img-src="https://sestosociety.com/images/Ben_01.png"
               data-img-name="Jean-Benoît">
-            <div class="card-body text-center">
-              <h5 class="card-title">Jean-Benoît</h5>
             </div>
-          </div>
         </div>
-
-      </div> </div> <footer class="py-4 mt-5 text-center text-muted">
+      </div> </div> <footer class="py-4 mt-5 text-center text-body-secondary"> 
         <p>&copy; 2025 Sesto Society</p>
      </footer>
 
     <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content">
+        <div class="modal-content"> 
           <div class="modal-header">
             <h5 class="modal-title" id="imageModalLabel">Image Sesto</h5> 
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -244,7 +226,6 @@
       </div>
     </div>
 
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
     <script>
@@ -253,10 +234,8 @@
       const modalTitle = document.getElementById('imageModalLabel'); 
       
       if (modalElement) {
-        // Listener to populate modal just before it's shown (standard Bootstrap event)
         modalElement.addEventListener('show.bs.modal', event => {
-          const triggerElement = event.relatedTarget; // Element that triggered the modal (the image)
-          
+          const triggerElement = event.relatedTarget; 
           const imgSrc = triggerElement.getAttribute('data-img-src');
           const imgName = triggerElement.getAttribute('data-img-name');
 
@@ -269,17 +248,14 @@
           }
         });
 
-        // Listener to clear image when modal is hidden (prevents flash)
          modalElement.addEventListener('hide.bs.modal', event => {
              if (modalImage) {
                  modalImage.src = ''; 
              }
          });
-
       } else {
           console.error("Modal element #imageModal not found.");
       }
-      
       console.log('Page loaded! Simple modal script ready.');
     </script>
   </body>
