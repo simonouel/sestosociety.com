@@ -16,7 +16,7 @@
       /* Apply Nunito font to the body, add padding for sticky top */
       body {
         font-family: 'Nunito', sans-serif;
-        padding-top: 80px; /* Adjust based on actual banner height */
+        padding-top: 80px; /* Adjust if banner height changes */
       }
       html[data-bs-theme="dark"] body {
         background-color: var(--bs-body-bg); 
@@ -45,6 +45,7 @@
           background-color: var(--bs-card-bg); 
       }
 
+      /* Card Tilt */
       .col:nth-child(odd) .card {
           transform: rotate(-1.5deg);
           transition: transform 0.2s ease-in-out; 
@@ -54,6 +55,7 @@
            transition: transform 0.2s ease-in-out;
       }
 
+      /* Wobble Keyframes */
       @keyframes wobble {
         0%, 100% { transform: translateX(0%) rotate(var(--base-rotate, 0deg)); } 
         15% { transform: translateX(-4px) rotate(calc(var(--base-rotate, 0deg) - 3deg)); }
@@ -105,11 +107,10 @@
            font-weight: 500; 
            font-size: 3rem; 
            color: var(--bs-body-color); 
-           /* Added flex for alignment with potential image */
            display: flex;
            align-items: center;
            justify-content: center;
-           flex-wrap: wrap; /* Allow wrapping on small screens */
+           flex-wrap: wrap; 
        }
        .section-heading {
            font-family: 'Caveat', cursive; 
@@ -121,15 +122,16 @@
        }
        /* Style for the thumbnail in the main title */
        .sesto-of-hour-thumb {
-           height: 1.5em; /* Relative to heading font size */
-           width: 1.5em;
+           height: 32px; /* Fixed size */
+           width: 32px;  /* Fixed size */
            object-fit: cover;
-           border-radius: 50%; /* Circular */
-           vertical-align: middle; /* Align with text */
+           border-radius: 50%; 
+           vertical-align: middle; /* Re-added for potential baseline alignment */
            margin-left: 0.3em;
            margin-right: 0.2em;
-           background-color: var(--bs-secondary-bg); /* Placeholder bg */
-           border: 1px solid var(--bs-border-color); /* Subtle border */
+           background-color: var(--bs-secondary-bg); 
+           border: 2px solid red; /* TEMPORARY: Make border obvious for debugging */
+           display: inline-block; /* Ensure it takes space */
        }
 
 
@@ -162,7 +164,7 @@
         body { padding-top: 70px; } 
         .sesto-card-img { height: 150px; }
         .display-4 { font-size: 2.25rem; }
-         .sesto-main-title { font-size: 1.8rem; } /* Adjusted H2 size */
+         .sesto-main-title { font-size: 1.8rem; } 
          h3.section-heading { 
              font-size: 2rem; 
              margin-top: 2rem !important; 
@@ -180,13 +182,13 @@
           #cartModalFooter > div:last-child { display: flex; flex-direction: column; }
           #cartModalFooter > div:last-child .btn { margin-top: 0.5rem;}
           #cartModalFooter > div:last-child .btn:first-child { margin-top: 0;}
-          .sesto-of-hour-thumb { height: 1.2em; width: 1.2em; } /* Smaller thumb on mobile */
+          .sesto-of-hour-thumb { height: 24px; width: 24px; } /* Smaller thumb on mobile */
       }
     </style>
   </head>
   <body>
 
-    <div class="bg-dark text-white p-3 text-center mb-4 position-relative sticky-top"> 
+    <div class="bg-dark text-white p-3 text-center mb-4 sticky-top" style="top: 0; z-index: 1030;"> 
       <h1 class="display-4">SestoSociety.com</h1> 
       <div class="position-absolute top-50 end-0 translate-middle-y pe-3">
           <button type="button" class="btn btn-outline-light position-relative border-0" data-bs-toggle="modal" data-bs-target="#cartModal" aria-label="Voir le panier">
@@ -198,17 +200,16 @@
 
     <div class="container text-center my-4 my-md-5"> 
         <p class="lead fst-italic col-lg-8 mx-auto">
-            Salut gang de Sestos (et futurs Sestos) ! Ce site, c'est un peu comme un party de famille qui dérape juste assez pour être drôle. Le mot 'sesto'? Une invention brillante (ou juste chanceuse?) d'un cousin pour traiter affectueusement quelqu'un de... disons... pas le pogo le plus dégelé de la boîte. C'est cette seconde où tu fais ou dis un truc tellement épais que ça en devient magnifique. Ici, on archive ces moments de gloire. Explorez la galerie ci-dessous, gracieuseté du 'MasterMind' Jean-Simon. Pis si tu te reconnais, ben... t'es juste un sesto, pis c'est correct !
+            Bienvenue à la Sesto Society ! Ici, on célèbre avec humour ces petits moments où la logique prend une pause café. Inspiré par Jean-Dominique (notre Big Bang affectueux) et baptisé par Jean-Benîto (le Père Fondateur du mot 'sesto'), ce club est pour tous ceux qui se reconnaissent dans l'art d'être brillamment... à côté de la plaque. Découvrez le 'Sesto Typic' (Jean-Christophe), le 'Ti-Sess' (Jean-Arthur), et le 'Pépé-Sesto' (Jean-Ben), sous la supervision du MasterMind Jean-Simon. Alors, explore, et demande-toi : suis-je un sesto ?
         </p>
     </div>
 
     <div class="text-center mb-4"> 
-      <h2 class="sesto-main-title d-flex align-items-center justify-content-center flex-wrap"> 
+       <h2 class="sesto-main-title d-flex align-items-center justify-content-center flex-wrap"> 
            <span id="sestoOfTheHourBaseTitle">Le Panthéon des Sestos</span>
            <span class="text-info ms-2" id="sestoOfTheHourDynamicPart" style="display: none;"> 
                (<span id="sestoOfTheHourLabel">Du moment</span> : 
-               <img src="" alt="" id="sestoOfTheHourImg" class="sesto-of-hour-thumb"> 
-               <span id="sestoOfTheHourName"></span> !)
+               <img src="" alt="" id="sestoOfTheHourImg" class="sesto-of-hour-thumb" style="display: none;"> <span id="sestoOfTheHourName"></span> !)
            </span>
        </h2> 
     </div>
@@ -216,7 +217,7 @@
     <div class="container mt-4"> 
       <h3 class="mb-3 mt-4 section-heading">Jean-Christophe :: Sesto Typic</h3>
       <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 g-3 g-sm-5" id="sestoGridChris"> 
-        <div class="col"> <div class="card h-100"> <img src="https://sestosociety.com/images/Chris_01.png" class="card-img-top sesto-card-img" alt="Jean-Christophe :: Sesto Typic 1" onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';" data-bs-toggle="modal" data-bs-target="#imageModal" data-img-src="https://sestosociety.com/images/Chris_01.png" data-img-name="Jean-Christophe :: Sesto Typic" data-img-desc="Le gars qui demande 'C'est quoi?' quand on explique le concept. Il EST le concept. L'étalon-or, la référence de base pour mesurer le niveau de sesterie ambiant. Fiable dans sa 'sestitude'."> <div class="card-body text-center py-2"> <p class="card-text small text-body-secondary fst-italic">Le Standard Sesto.</p></div> </div> </div>
+        <div class="col"> <div class="card h-100"> <img src="https://sestosociety.com/images/Chris_01.png" class="card-img-top sesto-card-img" alt="Jean-Christophe :: Sesto Typic 1" onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';" data-bs-toggle="modal" data-bs-target="#imageModal" data-img-src="https://sestosociety.com/images/Chris_01.png" data-img-name="Jean-Christophe :: Sesto Typic" data-img-desc="L'archétype même du Sesto. Ses actions définissent souvent la norme (ou l'absence de norme) pour les autres. Une source d'inspiration inépuisable... pour savoir quoi ne pas faire."> <div class="card-body text-center py-2"> <p class="card-text small text-body-secondary fst-italic">Le Standard Sesto.</p></div> </div> </div>
         <div class="col"> <div class="card h-100"> <img src="https://sestosociety.com/images/Chris_02.png" class="card-img-top sesto-card-img" alt="Jean-Christophe :: Sesto Typic 2" onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';" data-bs-toggle="modal" data-bs-target="#imageModal" data-img-src="https://sestosociety.com/images/Chris_02.png" data-img-name="Jean-Christophe :: Sesto Typic" data-img-desc="Ce regard profond qui fixe l'infini... ou juste le mur d'en face parce qu'il a oublié ce qu'il cherchait en entrant dans la pièce. Un classique Sesto Typic."> <div class="card-body text-center py-2"><p class="card-text small text-body-secondary fst-italic">Regard... Vide ?</p></div> </div> </div>
         <div class="col"> <div class="card h-100"> <img src="https://sestosociety.com/images/Chris_03.png" class="card-img-top sesto-card-img" alt="Jean-Christophe :: Sesto Typic 3" onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';" data-bs-toggle="modal" data-bs-target="#imageModal" data-img-src="https://sestosociety.com/images/Chris_03.png" data-img-name="Jean-Christophe :: Sesto Typic" data-img-desc="Est-ce qu'il réfléchit à la complexité de l'univers, à la recette de pâté chinois, ou à s'il a laissé le gaz ouvert ? Le mystère reste entier. Probablement la deuxième option."> <div class="card-body text-center py-2"><p class="card-text small text-body-secondary fst-italic">Il pense (peut-être).</p></div> </div> </div>
       </div> 
@@ -455,34 +456,37 @@
           }
       }
       function setRandomSestoTitle() {
-          if (!sestoOfTheHourTitle) return; 
           const baseTitleEl = document.getElementById('sestoOfTheHourBaseTitle');
           const dynamicPartEl = document.getElementById('sestoOfTheHourDynamicPart');
           const labelEl = document.getElementById('sestoOfTheHourLabel');
           const imgEl = document.getElementById('sestoOfTheHourImg');
           const nameEl = document.getElementById('sestoOfTheHourName');
 
-          if (!baseTitleEl || !dynamicPartEl || !labelEl || !imgEl || !nameEl) return; 
+          if (!baseTitleEl || !dynamicPartEl || !labelEl || !imgEl || !nameEl) {
+              console.error("One or more title elements not found");
+              return; 
+          }
 
-          const sestoImages = document.querySelectorAll('.sesto-card-img[data-img-name]');
+          const sestoImages = document.querySelectorAll('.sesto-card-img[data-img-name][data-img-src]');
           const sestoData = [...sestoImages].map(img => ({
               name: img.getAttribute('data-img-name'),
               src: img.getAttribute('data-img-src') 
           }));
           
-          if (sestoData.length > 0) {
-              const randomIndex = Math.floor(Math.random() * sestoData.length);
-              const randomSesto = sestoData[randomIndex];
+          const validSestoData = sestoData.filter(item => item.src);
+
+          if (validSestoData.length > 0) {
+              const randomIndex = Math.floor(Math.random() * validSestoData.length);
+              const randomSesto = validSestoData[randomIndex];
               
               labelEl.textContent = 'Du moment';
-              imgEl.src = randomSesto.src || 'https://placehold.co/32x32/cccccc/000000?text=?';
-              imgEl.alt = randomSesto.name || 'Sesto du moment';
-              nameEl.textContent = randomSesto.name || '???';
+              imgEl.src = randomSesto.src; 
+              imgEl.alt = randomSesto.name; 
+              nameEl.textContent = randomSesto.name;
               
-              imgEl.style.display = 'inline-block';
+              imgEl.style.display = 'inline-block'; 
               dynamicPartEl.style.display = 'inline'; 
           } else {
-              baseTitleEl.textContent = 'Le Panthéon des Sestos'; 
               dynamicPartEl.style.display = 'none'; 
           }
       }
@@ -556,6 +560,7 @@
           clearCartBtn.addEventListener('click', clearCart);
       }
       
+      // Cart Modal: Checkout Button - Longer loading duration
       if (checkoutBtn && clearCartBtn && checkoutBtnText && checkoutSpinner) {
           const sillyMessages = [
               "Consultation de l'oracle sesto...",
@@ -581,21 +586,25 @@
               checkoutBtnText.style.display = 'inline-block';
               
               if (messageInterval) clearInterval(messageInterval); 
+              // Change message every 3 seconds
               messageInterval = setInterval(() => {
                   messageIndex = (messageIndex + 1) % sillyMessages.length;
                   checkoutBtnText.textContent = sillyMessages[messageIndex];
-              }, 1000); 
+              }, 3000); // UPDATED interval duration
               
+              // Simulate total processing time (longer now)
               setTimeout(() => { 
                   clearInterval(messageInterval); 
                   checkoutSpinner.style.display = 'none';
                   checkoutBtnText.innerHTML = 'Ben non, t\'es juste un sesto 🙃😘'; 
+                                                    
                   setTimeout(() => {
                       checkoutBtnText.textContent = 'Passer la commande'; 
                       checkoutBtn.disabled = false; 
                       clearCartBtn.disabled = false;
                   }, 3500); 
-              }, 6000); 
+
+              }, 10000); // Total time: 10 seconds (UPDATED)
           });
       } else {
           console.error("Required elements for checkout simulation not found.");
