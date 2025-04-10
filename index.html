@@ -34,7 +34,24 @@
         z-index: 10; 
         position: relative; 
       }
-      /* Custom modal animation CSS is removed as GSAP handles it */
+      
+      /* Simple Scale-Fade Animation Keyframes (Re-added) */
+      @keyframes scale-fade-in {
+        0% {
+          transform: scale(0.7); 
+          opacity: 0;
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      /* Apply simple CSS animation to the modal dialog (Re-added) */
+      .modal.show .modal-dialog {
+        animation: scale-fade-in 0.5s ease-out; 
+      }
+
       #modalImage {
           max-height: 80vh; 
           width: auto; 
@@ -45,10 +62,7 @@
        .modal-content {
            overflow: hidden; 
        }
-       /* Ensure clicked image is visible during Flip */
-       .sesto-card-img.is-flipping {
-           opacity: 0; /* Hide original temporarily */
-       }
+       /* Removed .is-flipping class style */
     </style>
   </head>
   <body>
@@ -74,6 +88,8 @@
               class="card-img-top sesto-card-img" 
               alt="Jean-Christophe 1" 
               onerror="this.onerror=null; this.src='https://placehold.co/400x250/cccccc/000000?text=Image+Indisponible';"
+              data-bs-toggle="modal" 
+              data-bs-target="#imageModal"
               data-img-src="https://sestosociety.com/images/Chris_01.png"
               data-img-name="Jean-Christophe">
             <div class="card-body text-center">
@@ -88,6 +104,8 @@
               class="card-img-top sesto-card-img" 
               alt="Jean-Christophe 2" 
               onerror="this.onerror=null; this.src='https://placehold.co/400x250/cccccc/000000?text=Image+Indisponible';"
+              data-bs-toggle="modal" 
+              data-bs-target="#imageModal"
               data-img-src="https://sestosociety.com/images/Chris_02.png"
               data-img-name="Jean-Christophe">
             <div class="card-body text-center">
@@ -102,6 +120,8 @@
               class="card-img-top sesto-card-img" 
               alt="Jean-Christophe 3" 
               onerror="this.onerror=null; this.src='https://placehold.co/400x250/cccccc/000000?text=Image+Indisponible';"
+              data-bs-toggle="modal" 
+              data-bs-target="#imageModal"
               data-img-src="https://sestosociety.com/images/Chris_03.png"
               data-img-name="Jean-Christophe">
             <div class="card-body text-center">
@@ -116,6 +136,8 @@
               class="card-img-top sesto-card-img" 
               alt="Jean-Christophe 4" 
               onerror="this.onerror=null; this.src='https://placehold.co/400x250/cccccc/000000?text=Image+Indisponible';"
+              data-bs-toggle="modal" 
+              data-bs-target="#imageModal"
               data-img-src="https://sestosociety.com/images/Chris_04.png"
               data-img-name="Jean-Christophe">
             <div class="card-body text-center">
@@ -130,6 +152,8 @@
               class="card-img-top sesto-card-img" 
               alt="Jean-Christophe 5" 
               onerror="this.onerror=null; this.src='https://placehold.co/400x250/cccccc/000000?text=Image+Indisponible';"
+              data-bs-toggle="modal" 
+              data-bs-target="#imageModal"
               data-img-src="https://sestosociety.com/images/Chris_05.png"
               data-img-name="Jean-Christophe">
             <div class="card-body text-center">
@@ -144,6 +168,8 @@
               class="card-img-top sesto-card-img" 
               alt="Jean-Dominique 1" 
               onerror="this.onerror=null; this.src='https://placehold.co/400x250/cccccc/000000?text=Image+Indisponible';"
+              data-bs-toggle="modal" 
+              data-bs-target="#imageModal"
               data-img-src="https://sestosociety.com/images/Dom_01.png"
               data-img-name="Jean-Dominique">
             <div class="card-body text-center">
@@ -158,6 +184,8 @@
               class="card-img-top sesto-card-img" 
               alt="Jean-Dominique 2" 
               onerror="this.onerror=null; this.src='https://placehold.co/400x250/cccccc/000000?text=Image+Indisponible';"
+              data-bs-toggle="modal" 
+              data-bs-target="#imageModal"
               data-img-src="https://sestosociety.com/images/Dom_02.png"
               data-img-name="Jean-Dominique">
             <div class="card-body text-center">
@@ -172,6 +200,8 @@
               class="card-img-top sesto-card-img" 
               alt="Jean-Dominique 3" 
               onerror="this.onerror=null; this.src='https://placehold.co/400x250/cccccc/000000?text=Image+Indisponible';"
+              data-bs-toggle="modal" 
+              data-bs-target="#imageModal"
               data-img-src="https://sestosociety.com/images/Dom_03.png"
               data-img-name="Jean-Dominique">
             <div class="card-body text-center">
@@ -186,6 +216,8 @@
               class="card-img-top sesto-card-img" 
               alt="Jean-Benoît" 
               onerror="this.onerror=null; this.src='https://placehold.co/400x250/cccccc/000000?text=Image+Indisponible';"
+              data-bs-toggle="modal" 
+              data-bs-target="#imageModal"
               data-img-src="https://sestosociety.com/images/Ben_01.png"
               data-img-name="Jean-Benoît">
             <div class="card-body text-center">
@@ -213,91 +245,42 @@
     </div>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/Flip.min.js"></script>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
     <script>
-      // Register GSAP Flip plugin
-      gsap.registerPlugin(Flip); 
-
       const modalElement = document.getElementById('imageModal');
       const modalImage = document.getElementById('modalImage');
       const modalTitle = document.getElementById('imageModalLabel'); 
-      const sestoGrid = document.getElementById('sestoGrid');
-      let bootstrapModal = null; 
-
+      
       if (modalElement) {
-           bootstrapModal = new bootstrap.Modal(modalElement);
+        // Listener to populate modal just before it's shown (standard Bootstrap event)
+        modalElement.addEventListener('show.bs.modal', event => {
+          const triggerElement = event.relatedTarget; // Element that triggered the modal (the image)
+          
+          const imgSrc = triggerElement.getAttribute('data-img-src');
+          const imgName = triggerElement.getAttribute('data-img-name');
+
+          if (modalTitle) {
+            modalTitle.textContent = imgName || 'Image Sesto'; 
+          }
+          if (modalImage) {
+            modalImage.src = imgSrc || ''; 
+            modalImage.alt = imgName ? `Image agrandie de ${imgName}` : 'Image agrandie';
+          }
+        });
+
+        // Listener to clear image when modal is hidden (prevents flash)
+         modalElement.addEventListener('hide.bs.modal', event => {
+             if (modalImage) {
+                 modalImage.src = ''; 
+             }
+         });
+
       } else {
           console.error("Modal element #imageModal not found.");
       }
       
-      // Add click listener to the grid container (event delegation)
-      if (sestoGrid && bootstrapModal) {
-          sestoGrid.addEventListener('click', function(event) {
-              // Check if the clicked element is one of our card images
-              const clickedImage = event.target.closest('.sesto-card-img');
-              
-              if (clickedImage) {
-                  const imgSrc = clickedImage.getAttribute('data-img-src');
-                  const imgName = clickedImage.getAttribute('data-img-name');
-
-                  // Update the modal's content *before* capturing state
-                  if (modalTitle) {
-                      modalTitle.textContent = imgName || 'Image Sesto'; 
-                  }
-                  if (modalImage) {
-                      modalImage.src = imgSrc || ''; 
-                      modalImage.alt = imgName ? `Image agrandie de ${imgName}` : 'Image agrandie';
-                  }
-
-                  // 1. Capture the initial state of the clicked image
-                  const startState = Flip.getState(clickedImage);
-
-                  // Add a class to hide the original image smoothly during flip
-                  clickedImage.classList.add('is-flipping');
-
-                  // 3. Show the modal programmatically
-                  bootstrapModal.show(); 
-
-                  // 4. Animate with Flip *after* the modal is shown
-                  // Use 'shown.bs.modal' event for better timing (maybe)
-                  modalElement.addEventListener('shown.bs.modal', () => {
-                      Flip.from(startState, {
-                          targets: modalImage, // Animate the image inside the modal
-                          duration: 0.6, // Animation duration
-                          ease: "power2.inOut", // Animation easing
-                          scale: true, // Animate scale
-                          onComplete: () => {
-                              // Animation finished - ensure original is visible if modal closes abruptly
-                              clickedImage.classList.remove('is-flipping');
-                          }
-                      });
-                  }, { once: true }); // Ensure listener runs only once per show
-
-              }
-          });
-
-          // Handle modal close to restore original image visibility
-          modalElement.addEventListener('hide.bs.modal', event => {
-              // Find potentially hidden image (this requires knowing which image triggered it)
-              // This part is complex - simpler to just ensure all are visible on hide
-               const flippingImages = sestoGrid.querySelectorAll('.sesto-card-img.is-flipping');
-               flippingImages.forEach(img => img.classList.remove('is-flipping'));
-              
-               // Clear image src when closing to prevent flash of old image
-               if (modalImage) {
-                   modalImage.src = ''; 
-               }
-          });
-
-      } else {
-          console.error("Grid or Modal not found, cannot add listener.");
-      }
-      
-      console.log('Page loaded! GSAP Flip script re-enabled (Experimental).');
+      console.log('Page loaded! Simple modal script ready.');
     </script>
   </body>
 </html>
