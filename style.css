@@ -1,0 +1,191 @@
+/* Apply Nunito font to the body */
+body {
+    font-family: 'Nunito', sans-serif;
+    /* background-color is handled by data-bs-theme="dark" */
+  }
+  
+  /* Style for Sesto card images */
+  .sesto-card-img {
+    height: 250px; /* Default height for larger screens */
+    object-fit: cover; 
+    cursor: pointer; 
+     border-radius: var(--bs-card-inner-border-radius); /* Match card's inner radius */
+  }
+  
+  /* Card base styles and tilt effect */
+  .card {
+    transition: transform 0.15s ease-in-out; 
+     background-color: var(--bs-card-bg); 
+     border-radius: var(--bs-card-border-radius);
+     overflow: hidden; 
+  }
+  .col:nth-child(odd) .card {
+      transform: rotate(-1.5deg);
+  }
+  .col:nth-child(even) .card {
+      transform: rotate(1.5deg);
+  }
+  .col:nth-child(odd) .card:hover {
+    transform: scale(1.05) rotate(-1.5deg); 
+    z-index: 10; 
+    position: relative; 
+  }
+   .col:nth-child(even) .card:hover {
+    transform: scale(1.05) rotate(1.5deg); 
+    z-index: 10; 
+    position: relative; 
+  }
+  
+  /* Modal opening animation */
+  @keyframes scale-fade-in { 
+    0% { transform: scale(0.7); opacity: 0; } 
+    100% { transform: scale(1); opacity: 1; } 
+  }
+  /* Apply animation only to image modal */
+  #imageModal.modal.show .modal-dialog { 
+      animation: scale-fade-in 0.5s ease-out; 
+  } 
+  
+  /* Modal Image Styling */
+  #modalImage {
+      width: 100%; 
+      height: auto; 
+      display: block; 
+      margin: 0 auto; 
+      max-height: calc(80vh - 150px); /* Adjusted max-height */
+      object-fit: contain; 
+  }
+   .modal-content {
+       overflow: hidden; 
+       background-color: var(--bs-body-bg); 
+       min-height: 85vh; /* For image modal */
+       display: flex; 
+       flex-direction: column;
+   }
+   #cartModal .modal-content {
+       min-height: auto; /* Cart modal doesn't need min-height */
+   }
+   .modal-body {
+        overflow-y: auto; 
+        flex-grow: 1; 
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        padding: 1rem; 
+        flex-direction: column; /* Stack image and description */
+   }
+   #cartModal .modal-body {
+       display: block; /* Cart modal body layout */
+       align-items: normal;
+       justify-content: normal;
+   }
+    .modal-footer {
+        flex-shrink: 0; 
+        border-top: 1px solid var(--bs-border-color-translucent); 
+        padding-top: 1rem; 
+        padding-bottom: 1rem;
+    }
+  
+  /* Section heading style */
+   .section-heading {
+       font-family: 'Caveat', cursive; 
+       font-size: 2.5rem; 
+       border-bottom: 1px solid var(--bs-border-color-translucent); 
+       padding-bottom: 0.5rem;
+       color: var(--bs-body-color); 
+       font-weight: 500; 
+   }
+  
+   /* Cart Styles */
+   #cart-count { 
+       font-size: 0.7em; 
+   }
+   #cartModalBody ul { 
+       list-style: none; 
+       padding: 0; 
+       margin-bottom: 0;
+   } 
+   #cartModalBody li { 
+       display: flex; 
+       justify-content: space-between; 
+       align-items: center; 
+       padding: 0.75rem 0; 
+       border-bottom: 1px solid var(--bs-border-color-translucent); 
+   }
+   #cartModalBody li:last-child { 
+       border-bottom: none; 
+   }
+   .cart-item-thumbnail { 
+       width: 50px; 
+       height: 50px; 
+       object-fit: cover;
+       border-radius: 0.25rem; 
+       margin-right: 1rem; 
+       flex-shrink: 0; 
+   }
+   .cart-item-details { 
+       flex-grow: 1; 
+       margin-right: 1rem; 
+       word-break: break-word; 
+   } 
+   .remove-item-btn { 
+       flex-shrink: 0; 
+   } 
+   #checkoutBtn .spinner-border { 
+       vertical-align: text-bottom; 
+   }
+  
+  
+  /* --- Mobile Specific Styles --- */
+  @media (max-width: 575.98px) {
+    .sesto-card-img { 
+        height: 150px; 
+    }
+    .display-4 { 
+        font-size: 2.25rem; 
+    }
+     h2 { 
+        font-size: 1.6rem; 
+     }
+     h3.section-heading { 
+         font-size: 2rem; 
+         margin-top: 2rem !important; 
+     }
+     /* Stack buttons in image modal footer */
+     #imageModal .modal-footer { 
+         flex-direction: column; 
+         align-items: stretch; 
+     }
+     #imageModal .modal-footer .btn { 
+         margin-top: 0.5rem; 
+         margin-bottom: 0; 
+         margin-left: 0 !important; 
+         margin-right: 0 !important; 
+     }
+     #imageModal .modal-footer .btn:first-child { 
+         margin-top: 0; 
+     } 
+      #modalImage { 
+          max-height: calc(70vh - 160px); /* Adjusted max-height for mobile */
+      }
+      /* Stack buttons in cart modal footer */
+      #cartModalFooter { 
+          flex-direction: column; 
+          align-items: stretch; 
+      }
+      #cartModalFooter > div:first-child { 
+          margin-bottom: 0.5rem; 
+          text-align: center;
+      }
+      #cartModalFooter > div:last-child { 
+          display: flex; 
+          flex-direction: column; 
+      }
+      #cartModalFooter > div:last-child .btn { 
+          margin-top: 0.5rem;
+      }
+      #cartModalFooter > div:last-child .btn:first-child { 
+          margin-top: 0;
+      }
+  }
+  
