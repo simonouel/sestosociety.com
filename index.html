@@ -368,7 +368,8 @@
       function saveCart() { 
           localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
       }
-      function addToCart(item) { 
+      // UPDATED: Pass event to confetti call
+      function addToCart(item, event) { // Added event parameter
           item.id = Date.now() + Math.random(); 
           const triggerImage = document.querySelector(`.sesto-card-img[data-img-name="${item.name}"]`);
           item.image = triggerImage ? triggerImage.getAttribute('src') : 'https://placehold.co/50x50/cccccc/000000?text=?'; 
@@ -379,15 +380,14 @@
           updateCartDisplay();
           // --- Trigger Confetti ---
           if (typeof confetti === 'function') { 
-              // Get click coords from the event passed to the listener
-              const event = window.event; // Note: This might not be reliable, better to pass event through
               let origin = { y: 0.6 }; // Default origin
-              if (event) {
+              // Use event coords if available
+              if (event && event.clientX !== undefined && event.clientY !== undefined) { 
                   const clickX = event.clientX;
                   const clickY = event.clientY;
                   const windowWidth = window.innerWidth;
                   const windowHeight = window.innerHeight;
-                  if (windowWidth > 0 && windowHeight > 0) { // Avoid division by zero
+                  if (windowWidth > 0 && windowHeight > 0) { 
                      origin = { x: clickX / windowWidth, y: clickY / windowHeight };
                   }
               }
@@ -487,7 +487,10 @@
                   const specificImgSrc = targetButton.getAttribute('data-img-src'); 
                   
                   if (sestoName && specificImgSrc) { 
-                      addToCart({ type: productType, name: sestoName, price: price, image: specificImgSrc }); 
+                      // Pass the event object to addToCart for confetti origin
+                      addToCart({ type: productType, name: sestoName, price: price, image: specificImgSrc }, event); 
+                      
+                      // Visual feedback
                       const originalText = targetButton.textContent;
                       targetButton.textContent = 'Ajouté!';
                       targetButton.disabled = true; 
@@ -541,10 +544,11 @@
               checkoutBtnText.style.display = 'inline-block';
               
               if (messageInterval) clearInterval(messageInterval); 
+              // Change message every 2 seconds
               messageInterval = setInterval(() => {
                   messageIndex = (messageIndex + 1) % sillyMessages.length;
                   checkoutBtnText.textContent = sillyMessages[messageIndex];
-              }, 1000); // Change message every 1 second
+              }, 2000); // UPDATED interval duration
               
               // Simulate total processing time (longer now)
               setTimeout(() => { 
@@ -558,7 +562,7 @@
                       clearCartBtn.disabled = false;
                   }, 3500); 
 
-              }, 9000); // Total time: 9 seconds
+              }, 10000); // Total time: 10 seconds (UPDATED)
           });
       } else {
           console.error("Required elements for checkout simulation not found.");
