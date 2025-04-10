@@ -6,200 +6,298 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
-    <title>Sesto Society - Carousel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+
+    <title>Sesto Society - Les Sestos</title>
 
     <style>
-      /* Style for carousel items to provide background */
-      .carousel-item {
-         background-color: white; /* White background for empty space */
-         /* Ensure the item itself respects the max-height potentially set for images */
-         /* You might need to adjust this if images have varying heights */
-         /* height: 600px; /* Or keep it flexible */
+      body {
+        font-family: 'Nunito', sans-serif;
+        background-color: #f8f9fa; 
       }
-
-      /* Adjust image display: fit within container, keep aspect ratio */
-      .carousel-item img {
-        max-height: 600px; /* Adjust this value as needed */
-        width: 100%; /* Let width adjust based on height and contain */
-        height: 600px; /* Match max-height to ensure container has size for contain */
-        object-fit: contain; /* Scale image down to fit, keep aspect ratio */
-        object-position: center; /* Center the image within the frame */
-        display: block; /* Ensure proper block display */
-        margin: 0 auto; /* Center image horizontally */
+      .sesto-card-img {
+        height: 250px; 
+        object-fit: cover; 
+        cursor: pointer; 
       }
-      
-      /* Style for the overlay text */
-      .carousel-caption h5 {
-        font-size: 2.5rem; /* Slightly smaller text */
-        font-weight: bold;
-        /* Add a subtle shadow to make text more readable on various images */
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); 
-        /* You might need to adjust text color if background is white */
-        /* color: #333; /* Example: Darker text color */
+      .banner-icon {
+        height: 1em; width: 1em; vertical-align: -0.125em; margin-right: 0.2em; 
       }
-      /* Ensure caption is always visible */
-      .carousel-caption {
-        display: block !important; 
-        right: 15%; 
-        left: 15%; 
-        bottom: 1.25rem; 
-        padding-top: 1.25rem; 
-        padding-bottom: 1.25rem; 
-        color: #fff; /* Keeping white text, might need adjustment */
-        text-align: center; 
+      .card {
+        transition: transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out; 
       }
+      .card:hover {
+        transform: scale(1.05); 
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important; 
+        z-index: 10; 
+        position: relative; 
+      }
+      /* Custom modal animation CSS is removed as GSAP handles it */
+      #modalImage {
+          max-height: 80vh; 
+          width: auto; 
+          max-width: 100%; 
+          display: block;
+          margin: 0 auto; 
+      }
+       .modal-content {
+           overflow: hidden; 
+       }
+       /* Ensure clicked image is visible during Flip */
+       .sesto-card-img.is-flipping {
+           opacity: 0; /* Hide original temporarily */
+       }
     </style>
   </head>
   <body>
 
-    <div class="bg-dark text-white p-3 text-center mb-4">
-      <h1 class="display-4">Welcome to the Sesto Society</h1>
+    <div class="bg-primary text-white p-3 text-center mb-4 shadow-sm"> 
+      <h1 class="display-4">
+        <img src="https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/laugh.svg" alt="Icône rire" class="banner-icon">
+        Welcome to the Sesto Society
+      </h1>
     </div>
 
-    <div class="text-center mb-3">
-      <h2>Les Sestos de l'heure</h2>
+    <div class="text-center mb-4"> 
+      <h2 style="font-weight: 700;">Les Sestos de l'heure</h2> 
     </div>
 
-    <div class="container" style="max-width: 960px;"> 
-      
-      <div id="sestoCarousel" class="carousel slide" data-bs-ride="carousel">
-        
-        <div class="carousel-indicators">
-          <button type="button" data-bs-target="#sestoCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-          <button type="button" data-bs-target="#sestoCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-          <button type="button" data-bs-target="#sestoCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-          <button type="button" data-bs-target="#sestoCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
-          <button type="button" data-bs-target="#sestoCarousel" data-bs-slide-to="4" aria-label="Slide 5"></button>
-          <button type="button" data-bs-target="#sestoCarousel" data-bs-slide-to="5" aria-label="Slide 6"></button>
-          <button type="button" data-bs-target="#sestoCarousel" data-bs-slide-to="6" aria-label="Slide 7"></button>
-          <button type="button" data-bs-target="#sestoCarousel" data-bs-slide-to="7" aria-label="Slide 8"></button>
-          <button type="button" data-bs-target="#sestoCarousel" data-bs-slide-to="8" aria-label="Slide 9"></button>
+    <div class="container mt-4"> 
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4" id="sestoGrid">
+
+        <div class="col">
+          <div class="card h-100 shadow-sm">
+             <img 
+              src="https://sestosociety.com/images/Chris_01.png" 
+              class="card-img-top sesto-card-img" 
+              alt="Jean-Christophe 1" 
+              onerror="this.onerror=null; this.src='https://placehold.co/400x250/cccccc/000000?text=Image+Indisponible';"
+              data-img-src="https://sestosociety.com/images/Chris_01.png"
+              data-img-name="Jean-Christophe">
+            <div class="card-body text-center">
+              <h5 class="card-title">Jean-Christophe</h5>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100 shadow-sm">
+             <img 
+              src="https://sestosociety.com/images/Chris_02.png" 
+              class="card-img-top sesto-card-img" 
+              alt="Jean-Christophe 2" 
+              onerror="this.onerror=null; this.src='https://placehold.co/400x250/cccccc/000000?text=Image+Indisponible';"
+              data-img-src="https://sestosociety.com/images/Chris_02.png"
+              data-img-name="Jean-Christophe">
+            <div class="card-body text-center">
+              <h5 class="card-title">Jean-Christophe</h5>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100 shadow-sm">
+             <img 
+              src="https://sestosociety.com/images/Chris_03.png" 
+              class="card-img-top sesto-card-img" 
+              alt="Jean-Christophe 3" 
+              onerror="this.onerror=null; this.src='https://placehold.co/400x250/cccccc/000000?text=Image+Indisponible';"
+              data-img-src="https://sestosociety.com/images/Chris_03.png"
+              data-img-name="Jean-Christophe">
+            <div class="card-body text-center">
+              <h5 class="card-title">Jean-Christophe</h5>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100 shadow-sm">
+             <img 
+              src="https://sestosociety.com/images/Chris_04.png" 
+              class="card-img-top sesto-card-img" 
+              alt="Jean-Christophe 4" 
+              onerror="this.onerror=null; this.src='https://placehold.co/400x250/cccccc/000000?text=Image+Indisponible';"
+              data-img-src="https://sestosociety.com/images/Chris_04.png"
+              data-img-name="Jean-Christophe">
+            <div class="card-body text-center">
+              <h5 class="card-title">Jean-Christophe</h5>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100 shadow-sm">
+             <img 
+              src="https://sestosociety.com/images/Chris_05.png" 
+              class="card-img-top sesto-card-img" 
+              alt="Jean-Christophe 5" 
+              onerror="this.onerror=null; this.src='https://placehold.co/400x250/cccccc/000000?text=Image+Indisponible';"
+              data-img-src="https://sestosociety.com/images/Chris_05.png"
+              data-img-name="Jean-Christophe">
+            <div class="card-body text-center">
+              <h5 class="card-title">Jean-Christophe</h5>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100 shadow-sm">
+             <img 
+              src="https://sestosociety.com/images/Dom_01.png" 
+              class="card-img-top sesto-card-img" 
+              alt="Jean-Dominique 1" 
+              onerror="this.onerror=null; this.src='https://placehold.co/400x250/cccccc/000000?text=Image+Indisponible';"
+              data-img-src="https://sestosociety.com/images/Dom_01.png"
+              data-img-name="Jean-Dominique">
+            <div class="card-body text-center">
+              <h5 class="card-title">Jean-Dominique</h5>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100 shadow-sm">
+             <img 
+              src="https://sestosociety.com/images/Dom_02.png" 
+              class="card-img-top sesto-card-img" 
+              alt="Jean-Dominique 2" 
+              onerror="this.onerror=null; this.src='https://placehold.co/400x250/cccccc/000000?text=Image+Indisponible';"
+              data-img-src="https://sestosociety.com/images/Dom_02.png"
+              data-img-name="Jean-Dominique">
+            <div class="card-body text-center">
+              <h5 class="card-title">Jean-Dominique</h5>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100 shadow-sm">
+             <img 
+              src="https://sestosociety.com/images/Dom_03.png" 
+              class="card-img-top sesto-card-img" 
+              alt="Jean-Dominique 3" 
+              onerror="this.onerror=null; this.src='https://placehold.co/400x250/cccccc/000000?text=Image+Indisponible';"
+              data-img-src="https://sestosociety.com/images/Dom_03.png"
+              data-img-name="Jean-Dominique">
+            <div class="card-body text-center">
+              <h5 class="card-title">Jean-Dominique</h5>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card h-100 shadow-sm">
+             <img 
+              src="https://sestosociety.com/images/Ben_01.png" 
+              class="card-img-top sesto-card-img" 
+              alt="Jean-Benoît" 
+              onerror="this.onerror=null; this.src='https://placehold.co/400x250/cccccc/000000?text=Image+Indisponible';"
+              data-img-src="https://sestosociety.com/images/Ben_01.png"
+              data-img-name="Jean-Benoît">
+            <div class="card-body text-center">
+              <h5 class="card-title">Jean-Benoît</h5>
+            </div>
+          </div>
         </div>
 
-        <div class="carousel-inner">
-          
-          <div class="carousel-item active">
-            <img 
-              src="https://sestosociety.com/images/Chris_01.png" 
-              class="d-block w-100" 
-              alt="Jean-Christophe 1"
-              onerror="this.onerror=null; this.src='https://placehold.co/1200x500/cccccc/000000?text=Image+Jean-Christophe+1+Indisponible';"
-            >
-            <div class="carousel-caption">
-              <h5>Jean-Christophe</h5>
-            </div>
+      </div> </div> <footer class="py-4 mt-5 text-center text-muted">
+        <p>&copy; 2025 Sesto Society</p>
+     </footer>
+
+    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="imageModalLabel">Image Sesto</h5> 
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-
-          <div class="carousel-item">
-            <img 
-              src="https://sestosociety.com/images/Chris_02.png" 
-              class="d-block w-100" 
-              alt="Jean-Christophe 2"
-              onerror="this.onerror=null; this.src='https://placehold.co/1200x500/cccccc/000000?text=Image+Jean-Christophe+2+Indisponible';"
-            >
-            <div class="carousel-caption">
-              <h5>Jean-Christophe</h5>
-            </div>
+          <div class="modal-body text-center">
+             <img src="" id="modalImage" class="img-fluid" alt="Image agrandie"> 
           </div>
+        </div>
+      </div>
+    </div>
 
-          <div class="carousel-item">
-            <img 
-              src="https://sestosociety.com/images/Chris_03.png" 
-              class="d-block w-100" 
-              alt="Jean-Christophe 3"
-              onerror="this.onerror=null; this.src='https://placehold.co/1200x500/cccccc/000000?text=Image+Jean-Christophe+3+Indisponible';"
-            >
-            <div class="carousel-caption">
-              <h5>Jean-Christophe</h5>
-            </div>
-          </div>
 
-          <div class="carousel-item">
-            <img 
-              src="https://sestosociety.com/images/Chris_04.png" 
-              class="d-block w-100" 
-              alt="Jean-Christophe 4"
-              onerror="this.onerror=null; this.src='https://placehold.co/1200x500/cccccc/000000?text=Image+Jean-Christophe+4+Indisponible';"
-            >
-            <div class="carousel-caption">
-              <h5>Jean-Christophe</h5>
-            </div>
-          </div>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/Flip.min.js"></script>
 
-          <div class="carousel-item">
-            <img 
-              src="https://sestosociety.com/images/Chris_05.png" 
-              class="d-block w-100" 
-              alt="Jean-Christophe 5"
-              onerror="this.onerror=null; this.src='https://placehold.co/1200x500/cccccc/000000?text=Image+Jean-Christophe+5+Indisponible';"
-            >
-            <div class="carousel-caption">
-              <h5>Jean-Christophe</h5>
-            </div>
-          </div>
-
-          <div class="carousel-item">
-            <img 
-              src="https://sestosociety.com/images/Dom_01.png" 
-              class="d-block w-100" 
-              alt="Jean-Dominique 1"
-              onerror="this.onerror=null; this.src='https://placehold.co/1200x500/cccccc/000000?text=Image+Jean-Dominique+1+Indisponible';"
-            >
-            <div class="carousel-caption">
-              <h5>Jean-Dominique</h5>
-            </div>
-          </div>
-
-          <div class="carousel-item">
-            <img 
-              src="https://sestosociety.com/images/Dom_02.png" 
-              class="d-block w-100" 
-              alt="Jean-Dominique 2"
-              onerror="this.onerror=null; this.src='https://placehold.co/1200x500/cccccc/000000?text=Image+Jean-Dominique+2+Indisponible';"
-            >
-            <div class="carousel-caption">
-              <h5>Jean-Dominique</h5>
-            </div>
-          </div>
-
-          <div class="carousel-item">
-            <img 
-              src="https://sestosociety.com/images/Dom_03.png" 
-              class="d-block w-100" 
-              alt="Jean-Dominique 3"
-              onerror="this.onerror=null; this.src='https://placehold.co/1200x500/cccccc/000000?text=Image+Jean-Dominique+3+Indisponible';"
-            >
-            <div class="carousel-caption">
-              <h5>Jean-Dominique</h5>
-            </div>
-          </div>
-
-          <div class="carousel-item">
-            <img 
-              src="https://sestosociety.com/images/Ben_01.png" 
-              class="d-block w-100" 
-              alt="Jean-Benoît"
-              onerror="this.onerror=null; this.src='https://placehold.co/1200x500/cccccc/000000?text=Image+Jean-Benoît+Indisponible';"
-            >
-            <div class="carousel-caption">
-              <h5>Jean-Benoît</h5>
-            </div>
-          </div>
-
-        </div> <button class="carousel-control-prev" type="button" data-bs-target="#sestoCarousel" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Précédent</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#sestoCarousel" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Suivant</span>
-        </button>
-
-      </div> </div> <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
     <script>
-      // Initialize the carousel (though data-bs-ride="carousel" does this automatically)
-      console.log('Bootstrap Carousel initialized!');
+      // Register GSAP Flip plugin
+      gsap.registerPlugin(Flip); 
+
+      const modalElement = document.getElementById('imageModal');
+      const modalImage = document.getElementById('modalImage');
+      const modalTitle = document.getElementById('imageModalLabel'); 
+      const sestoGrid = document.getElementById('sestoGrid');
+      let bootstrapModal = null; 
+
+      if (modalElement) {
+           bootstrapModal = new bootstrap.Modal(modalElement);
+      } else {
+          console.error("Modal element #imageModal not found.");
+      }
+      
+      // Add click listener to the grid container (event delegation)
+      if (sestoGrid && bootstrapModal) {
+          sestoGrid.addEventListener('click', function(event) {
+              // Check if the clicked element is one of our card images
+              const clickedImage = event.target.closest('.sesto-card-img');
+              
+              if (clickedImage) {
+                  const imgSrc = clickedImage.getAttribute('data-img-src');
+                  const imgName = clickedImage.getAttribute('data-img-name');
+
+                  // Update the modal's content *before* capturing state
+                  if (modalTitle) {
+                      modalTitle.textContent = imgName || 'Image Sesto'; 
+                  }
+                  if (modalImage) {
+                      modalImage.src = imgSrc || ''; 
+                      modalImage.alt = imgName ? `Image agrandie de ${imgName}` : 'Image agrandie';
+                  }
+
+                  // 1. Capture the initial state of the clicked image
+                  const startState = Flip.getState(clickedImage);
+
+                  // Add a class to hide the original image smoothly during flip
+                  clickedImage.classList.add('is-flipping');
+
+                  // 3. Show the modal programmatically
+                  bootstrapModal.show(); 
+
+                  // 4. Animate with Flip *after* the modal is shown
+                  // Use 'shown.bs.modal' event for better timing (maybe)
+                  modalElement.addEventListener('shown.bs.modal', () => {
+                      Flip.from(startState, {
+                          targets: modalImage, // Animate the image inside the modal
+                          duration: 0.6, // Animation duration
+                          ease: "power2.inOut", // Animation easing
+                          scale: true, // Animate scale
+                          onComplete: () => {
+                              // Animation finished - ensure original is visible if modal closes abruptly
+                              clickedImage.classList.remove('is-flipping');
+                          }
+                      });
+                  }, { once: true }); // Ensure listener runs only once per show
+
+              }
+          });
+
+          // Handle modal close to restore original image visibility
+          modalElement.addEventListener('hide.bs.modal', event => {
+              // Find potentially hidden image (this requires knowing which image triggered it)
+              // This part is complex - simpler to just ensure all are visible on hide
+               const flippingImages = sestoGrid.querySelectorAll('.sesto-card-img.is-flipping');
+               flippingImages.forEach(img => img.classList.remove('is-flipping'));
+              
+               // Clear image src when closing to prevent flash of old image
+               if (modalImage) {
+                   modalImage.src = ''; 
+               }
+          });
+
+      } else {
+          console.error("Grid or Modal not found, cannot add listener.");
+      }
+      
+      console.log('Page loaded! GSAP Flip script re-enabled (Experimental).');
     </script>
   </body>
 </html>
