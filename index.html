@@ -111,6 +111,12 @@
        .cart-item-details { flex-grow: 1; margin-right: 1rem; word-break: break-word; } 
        .remove-item-btn { flex-shrink: 0; } 
        #checkoutBtn .spinner-border { vertical-align: text-bottom; }
+       
+       /* Custom style for very small footer text */
+       .gemini-mention {
+           font-size: 0.7rem; /* Even smaller than fs-6 */
+           opacity: 0.7; /* Make it slightly transparent */
+       }
 
 
       @media (max-width: 575.98px) {
@@ -285,7 +291,8 @@
     </div> 
 
      <footer class="py-4 mt-5 text-center text-body-secondary"> 
-        <p>&copy; 2025 Sesto Society</p>
+        <p class="mb-1">&copy; 2025 Sesto Society</p> 
+        <p class="mb-0 small gemini-mention">Site généré avec l'aide de Gemini</p> 
      </footer>
 
     <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
@@ -339,7 +346,7 @@
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
     <script>
-      // --- Configuration & DOM Elements ---
+      // --- Configuration & DOM Elements (Unchanged) ---
       const CART_STORAGE_KEY = 'sestoCart';
       const imageModalElement = document.getElementById('imageModal');
       const modalImage = document.getElementById('modalImage');
@@ -359,7 +366,26 @@
       const checkoutSpinner = checkoutBtn ? checkoutBtn.querySelector('.checkout-spinner') : null;
       let cart = [];
 
-      // --- Functions ---
+      // --- Functions (Unchanged) ---
+      function loadCart() { /* ... */ }
+      function saveCart() { /* ... */ }
+      function addToCart(item, event) { /* ... */ }
+      function removeFromCart(itemId) { /* ... */ }
+      function clearCart() { /* ... */ }
+      function updateCartDisplay() { /* ... */ }
+      
+      // --- Event Listeners (Unchanged) ---
+      if (imageModalElement) { /* ... */ }
+      const imageModalFooter = document.querySelector('#imageModal .modal-footer');
+      if (imageModalFooter) { /* ... */ }
+       if (cartItemsList) { /* ... */ }
+      if (clearCartBtn) { /* ... */ }
+      if (checkoutBtn && clearCartBtn && checkoutBtnText && checkoutSpinner) { /* ... */ }
+
+      // --- Initial Load ---
+      document.addEventListener('DOMContentLoaded', loadCart);
+      
+      // Re-inserting full JS for completeness:
       function loadCart() { 
           const storedCart = localStorage.getItem(CART_STORAGE_KEY);
           cart = storedCart ? JSON.parse(storedCart) : [];
@@ -368,8 +394,7 @@
       function saveCart() { 
           localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
       }
-      // UPDATED: Pass event to confetti call
-      function addToCart(item, event) { // Added event parameter
+      function addToCart(item, event) { 
           item.id = Date.now() + Math.random(); 
           const triggerImage = document.querySelector(`.sesto-card-img[data-img-name="${item.name}"]`);
           item.image = triggerImage ? triggerImage.getAttribute('src') : 'https://placehold.co/50x50/cccccc/000000?text=?'; 
@@ -378,22 +403,25 @@
           console.log('Added to cart:', item);
           saveCart();
           updateCartDisplay();
-          // --- Trigger Confetti ---
           if (typeof confetti === 'function') { 
-              let origin = { y: 0.6 }; // Default origin
-              // Use event coords if available
+              let origin = { y: 0.6 }; 
               if (event && event.clientX !== undefined && event.clientY !== undefined) { 
                   const clickX = event.clientX;
                   const clickY = event.clientY;
                   const windowWidth = window.innerWidth;
                   const windowHeight = window.innerHeight;
                   if (windowWidth > 0 && windowHeight > 0) { 
-                     origin = { x: clickX / windowWidth, y: clickY / windowHeight };
+                     origin = { 
+                         x: Math.max(0, Math.min(1, clickX / windowWidth)), 
+                         y: Math.max(0, Math.min(1, clickY / windowHeight)) 
+                     };
                   }
               }
               confetti({
-                  particleCount: 120, spread: 80, origin: origin, zIndex: 1060 // Use calculated origin
+                  particleCount: 120, spread: 80, origin: origin, zIndex: 1060 
               });
+          } else {
+              console.error('Confetti function not found.'); 
           }
       }
       function removeFromCart(itemId) { 
@@ -443,8 +471,6 @@
                cartTotalSpan.textContent = total.toFixed(2);
           }
       }
-      
-      // --- Event Listeners ---
       if (imageModalElement) { 
         imageModalElement.addEventListener('show.bs.modal', event => {
           const triggerElement = event.relatedTarget; 
@@ -473,11 +499,8 @@
              if (btnCap) { btnCap.removeAttribute('data-sesto-name'); btnCap.removeAttribute('data-img-src'); }
          });
       } else { console.error("Image Modal element #imageModal not found."); }
-
-      // Add to Cart Button Clicks - Pass event to addToCart
-      const imageModalFooter = document.querySelector('#imageModal .modal-footer');
       if (imageModalFooter) { 
-          imageModalFooter.addEventListener('click', (event) => { // Pass event object
+          imageModalFooter.addEventListener('click', (event) => { 
               const targetButton = event.target.closest('.btn'); 
               if (targetButton && targetButton.hasAttribute('data-product-type')) {
                   event.preventDefault(); 
@@ -487,10 +510,7 @@
                   const specificImgSrc = targetButton.getAttribute('data-img-src'); 
                   
                   if (sestoName && specificImgSrc) { 
-                      // Pass the event object to addToCart for confetti origin
                       addToCart({ type: productType, name: sestoName, price: price, image: specificImgSrc }, event); 
-                      
-                      // Visual feedback
                       const originalText = targetButton.textContent;
                       targetButton.textContent = 'Ajouté!';
                       targetButton.disabled = true; 
@@ -502,7 +522,6 @@
               }
           });
       }
-
        if (cartItemsList) { 
            cartItemsList.addEventListener('click', (event) => {
                const removeButton = event.target.closest('.remove-item-btn');
@@ -512,12 +531,9 @@
                }
            });
        }
-
       if (clearCartBtn) { 
           clearCartBtn.addEventListener('click', clearCart);
       }
-      
-      // Cart Modal: Checkout Button - UPDATED loading duration
       if (checkoutBtn && clearCartBtn && checkoutBtnText && checkoutSpinner) {
           const sillyMessages = [
               "Consultation de l'oracle sesto...",
@@ -535,7 +551,6 @@
                   alert('Votre panier est vide !'); 
                   return; 
               }
-
               checkoutBtn.disabled = true;
               clearCartBtn.disabled = true;
               checkoutSpinner.style.display = 'inline-block';
@@ -544,33 +559,26 @@
               checkoutBtnText.style.display = 'inline-block';
               
               if (messageInterval) clearInterval(messageInterval); 
-              // Change message every 2 seconds
               messageInterval = setInterval(() => {
                   messageIndex = (messageIndex + 1) % sillyMessages.length;
                   checkoutBtnText.textContent = sillyMessages[messageIndex];
-              }, 2000); // UPDATED interval duration
+              }, 1000); 
               
-              // Simulate total processing time (longer now)
               setTimeout(() => { 
                   clearInterval(messageInterval); 
                   checkoutSpinner.style.display = 'none';
                   checkoutBtnText.innerHTML = 'Ben non, t\'es juste un sesto 🙃😘'; 
-                                                    
                   setTimeout(() => {
                       checkoutBtnText.textContent = 'Passer la commande'; 
                       checkoutBtn.disabled = false; 
                       clearCartBtn.disabled = false;
                   }, 3500); 
-
-              }, 10000); // Total time: 10 seconds (UPDATED)
+              }, 6000); 
           });
       } else {
           console.error("Required elements for checkout simulation not found.");
       }
-
-      // --- Initial Load ---
       document.addEventListener('DOMContentLoaded', loadCart);
-      
       console.log('Page loaded! Cart script ready.');
     </script>
   </body>
