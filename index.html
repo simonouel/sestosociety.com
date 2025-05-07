@@ -21,6 +21,10 @@ body {
 html[data-bs-theme="dark"] body {
   background-color: #121212;
 }
+html[data-bs-theme="light"] body {
+  background-color: #f8f9fa;
+  color: #212529;
+}
 
 /* Header styling */
 .site-header {
@@ -33,6 +37,9 @@ html[data-bs-theme="dark"] body {
   width: 100%;
   z-index: 1030;
   overflow: hidden;
+}
+html[data-bs-theme="light"] .site-header {
+  background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
 }
 .site-header::before {
   content: "🤪";
@@ -51,6 +58,12 @@ html[data-bs-theme="dark"] body {
   -webkit-text-fill-color: transparent;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
+html[data-bs-theme="light"] .site-title {
+  background: linear-gradient(90deg, #212529, #343a40);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+}
 
 /* Card styling */
 .sesto-card {
@@ -61,6 +74,9 @@ html[data-bs-theme="dark"] body {
   border: none;
   height: 100%;
   position: relative;
+}
+html[data-bs-theme="light"] .sesto-card {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 /* Card Tilt */
 .col:nth-child(odd) .sesto-card {
@@ -111,6 +127,9 @@ html[data-bs-theme="dark"] body {
   backdrop-filter: blur(10px);
   text-align: center;
 }
+html[data-bs-theme="light"] .sesto-card-body {
+  background: rgba(0, 0, 0, 0.03);
+}
 .sesto-card-text {
   font-style: italic;
   font-size: 0.9rem;
@@ -124,6 +143,15 @@ html[data-bs-theme="dark"] body {
 }
 .row[id^='sestoGrid'] .col:nth-child(3n+3) .sesto-card {
   background-color: var(--bs-card-bg); 
+}
+html[data-bs-theme="light"] .row[id^='sestoGrid'] .col:nth-child(3n+1) .sesto-card {
+  background-color: var(--bs-gray-200); 
+}
+html[data-bs-theme="light"] .row[id^='sestoGrid'] .col:nth-child(3n+2) .sesto-card {
+  background-color: var(--bs-gray-100); 
+}
+html[data-bs-theme="light"] .row[id^='sestoGrid'] .col:nth-child(3n+3) .sesto-card {
+  background-color: var(--bs-white); 
 }
 
 /* Section styling */
@@ -146,6 +174,9 @@ html[data-bs-theme="dark"] body {
   height: 4px;
   background: linear-gradient(90deg, #6c757d, transparent);
   border-radius: 2px;
+}
+html[data-bs-theme="light"] .section-heading::after {
+  background: linear-gradient(90deg, #495057, transparent);
 }
 .sesto-main-title {
   font-family: 'Caveat', cursive;
@@ -207,6 +238,10 @@ html[data-bs-theme="dark"] body {
   position: relative;
   overflow: hidden;
 }
+html[data-bs-theme="light"] .intro-text {
+  background-color: rgba(0, 0, 0, 0.03);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
 .intro-text::before {
   content: "🤪";
   position: absolute;
@@ -235,6 +270,9 @@ html[data-bs-theme="dark"] body {
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   padding: 1.5rem;
 }
+html[data-bs-theme="light"] .modal-header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
 .modal-body {
   overflow-y: auto;
   flex-grow: 1;
@@ -254,6 +292,9 @@ html[data-bs-theme="dark"] body {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   padding: 1.5rem;
 }
+html[data-bs-theme="light"] .modal-footer {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
 #modalImage {
   width: 100%;
   height: auto;
@@ -263,6 +304,9 @@ html[data-bs-theme="dark"] body {
   object-fit: contain;
   border-radius: 8px;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+html[data-bs-theme="light"] #modalImage {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
 @keyframes scale-fade-in {
   0% { transform: scale(0.7); opacity: 0; }
@@ -287,6 +331,9 @@ html[data-bs-theme="dark"] body {
   align-items: center;
   padding: 1rem 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+html[data-bs-theme="light"] #cartModalBody li {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 #cartModalBody li:last-child {
   border-bottom: none;
@@ -320,6 +367,10 @@ html[data-bs-theme="dark"] body {
   border-top: 1px solid rgba(255, 255, 255, 0.05);
   position: relative;
   overflow: hidden;
+}
+html[data-bs-theme="light"] .site-footer {
+  background-color: rgba(0, 0, 0, 0.05);
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
 .site-footer::before {
   content: "🤪";
@@ -388,15 +439,107 @@ html[data-bs-theme="dark"] body {
   transition: all 0.3s ease;
   position: relative;
 }
+html[data-bs-theme="light"] .btn-cart {
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  color: #212529;
+}
 .btn-cart:hover {
   background: rgba(255, 255, 255, 0.1);
   transform: scale(1.1) rotate(5deg);
+}
+html[data-bs-theme="light"] .btn-cart:hover {
+  background: rgba(0, 0, 0, 0.05);
 }
 .btn-cart svg {
   transition: all 0.3s ease;
 }
 .btn-cart:hover svg {
   transform: scale(1.1);
+}
+
+/* Theme toggle button */
+.theme-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1000;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  border: none;
+  transition: all 0.3s ease;
+}
+.theme-toggle:hover {
+  transform: scale(1.1) rotate(5deg);
+}
+.theme-toggle svg {
+  width: 24px;
+  height: 24px;
+}
+html[data-bs-theme="light"] .theme-toggle .moon-icon {
+  display: none;
+}
+html[data-bs-theme="dark"] .theme-toggle .sun-icon {
+  display: none;
+}
+
+/* Filter buttons */
+.filter-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+.filter-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--bs-body-color);
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+html[data-bs-theme="light"] .filter-btn {
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+.filter-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+html[data-bs-theme="light"] .filter-btn:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+.filter-btn.active {
+  background: var(--bs-primary);
+  color: white;
+  border-color: var(--bs-primary);
+}
+
+/* Sesto counter */
+.sesto-counter {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  z-index: 1000;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+html[data-bs-theme="light"] .sesto-counter {
+  background: rgba(0, 0, 0, 0.6);
 }
 
 /* Sticky Cookie Styles */
@@ -418,6 +561,72 @@ html[data-bs-theme="dark"] body {
 }
 .is-shaking {
   animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+/* Phrase generator on main page */
+.phrase-generator-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+}
+html[data-bs-theme="light"] .phrase-generator-card {
+  background: rgba(0, 0, 0, 0.03);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+.phrase-generator-card::before {
+  content: "🤪";
+  position: absolute;
+  font-size: 100px;
+  opacity: 0.05;
+  right: -20px;
+  bottom: -30px;
+  transform: rotate(-15deg);
+}
+#sestoPhrase {
+  min-height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Quiz styling */
+.quiz-button {
+  position: fixed;
+  bottom: 20px;
+  right: 80px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1000;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  border: none;
+  transition: all 0.3s ease;
+  font-size: 1.2rem;
+}
+.quiz-button:hover {
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* Confetti z-index fix */
+.confetti-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
 }
 
 /* --- Mobile Specific Styles --- */
@@ -494,6 +703,26 @@ html[data-bs-theme="dark"] body {
     padding: 1.5rem;
     font-size: 1rem;
   }
+  .filter-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .filter-btn {
+    width: 100%;
+    max-width: 300px;
+  }
+  .theme-toggle {
+    bottom: 80px;
+    right: 20px;
+  }
+  .quiz-button {
+    bottom: 80px;
+    right: 80px;
+  }
+  .sesto-counter {
+    bottom: 80px;
+    left: 20px;
+  }
 }
     </style>
   </head>
@@ -515,7 +744,27 @@ html[data-bs-theme="dark"] body {
   </p>
 </div>
 
-    <div class="text-center mb-5"> 
+<div class="filter-container">
+  <button class="filter-btn active" data-filter="all">Tous les Sestos</button>
+  <button class="filter-btn" data-filter="typic">Sesto Typic</button>
+  <button class="filter-btn" data-filter="ultra">Ultra Sess</button>
+  <button class="filter-btn" data-filter="fondateur">Sesto Fondateur</button>
+  <button class="filter-btn" data-filter="ti-sess">Ti-Sess</button>
+  <button class="filter-btn" data-filter="pepe">Pépé-Sesto</button>
+  <button class="filter-btn" data-filter="philosophe">Sesto Philosophe</button>
+  <button class="filter-btn" data-filter="creatif">Sestache Créative</button>
+  <button class="filter-btn" data-filter="mastermind">Sesto MasterMind</button>
+</div>
+
+<div class="container mb-5">
+  <div class="phrase-generator-card">
+    <h4 class="mb-3">Générateur de phrases Sesto</h4>
+    <p id="sestoPhrase" class="fs-5 mb-4 fst-italic">Clique sur le bouton pour générer une phrase typique de Sesto!</p>
+    <button id="generatePhraseBtn" class="btn btn-sesto">Générer une phrase</button>
+  </div>
+</div>
+
+<div class="text-center mb-5"> 
   <h2 class="sesto-main-title d-flex align-items-center justify-content-center flex-wrap"> 
     <span id="sestoOfTheHourBaseTitle">Le Panthéon des Sestos</span>
     <span class="text-info ms-2 d-none" id="sestoOfTheHourDynamicPart"> 
@@ -526,9 +775,9 @@ html[data-bs-theme="dark"] body {
   </h2> 
 </div>
 
-    <div class="container mt-5"> 
+<div class="container mt-5"> 
   <h3 class="section-heading">Jean-Christophe :: Sesto Typic</h3>
-  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 g-md-5" id="sestoGridChris"> 
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 g-md-5 sesto-grid" id="sestoGridChris" data-category="typic"> 
     <div class="col"> 
       <div class="sesto-card"> 
         <img src="https://sestosociety.com/images/Chris_01.png" 
@@ -580,7 +829,7 @@ html[data-bs-theme="dark"] body {
   </div>
 
 <h3 class="section-heading mt-5">Jean-Dominique :: Ultra Sess</h3>
-<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 g-md-5" id="sestoGridDom">
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 g-md-5 sesto-grid" id="sestoGridDom" data-category="ultra">
   <div class="col"> 
     <div class="sesto-card"> 
       <img src="https://sestosociety.com/images/Dom_01.png" 
@@ -632,7 +881,7 @@ html[data-bs-theme="dark"] body {
 </div>
 
 <h3 class="section-heading mt-5">Jean-Benîto :: Sesto fondateur</h3> 
-<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 g-md-5" id="sestoGridBenito">
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 g-md-5 sesto-grid" id="sestoGridBenito" data-category="fondateur">
   <div class="col"> 
     <div class="sesto-card"> 
       <img src="https://sestosociety.com/images/Benito_01.png" 
@@ -651,14 +900,65 @@ html[data-bs-theme="dark"] body {
   </div>
 </div>
 
+<h3 class="section-heading mt-5">Jean-Simon :: Sesto MasterMind</h3>
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 g-md-5 sesto-grid" id="sestoGridSimon" data-category="mastermind">
+  <div class="col"> 
+    <div class="sesto-card"> 
+      <img src="https://sestosociety.com/images/Simon_01.png" 
+           class="sesto-card-img" 
+           alt="Jean-Simon :: Sesto MasterMind 1" 
+           onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';" 
+           data-bs-toggle="modal" 
+           data-bs-target="#imageModal" 
+           data-img-src="https://sestosociety.com/images/Simon_01.png" 
+           data-img-name="Jean-Simon :: Sesto MasterMind"
+           data-img-desc="Le créateur de la SestoSociety. Celui qui a eu l'idée brillante de documenter tous ces moments de sesterie pour la postérité. Un visionnaire qui a transformé nos moments de honte en œuvres d'art."> 
+      <div class="sesto-card-body text-center">
+        <p class="sesto-card-text">Le Créateur Visionnaire.</p>
+      </div> 
+    </div> 
+  </div>
+  <div class="col"> 
+    <div class="sesto-card"> 
+      <img src="https://sestosociety.com/images/Simon_02.png" 
+           class="sesto-card-img" 
+           alt="Jean-Simon :: Sesto MasterMind 2" 
+           onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';" 
+           data-bs-toggle="modal" 
+           data-bs-target="#imageModal" 
+           data-img-src="https://sestosociety.com/images/Simon_02.png" 
+           data-img-name="Jean-Simon :: Sesto MasterMind"
+           data-img-desc="Le MasterMind derrière l'archive des Sestos. A passé des heures à collecter ces moments précieux tout en étant lui-même un Sesto de première classe. L'ironie ne lui échappe pas."> 
+      <div class="sesto-card-body text-center">
+        <p class="sesto-card-text">L'Archiviste Suprême.</p>
+      </div> 
+    </div> 
+  </div>
+  <div class="col"> 
+    <div class="sesto-card"> 
+      <img src="https://sestosociety.com/images/Simon_03.png" 
+           class="sesto-card-img" 
+           alt="Jean-Simon :: Sesto MasterMind 3" 
+           onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';" 
+           data-bs-toggle="modal" 
+           data-bs-target="#imageModal" 
+           data-img-src="https://sestosociety.com/images/Simon_03.png" 
+           data-img-name="Jean-Simon :: Sesto MasterMind"
+           data-img-desc="Le jour où il a créé ce site, il a oublié son mot de passe juste après l'avoir configuré. 'C'est pas grave, je vais juste en créer un nouveau... comme le site.'"> 
+      <div class="sesto-card-body text-center">
+        <p class="sesto-card-text">Le Webmaster Sesto.</p>
+      </div> 
+    </div> 
+  </div>
+</div>
+
 <h3 class="section-heading mt-5">Jean-Arthur :: Ti-Sess</h3>
-<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 g-md-5" id="sestoGridArthur">
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 g-md-5 sesto-grid" id="sestoGridArthur" data-category="ti-sess">
   <div class="col"> 
     <div class="sesto-card"> 
       <img src="https://sestosociety.com/images/Arthur_01.png" 
            class="sesto-card-img" 
            alt="Jean-Arthur :: Ti-Sess 1" 
-           onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/ :: Ti-Sess 1"
            onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';" 
            data-bs-toggle="modal" 
            data-bs-target="#imageModal" 
@@ -689,7 +989,7 @@ html[data-bs-theme="dark"] body {
 </div>
 
 <h3 class="section-heading mt-5">Jean-Ben :: Pépé-Sesto</h3>
-<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 g-md-5" id="sestoGridBen">
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 g-md-5 sesto-grid" id="sestoGridBen" data-category="pepe">
   <div class="col"> 
     <div class="sesto-card"> 
       <img src="https://sestosociety.com/images/Ben_01.png" 
@@ -709,7 +1009,7 @@ html[data-bs-theme="dark"] body {
 </div>
 
 <h3 class="section-heading mt-5">Jean-Gilebert :: Sesto Philosophe</h3>
-<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 g-md-5" id="sestoGridGilebert">
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 g-md-5 sesto-grid" id="sestoGridGilebert" data-category="philosophe">
   <div class="col"> 
     <div class="sesto-card"> 
       <img src="https://sestosociety.com/images/Gilebert_01.png" 
@@ -720,9 +1020,9 @@ html[data-bs-theme="dark"] body {
            data-bs-target="#imageModal" 
            data-img-src="https://sestosociety.com/images/Gilebert_01.png" 
            data-img-name="Jean-Gilebert :: Sesto Philosophe"
-           data-img-desc="Le Sesto Philosophe dans toute sa splendeur. A passé 20 minutes à chercher pourquoi sa voiture ne démarrait pas avant de réaliser qu'il était assis dans la mauvaise voiture. 'C'est pas ma faute, elles sont toutes grises maintenant!'"> 
+           data-img-desc="Le Sesto Campeur par excellence. A passé 20 minutes à chercher pourquoi sa roulotte ne démarrait pas avant de réaliser qu'il était assis dans la mauvaise voiture. 'C'est pas ma faute, toutes les roulottes se ressemblent quand t'as oublié tes lunettes!'"> 
       <div class="sesto-card-body text-center">
-        <p class="sesto-card-text">Méditation profonde.</p>
+        <p class="sesto-card-text">Méditation en camping.</p>
       </div> 
     </div> 
   </div>
@@ -733,12 +1033,12 @@ html[data-bs-theme="dark"] body {
            alt="Jean-Gilebert :: Sesto Philosophe 2" 
            onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';" 
            data-bs-toggle="modal" 
-           data-bs-target="#imageModal" 
+           data-bs-target="#imageModal"
            data-img-src="https://sestosociety.com/images/Gilebert_02.png" 
            data-img-name="Jean-Gilebert :: Sesto Philosophe"
-           data-img-desc="A un jour expliqué pendant 15 minutes pourquoi les toasts tombent toujours côté beurre, avant de conclure que 'c'est une conspiration des fabricants de tapis'. Un génie incompris de notre temps."> 
+           data-img-desc="A un jour expliqué pendant 15 minutes pourquoi les guimauves tombent toujours dans le feu de camp, avant de conclure que 'c'est une conspiration des fabricants de guimauves pour qu'on en achète plus'. Un génie incompris du camping sauvage."> 
       <div class="sesto-card-body text-center">
-        <p class="sesto-card-text">Théories du complot.</p>
+        <p class="sesto-card-text">Théories du camping.</p>
       </div> 
     </div> 
   </div>
@@ -749,32 +1049,32 @@ html[data-bs-theme="dark"] body {
            alt="Jean-Gilebert :: Sesto Philosophe 3" 
            onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';" 
            data-bs-toggle="modal" 
-           data-bs-target="#imageModal" 
+           data-bs-target="#imageModal"
            data-img-src="https://sestosociety.com/images/Gilebert_03.png" 
            data-img-name="Jean-Gilebert :: Sesto Philosophe"
-           data-img-desc="Sa plus grande réalisation : avoir convaincu tout le monde à une fête qu'il était expert en vins, alors qu'il buvait du jus de raisin toute la soirée. 'Le goût est dans la tête, pas dans la bouteille!'"> 
+           data-img-desc="Sa plus grande réalisation : avoir convaincu tout le monde au camping que sa roulotte était un modèle de luxe, alors qu'il avait juste mis des guirlandes lumineuses partout. 'Le luxe est dans l'œil de celui qui regarde, pas dans le prix payé!'"> 
       <div class="sesto-card-body text-center">
-        <p class="sesto-card-text">Sommelier autoproclamé.</p>
+        <p class="sesto-card-text">Campeur philosophe.</p>
       </div> 
     </div> 
   </div>
 </div>
 
-<h3 class="section-heading mt-5">Jean-Emilie :: Sesto Créatif</h3>
-<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 g-md-5" id="sestoGridEmilie">
+<h3 class="section-heading mt-5">Jean-Emilie :: Sestache Créative</h3>
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 g-md-5 sesto-grid" id="sestoGridEmilie" data-category="creatif">
   <div class="col"> 
     <div class="sesto-card"> 
       <img src="https://sestosociety.com/images/Emilie_01.png" 
            class="sesto-card-img" 
-           alt="Jean-Emilie :: Sesto Créatif 1" 
+           alt="Jean-Emilie :: Sestache Créative 1" 
            onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';" 
            data-bs-toggle="modal" 
            data-bs-target="#imageModal" 
            data-img-src="https://sestosociety.com/images/Emilie_01.png" 
-           data-img-name="Jean-Emilie :: Sesto Créatif"
-           data-img-desc="Le Sesto Créatif par excellence. A passé trois heures à chercher son téléphone en utilisant la lampe de poche... de son téléphone. 'J'étais tellement concentré sur ma recherche que j'ai pas fait le lien!'"> 
+           data-img-name="Jean-Emilie :: Sestache Créative"
+           data-img-desc="La Sestache Créative par excellence. A passé trois heures à chercher son pinceau alors qu'elle le tenait dans sa main. 'J'étais tellement concentrée sur la couleur parfaite pour ce mur que j'ai pas fait le lien!'"> 
       <div class="sesto-card-body text-center">
-        <p class="sesto-card-text">Concentration extrême.</p>
+        <p class="sesto-card-text">Peintre distraite.</p>
       </div> 
     </div> 
   </div>
@@ -782,15 +1082,15 @@ html[data-bs-theme="dark"] body {
     <div class="sesto-card"> 
       <img src="https://sestosociety.com/images/Emilie_02.png" 
            class="sesto-card-img" 
-           alt="Jean-Emilie :: Sesto Créatif 2" 
+           alt="Jean-Emilie :: Sestache Créative 2" 
            onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';" 
            data-bs-toggle="modal" 
            data-bs-target="#imageModal" 
            data-img-src="https://sestosociety.com/images/Emilie_02.png" 
-           data-img-name="Jean-Emilie :: Sesto Créatif"
-           data-img-desc="A un jour cuisiné des pâtes sans eau parce que 'ça prend trop de temps à bouillir'. Le détecteur de fumée a sonné l'alarme, mais au moins 'les pâtes étaient al dente... très al dente'."> 
+           data-img-name="Jean-Emilie :: Sestache Créative"
+           data-img-desc="A un jour appliqué du plâtre sur un mur déjà plâtré parce que 'on n'est jamais trop prudent'. Le client a fini par avoir un mur si épais qu'il a perdu 10cm de superficie dans sa pièce. 'Au moins, c'est solide!'"> 
       <div class="sesto-card-body text-center">
-        <p class="sesto-card-text">Chef innovant.</p>
+        <p class="sesto-card-text">Plâtrière enthousiaste.</p>
       </div> 
     </div> 
   </div>
@@ -798,33 +1098,52 @@ html[data-bs-theme="dark"] body {
     <div class="sesto-card"> 
       <img src="https://sestosociety.com/images/Emilie_03.png" 
            class="sesto-card-img" 
-           alt="Jean-Emilie :: Sesto Créatif 3" 
+           alt="Jean-Emilie :: Sestache Créative 3" 
            onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';" 
            data-bs-toggle="modal" 
-           data-bs-target="#imageModal" 
+           data-bs-target="#imageModal"
            data-img-src="https://sestosociety.com/images/Emilie_03.png" 
-           data-img-name="Jean-Emilie :: Sesto Créatif"
-           data-img-desc="A réussi à se perdre en suivant le GPS... dans sa propre ville natale. 'Le GPS disait de tourner à droite, mais mon instinct disait gauche. Mon instinct avait tort, mais j'ai découvert un nouveau café sympa!'"> 
+           data-img-name="Jean-Emilie :: Sestache Créative"
+           data-img-desc="A réussi à peindre une pièce entière dans la mauvaise couleur sans s'en rendre compte. 'Le client voulait bleu ciel, j'ai fait vert forêt... mais finalement, il a adoré! Je l'appelle ma technique de sérendipité créative.'"> 
       <div class="sesto-card-body text-center">
-        <p class="sesto-card-text">Explorateur accidentel.</p>
+        <p class="sesto-card-text">Artiste du bâtiment.</p>
       </div> 
     </div> 
   </div>
 </div>
        
-    </div> 
+</div> 
 
-     <footer class="site-footer text-center text-body-secondary"> 
+<div class="sesto-counter">
+  Sestos vus: <span id="sestoCount">0</span>
+  <span id="sestoCountMessage" class="ms-2 d-none">T'es un vrai sesto de perdre ton temps ici!</span>
+</div>
+
+<button class="theme-toggle" id="themeToggle" aria-label="Changer le thème">
+  <svg xmlns="http://www.w3.org/2000/svg" class="sun-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" class="moon-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+</button>
+
+<footer class="site-footer text-center text-body-secondary"> 
   <p class="mb-1">&copy; 2025 Sesto Society - Fait avec amour et beaucoup de sesterie.</p> 
-  <p class="mb-0 small gemini-mention">Site généré avec l'aide de Gemini</p> 
+  <p class="mb-0 small">Site généré avec l'IA</p> 
 </footer>
 
-    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true"> <div class="modal-dialog modal-xl modal-dialog-centered"> <div class="modal-content"> <div class="modal-header"> <h5 class="modal-title" id="imageModalLabel">Image Sesto</h5> <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> </div> <div class="modal-body text-center"> <img src="/placeholder.svg" id="modalImage" class="img-fluid" alt="Image agrandie"> <p id="modalDescription" class="mt-3 mb-0 text-body-secondary"></p> </div> <div class="modal-footer justify-content-center border-top pt-3"> 
+<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true"> <div class="modal-dialog modal-xl modal-dialog-centered"> <div class="modal-content"> <div class="modal-header"> <h5 class="modal-title" id="imageModalLabel">Image Sesto</h5> <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> </div> <div class="modal-body text-center"> <img src="/placeholder.svg" id="modalImage" class="img-fluid" alt="Image agrandie"> <p id="modalDescription" class="mt-3 mb-0 text-body-secondary"></p> </div> <div class="modal-footer justify-content-center border-top pt-3"> 
+  <div class="social-share-buttons mb-3 w-100 text-center">
+  <button class="btn btn-sm btn-outline-secondary copy-link-btn" id="copyLinkBtn">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+      <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1.002 1.002 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4.018 4.018 0 0 1-.128-1.287z"/>
+      <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243L6.586 4.672z"/>
+    </svg> Copier le lien
+  </button>
+  <span id="copyConfirmation" class="text-success ms-2" style="display: none;">Lien copié!</span>
+</div>
   <a href="#" id="btnModalPrint" class="btn btn-sesto mx-1 mx-sm-2" data-product-type="Print" data-price="14.99">Ajouter Print au panier</a> 
   <a href="#" id="btnModalTshirt" class="btn btn-sesto mx-1 mx-sm-2" data-product-type="T-Shirt" data-price="24.99">Ajouter T-Shirt au panier</a> 
   <a href="#" id="btnModalCap" class="btn btn-sesto mx-1 mx-sm-2" data-product-type="Casquette" data-price="19.99">Ajouter Casquette au panier</a> 
 </div> </div> </div> </div>
-    <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true"> <div class="modal-dialog modal-lg modal-dialog-scrollable"> <div class="modal-content"> <div class="modal-header"> <h5 class="modal-title" id="cartModalLabel">Votre Panier Sesto</h5> <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> </div> <div class="modal-body" id="cartModalBody"> <p id="emptyCartMsg">Votre panier est vide.</p> <ul id="cartItemsList"></ul> </div> <div class="modal-footer flex-column flex-sm-row justify-content-between" id="cartModalFooter"> <div class="mb-2 mb-sm-0 text-center text-sm-start"> <strong>Total: <span id="cartTotal">0.00</span> $</strong> </div> <div class="d-flex flex-column flex-sm-row justify-content-end w-100 w-sm-auto"> 
+<div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true"> <div class="modal-dialog modal-lg modal-dialog-scrollable"> <div class="modal-content"> <div class="modal-header"> <h5 class="modal-title" id="cartModalLabel">Votre Panier Sesto</h5> <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> </div> <div class="modal-body" id="cartModalBody"> <p id="emptyCartMsg">Votre panier est vide.</p> <ul id="cartItemsList"></ul> </div> <div class="modal-footer flex-column flex-sm-row justify-content-between" id="cartModalFooter"> <div class="mb-2 mb-sm-0 text-center text-sm-start"> <strong>Total: <span id="cartTotal">0.00</span> $</strong> </div> <div class="d-flex flex-column flex-sm-row justify-content-end w-100 w-sm-auto"> 
   <button type="button" class="btn btn-outline-secondary mb-2 mb-sm-0 me-sm-2" id="clearCartBtn">Vider le Panier</button> 
   <button type="button" class="btn btn-sesto" id="checkoutBtn"> 
     <span class="checkout-text">Passer la commande</span> 
@@ -832,275 +1151,532 @@ html[data-bs-theme="dark"] body {
   </button> 
 </div> </div> </div> </div> </div>
      
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-    <script>
-      // --- Configuration & DOM Elements ---
-      const CART_STORAGE_KEY = 'sestoCart';
-      const imageModalElement = document.getElementById('imageModal');
-      const modalImage = document.getElementById('modalImage');
-      const modalTitle = document.getElementById('imageModalLabel'); 
-      const modalDescription = document.getElementById('modalDescription'); 
-      const btnPrint = document.getElementById('btnModalPrint');
-      const btnTshirt = document.getElementById('btnModalTshirt');
-      const btnCap = document.getElementById('btnModalCap');
-      const cartModalElement = document.getElementById('cartModal');
-      const cartCountBadge = document.getElementById('cart-count');
-      const cartItemsList = document.getElementById('cartItemsList');
-      const cartTotalSpan = document.getElementById('cartTotal');
-      const emptyCartMsg = document.getElementById('emptyCartMsg');
-      const clearCartBtn = document.getElementById('clearCartBtn');
-      const checkoutBtn = document.getElementById('checkoutBtn'); 
-      const checkoutBtnText = checkoutBtn ? checkoutBtn.querySelector('.checkout-text') : null;
-      const checkoutSpinner = checkoutBtn ? checkoutBtn.querySelector('.checkout-spinner') : null;
-      const sestoOfTheHourTitle = document.getElementById('sestoOfTheHourTitle'); 
-      const baseTitleEl = document.getElementById('sestoOfTheHourBaseTitle'); 
-      const dynamicPartEl = document.getElementById('sestoOfTheHourDynamicPart'); 
-      const labelEl = document.getElementById('sestoOfTheHourLabel'); 
-      const imgEl = document.getElementById('sestoOfTheHourImg'); 
-      const nameEl = document.getElementById('sestoOfTheHourName'); 
-      let cart = [];
+<script>
+  // --- Configuration & DOM Elements ---
+  const CART_STORAGE_KEY = 'sestoCart';
+  const THEME_STORAGE_KEY = 'sestoTheme';
+  const SESTO_COUNT_KEY = 'sestoCount';
+  const imageModalElement = document.getElementById('imageModal');
+  const modalImage = document.getElementById('modalImage');
+  const modalTitle = document.getElementById('imageModalLabel'); 
+  const modalDescription = document.getElementById('modalDescription'); 
+  const btnPrint = document.getElementById('btnModalPrint');
+  const btnTshirt = document.getElementById('btnModalTshirt');
+  const btnCap = document.getElementById('btnModalCap');
+  const cartModalElement = document.getElementById('cartModal');
+  const cartCountBadge = document.getElementById('cart-count');
+  const cartItemsList = document.getElementById('cartItemsList');
+  const cartTotalSpan = document.getElementById('cartTotal');
+  const emptyCartMsg = document.getElementById('emptyCartMsg');
+  const clearCartBtn = document.getElementById('clearCartBtn');
+  const checkoutBtn = document.getElementById('checkoutBtn'); 
+  const checkoutBtnText = checkoutBtn ? checkoutBtn.querySelector('.checkout-text') : null;
+  const checkoutSpinner = checkoutBtn ? checkoutBtn.querySelector('.checkout-spinner') : null;
+  const sestoOfTheHourTitle = document.getElementById('sestoOfTheHourTitle'); 
+  const baseTitleEl = document.getElementById('sestoOfTheHourBaseTitle'); 
+  const dynamicPartEl = document.getElementById('sestoOfTheHourDynamicPart'); 
+  const labelEl = document.getElementById('sestoOfTheHourLabel'); 
+  const imgEl = document.getElementById('sestoOfTheHourImg'); 
+  const nameEl = document.getElementById('sestoOfTheHourName'); 
+  const themeToggle = document.getElementById('themeToggle');
+  const sestoCountElement = document.getElementById('sestoCount');
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  let cart = [];
+  let sestoCount = 0;
 
-      // --- Functions ---
-      function loadCart() { 
-          const storedCart = localStorage.getItem(CART_STORAGE_KEY);
-          cart = storedCart ? JSON.parse(storedCart) : [];
-          updateCartDisplay();
-      }
-      function saveCart() { 
-          localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
-      }
-      function addToCart(item, event) { 
-          item.id = Date.now() + Math.random(); 
-          item.image = item.image || 'https://placehold.co/50x50/cccccc/000000?text=?'; 
-          cart.push(item);
-          console.log('Added to cart:', item);
-          saveCart();
-          updateCartDisplay();
-          if (typeof confetti === 'function') { 
-              let origin = { y: 0.6 }; 
-              if (event && event.clientX !== undefined && event.clientY !== undefined) { 
-                  const clickX = event.clientX;
-                  const clickY = event.clientY;
-                  const windowWidth = window.innerWidth;
-                  const windowHeight = window.innerHeight;
-                  if (windowWidth > 0 && windowHeight > 0) { 
-                     origin = { 
-                         x: Math.max(0, Math.min(1, clickX / windowWidth)), 
-                         y: Math.max(0, Math.min(1, clickY / windowHeight)) 
-                     };
-                  }
-              }
-              confetti({
-                  particleCount: 120, spread: 80, origin: origin, zIndex: 1060 
-              });
-          } else { console.error('Confetti function not found.'); }
-      }
-      function removeFromCart(itemId) { 
-          console.log('Removing item with ID:', itemId);
-          const idToRemove = parseFloat(itemId); 
-          cart = cart.filter(item => item.id !== idToRemove);
-          saveCart();
-          updateCartDisplay();
-      }
-      function clearCart() { 
-          cart = [];
-          saveCart();
-          updateCartDisplay();
-      }
-      function updateCartDisplay() { 
-          if (cartCountBadge) {
-              if (cart.length > 0) {
-                  cartCountBadge.textContent = cart.length;
-                  cartCountBadge.style.display = 'inline-block';
-              } else {
-                  cartCountBadge.style.display = 'none';
-              }
-          }
-          if (cartItemsList && cartTotalSpan && emptyCartMsg) {
-               cartItemsList.innerHTML = ''; 
-               let total = 0;
-               if (cart.length === 0) {
-                   emptyCartMsg.style.display = 'block';
-               } else {
-                   emptyCartMsg.style.display = 'none';
-                   cart.forEach(item => {
-                       total += parseFloat(item.price || 0);
-                       const li = document.createElement('li');
-                       const imageSrc = item.image || 'https://placehold.co/50x50/cccccc/000000?text=?'; 
-                       const displayName = item.name || 'Sesto'; 
-                       li.innerHTML = `
-                           <img src="${imageSrc}" alt="${displayName}" class="cart-item-thumbnail"> 
-                           <div class="cart-item-details">
-                               <strong>${item.type || 'Article'}</strong> - ${displayName} 
-                               ($${parseFloat(item.price || 0).toFixed(2)})
-                           </div>
-                           <button class="btn btn-sm btn-outline-danger remove-item-btn" data-item-id="${item.id}">X</button>
-                       `;
-                       cartItemsList.appendChild(li);
-                   });
-               }
-               cartTotalSpan.textContent = total.toFixed(2);
+  // --- Functions ---
+  function loadCart() { 
+      const storedCart = localStorage.getItem(CART_STORAGE_KEY);
+      cart = storedCart ? JSON.parse(storedCart) : [];
+      updateCartDisplay();
+  }
+  function saveCart() { 
+      localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
+  }
+  function addToCart(item, event) { 
+      item.id = Date.now() + Math.random(); 
+      item.image = item.image || 'https://placehold.co/50x50/cccccc/000000?text=?'; 
+      cart.push(item);
+      console.log('Added to cart:', item);
+      saveCart();
+      updateCartDisplay();
+  // Add confetti
+  triggerConfetti(event);
+}
+  function removeFromCart(itemId) { 
+      console.log('Removing item with ID:', itemId);
+      const idToRemove = parseFloat(itemId); 
+      cart = cart.filter(item => item.id !== idToRemove);
+      saveCart();
+      updateCartDisplay();
+  }
+  function clearCart() { 
+      cart = [];
+      saveCart();
+      updateCartDisplay();
+  }
+  function updateCartDisplay() { 
+      if (cartCountBadge) {
+          if (cart.length > 0) {
+              cartCountBadge.textContent = cart.length;
+              cartCountBadge.style.display = 'inline-block';
+          } else {
+              cartCountBadge.style.display = 'none';
           }
       }
-      function setRandomSestoTitle() {
-          if (!baseTitleEl || !dynamicPartEl || !labelEl || !imgEl || !nameEl) {
-              console.error("One or more title elements not found");
+      if (cartItemsList && cartTotalSpan && emptyCartMsg) {
+           cartItemsList.innerHTML = ''; 
+           let total = 0;
+           if (cart.length === 0) {
+               emptyCartMsg.style.display = 'block';
+           } else {
+               emptyCartMsg.style.display = 'none';
+               cart.forEach(item => {
+                   total += parseFloat(item.price || 0);
+                   const li = document.createElement('li');
+                   const imageSrc = item.image || 'https://placehold.co/50x50/cccccc/000000?text=?'; 
+                   const displayName = item.name || 'Sesto'; 
+                   li.innerHTML = `
+                       <img src="${imageSrc}" alt="${displayName}" class="cart-item-thumbnail"> 
+                       <div class="cart-item-details">
+                           <strong>${item.type || 'Article'}</strong> - ${displayName} 
+                           ($${parseFloat(item.price || 0).toFixed(2)})
+                       </div>
+                       <button class="btn btn-sm btn-outline-danger remove-item-btn" data-item-id="${item.id}">X</button>
+                   `;
+                   cartItemsList.appendChild(li);
+               });
+           }
+           cartTotalSpan.textContent = total.toFixed(2);
+      }
+  }
+// Filter Sestos
+function filterSestos(category) {
+  const sestoCards = document.querySelectorAll('.sesto-card');
+  
+  if (category === 'all') {
+    // Show all sections
+    document.querySelectorAll('.section-heading').forEach(heading => {
+      heading.style.display = 'block';
+    });
+    
+    // Show all cards
+    sestoCards.forEach(card => {
+      card.closest('.col').style.display = 'block';
+    });
+    
+    // Show all grids
+    document.querySelectorAll('.sesto-grid').forEach(grid => {
+      grid.style.display = 'flex';
+    });
+  } else {
+    // First hide all sections
+    document.querySelectorAll('.section-heading').forEach(heading => {
+      heading.style.display = 'none';
+    });
+    
+    // Hide all grids initially
+    document.querySelectorAll('.sesto-grid').forEach(grid => {
+      grid.style.display = 'none';
+    });
+    
+    // Show only matching sections and their cards
+    document.querySelectorAll(`.sesto-grid[data-category="${category}"]`).forEach(grid => {
+      // Show this grid
+      grid.style.display = 'flex';
+      
+      // Show the heading for this grid
+      const heading = grid.previousElementSibling;
+      if (heading && heading.classList.contains('section-heading')) {
+        heading.style.display = 'block';
+      }
+      
+      // Show all cards in this grid
+      grid.querySelectorAll('.sesto-card').forEach(card => {
+        card.closest('.col').style.display = 'block';
+      });
+    });
+  }
+}
+
+// Funny insults for copy link
+const sestoInsults = [
+  "Espèce de sesto qui met ses chaussettes dans le micro-ondes!",
+  "T'es le genre de sesto qui cherche son téléphone pendant qu'il parle dedans!",
+  "Quel sesto! Tu as déjà essayé de déverrouiller ta maison avec la télécommande de ta voiture?",
+  "Sesto suprême! Tu mets probablement tes céréales dans le réfrigérateur et ton lait dans le placard!",
+  "Gros sesto va! Tu as sûrement déjà envoyé un message à quelqu'un pour lui demander où était ton téléphone!",
+  "Sesto de première classe! Tu as certainement déjà essayé de faire défiler une page dans un livre papier avec ton doigt!",
+  "Sesto légendaire! Tu as mis tes lunettes sur ta tête et tu as passé une heure à les chercher!",
+  "Sesto ultime! Tu as probablement déjà mis ton café dans le micro-ondes et tu l'as oublié trois fois de suite!",
+  "Sesto cosmique! Tu as sûrement déjà essayé de prendre une photo d'un arc-en-ciel avec ta calculatrice!",
+  "Sesto galactique! Tu as certainement déjà mis tes clés dans le congélateur en rangeant les courses!"
+];
+
+// Copy link with funny insult
+function copyLinkWithInsult() {
+  const randomInsult = sestoInsults[Math.floor(Math.random() * sestoInsults.length)];
+  
+  navigator.clipboard.writeText(randomInsult).then(() => {
+    const copyConfirmation = document.getElementById('copyConfirmation');
+    copyConfirmation.style.display = 'inline';
+    setTimeout(() => {
+      copyConfirmation.style.display = 'none';
+    }, 2000);
+    
+    // Ajouter des confettis
+    triggerConfetti();
+  }).catch(err => {
+    console.error('Erreur lors de la copie du lien: ', err);
+  });
+}
+
+  function setRandomSestoTitle() {
+      if (!baseTitleEl || !dynamicPartEl || !labelEl || !imgEl || !nameEl) {
+          console.error("One or more title elements not found");
+          return; 
+      }
+
+      const sestoImages = document.querySelectorAll('.sesto-card-img[data-img-name][data-img-src]');
+      const sestoData = [...sestoImages].map(img => ({
+          name: img.getAttribute('data-img-name'),
+          src: img.getAttribute('data-img-src') 
+      }));
+      
+      const validSestoData = sestoData.filter(item => item.src);
+
+      if (validSestoData.length > 0) {
+          const randomIndex = Math.floor(Math.random() * validSestoData.length);
+          const randomSesto = validSestoData[randomIndex];
+          
+          labelEl.textContent = 'Du moment';
+          imgEl.src = randomSesto.src; 
+          imgEl.alt = randomSesto.name; 
+          nameEl.textContent = randomSesto.name;
+          
+          // Use classList to show elements
+          imgEl.classList.remove('d-none'); 
+          dynamicPartEl.classList.remove('d-none'); 
+      } else {
+          // Hide dynamic part if no valid sestos found
+          dynamicPartEl.classList.add('d-none'); 
+          imgEl.classList.add('d-none');
+      }
+  }
+
+  // Theme toggle function
+  function toggleTheme() {
+      const html = document.documentElement;
+      const currentTheme = html.getAttribute('data-bs-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      
+      html.setAttribute('data-bs-theme', newTheme);
+      localStorage.setItem(THEME_STORAGE_KEY, newTheme);
+      
+      // Add confetti
+  triggerConfetti();
+}
+
+  // Load theme from localStorage
+  function loadTheme() {
+      const savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
+      if (savedTheme) {
+          document.documentElement.setAttribute('data-bs-theme', savedTheme);
+      }
+  }
+
+  // Filter buttons event listeners
+  if (filterButtons) {
+      filterButtons.forEach(button => {
+          button.addEventListener('click', () => {
+              // Remove active class from all buttons
+              filterButtons.forEach(btn => btn.classList.remove('active'));
+              
+              // Add active class to clicked button
+              button.classList.add('active');
+              
+              // Filter sestos
+              const category = button.getAttribute('data-filter');
+              filterSestos(category);
+          });
+      });
+  }
+
+  // Sesto Counter
+  function incrementSestoCount() {
+  sestoCount++;
+  if (sestoCountElement) {
+    sestoCountElement.textContent = sestoCount;
+  }
+  localStorage.setItem(SESTO_COUNT_KEY, sestoCount);
+  
+  // Afficher un message moqueur
+  const sestoCountMessage = document.getElementById('sestoCountMessage');
+  if (sestoCountMessage) {
+    const messages = [
+      "T'es un vrai sesto de perdre ton temps ici!",
+      "Encore un sesto de plus? Tu n'as rien de mieux à faire?",
+      "Wow, tu continues à regarder? Sesto confirmé!",
+      "Ton niveau de sesterie augmente avec chaque clic!",
+      "Tu collectionnes les sestos comme d'autres collectionnent les timbres!"
+    ];
+    sestoCountMessage.textContent = messages[Math.floor(Math.random() * messages.length)];
+    sestoCountMessage.classList.remove('d-none');
+    setTimeout(() => {
+      sestoCountMessage.classList.add('d-none');
+    }, 3000);
+  }
+  
+  // Ajouter des confettis
+  triggerConfetti();
+}
+
+  function loadSestoCount() {
+      const savedCount = localStorage.getItem(SESTO_COUNT_KEY);
+      if (savedCount) {
+          sestoCount = parseInt(savedCount, 10);
+          if (sestoCountElement) {
+              sestoCountElement.textContent = sestoCount;
+          }
+      }
+  }
+  
+  // --- Event Listeners ---
+  if (imageModalElement) { 
+    imageModalElement.addEventListener('show.bs.modal', event => {
+      const triggerElement = event.relatedTarget; 
+      const imgSrc = triggerElement.getAttribute('data-img-src');
+      const imgName = triggerElement.getAttribute('data-img-name'); 
+      const imgDesc = triggerElement.getAttribute('data-img-desc'); 
+      
+      console.log("Modal opening with:", { imgSrc, imgName, imgDesc });
+      
+      if (modalTitle) modalTitle.textContent = imgName || 'Image Sesto'; 
+      if (modalImage) {
+        modalImage.src = imgSrc || ''; 
+        modalImage.alt = imgName ? `Image agrandie de ${imgName}` : 'Image agrandie';
+      }
+      if (modalDescription) { 
+        modalDescription.textContent = imgDesc || ''; 
+      }
+      if(imgName && imgSrc) { 
+        if (btnPrint) { btnPrint.setAttribute('data-sesto-name', imgName); btnPrint.setAttribute('data-img-src', imgSrc); }
+        if (btnTshirt) { btnTshirt.setAttribute('data-sesto-name', imgName); btnTshirt.setAttribute('data-img-src', imgSrc); }
+        if (btnCap) { btnCap.setAttribute('data-sesto-name', imgName); btnCap.setAttribute('data-img-src', imgSrc); }
+      }
+      
+      // Increment sesto count when viewing a sesto
+      incrementSestoCount();
+      
+      // Trigger confetti
+      triggerConfetti();
+    });
+     imageModalElement.addEventListener('hide.bs.modal', event => {
+         if (modalImage) modalImage.src = ''; 
+         if (modalDescription) modalDescription.textContent = ''; 
+         if (btnPrint) { btnPrint.removeAttribute('data-sesto-name'); btnPrint.removeAttribute('data-img-src'); }
+         if (btnTshirt) { btnTshirt.removeAttribute('data-sesto-name'); btnTshirt.removeAttribute('data-img-src'); }
+         if (btnCap) { btnCap.removeAttribute('data-sesto-name'); btnCap.removeAttribute('data-img-src'); }
+     });
+  } else { console.error("Image Modal element #imageModal not found."); }
+
+  const imageModalFooter = document.querySelector('#imageModal .modal-footer');
+  if (imageModalFooter) { 
+      imageModalFooter.addEventListener('click', (event) => { 
+          const targetButton = event.target.closest('.btn'); 
+          if (targetButton && targetButton.hasAttribute('data-product-type')) {
+              event.preventDefault(); 
+              const productType = targetButton.getAttribute('data-product-type');
+              const price = targetButton.getAttribute('data-price');
+              const sestoName = targetButton.getAttribute('data-sesto-name'); 
+              const specificImgSrc = targetButton.getAttribute('data-img-src'); 
+              
+              if (sestoName && specificImgSrc) { 
+                  addToCart({ type: productType, name: sestoName, price: price, image: specificImgSrc }, event); 
+                  const originalText = targetButton.textContent;
+                  targetButton.textContent = 'Ajouté!';
+                  targetButton.disabled = true; 
+                  setTimeout(() => { 
+                      targetButton.textContent = originalText; 
+                      targetButton.disabled = false; 
+                  }, 1500);
+              } else { console.error("Sesto name or image source not found on button for adding to cart."); }
+          }
+      });
+  }
+
+   if (cartItemsList) { 
+       cartItemsList.addEventListener('click', (event) => {
+           const removeButton = event.target.closest('.remove-item-btn');
+           if (removeButton) {
+               const itemId = removeButton.getAttribute('data-item-id');
+               removeFromCart(itemId);
+           }
+       });
+   }
+
+  if (clearCartBtn) { 
+      clearCartBtn.addEventListener('click', clearCart);
+  }
+  
+  // Cart Modal: Checkout Button - Longer loading duration
+  if (checkoutBtn && clearCartBtn && checkoutBtnText && checkoutSpinner) {
+      const sillyMessages = [
+          "Consultation de l'oracle sesto...",
+          "Recalibrage du sesto-mètre...",
+          "Vérification du niveau d'absurdité...",
+          "Application du vernis à sesterie...",
+          "Recherche de chaussettes perdues...",
+          "Polissage de la boule de cristal...",
+          "Presque là, courage !"
+      ];
+      let messageInterval = null; 
+
+      checkoutBtn.addEventListener('click', () => {
+          if (cart.length === 0) {
+              alert('Votre panier est vide !'); 
               return; 
           }
-
-          const sestoImages = document.querySelectorAll('.sesto-card-img[data-img-name][data-img-src]');
-          const sestoData = [...sestoImages].map(img => ({
-              name: img.getAttribute('data-img-name'),
-              src: img.getAttribute('data-img-src') 
-          }));
+          checkoutBtn.disabled = true;
+          clearCartBtn.disabled = true;
+          checkoutSpinner.style.display = 'inline-block';
+          let messageIndex = 0;
+          checkoutBtnText.textContent = sillyMessages[messageIndex]; 
+          checkoutBtnText.style.display = 'inline-block';
           
-          const validSestoData = sestoData.filter(item => item.src);
-
-          if (validSestoData.length > 0) {
-              const randomIndex = Math.floor(Math.random() * validSestoData.length);
-              const randomSesto = validSestoData[randomIndex];
-              
-              labelEl.textContent = 'Du moment';
-              imgEl.src = randomSesto.src; 
-              imgEl.alt = randomSesto.name; 
-              nameEl.textContent = randomSesto.name;
-              
-              // Use classList to show elements
-              imgEl.classList.remove('d-none'); 
-              dynamicPartEl.classList.remove('d-none'); 
-          } else {
-              // Hide dynamic part if no valid sestos found
-              dynamicPartEl.classList.add('d-none'); 
-              imgEl.classList.add('d-none');
-          }
-      }
-      
-      // --- Event Listeners ---
-      if (imageModalElement) { 
-        imageModalElement.addEventListener('show.bs.modal', event => {
-          const triggerElement = event.relatedTarget; 
-          const imgSrc = triggerElement.getAttribute('data-img-src');
-          const imgName = triggerElement.getAttribute('data-img-name'); 
-          const imgDesc = triggerElement.getAttribute('data-img-desc'); 
-          if (modalTitle) modalTitle.textContent = imgName || 'Image Sesto'; 
-          if (modalImage) {
-            modalImage.src = imgSrc || ''; 
-            modalImage.alt = imgName ? `Image agrandie de ${imgName}` : 'Image agrandie';
-          }
-          if (modalDescription) { 
-              modalDescription.textContent = imgDesc || ''; 
-          }
-          if(imgName && imgSrc) { 
-              if (btnPrint) { btnPrint.setAttribute('data-sesto-name', imgName); btnPrint.setAttribute('data-img-src', imgSrc); }
-              if (btnTshirt) { btnTshirt.setAttribute('data-sesto-name', imgName); btnTshirt.setAttribute('data-img-src', imgSrc); }
-              if (btnCap) { btnCap.setAttribute('data-sesto-name', imgName); btnCap.setAttribute('data-img-src', imgSrc); }
-          }
-        });
-         imageModalElement.addEventListener('hide.bs.modal', event => {
-             if (modalImage) modalImage.src = ''; 
-             if (modalDescription) modalDescription.textContent = ''; 
-             if (btnPrint) { btnPrint.removeAttribute('data-sesto-name'); btnPrint.removeAttribute('data-img-src'); }
-             if (btnTshirt) { btnTshirt.removeAttribute('data-sesto-name'); btnTshirt.removeAttribute('data-img-src'); }
-             if (btnCap) { btnCap.removeAttribute('data-sesto-name'); btnCap.removeAttribute('data-img-src'); }
-         });
-      } else { console.error("Image Modal element #imageModal not found."); }
-
-      const imageModalFooter = document.querySelector('#imageModal .modal-footer');
-      if (imageModalFooter) { 
-          imageModalFooter.addEventListener('click', (event) => { 
-              const targetButton = event.target.closest('.btn'); 
-              if (targetButton && targetButton.hasAttribute('data-product-type')) {
-                  event.preventDefault(); 
-                  const productType = targetButton.getAttribute('data-product-type');
-                  const price = targetButton.getAttribute('data-price');
-                  const sestoName = targetButton.getAttribute('data-sesto-name'); 
-                  const specificImgSrc = targetButton.getAttribute('data-img-src'); 
-                  
-                  if (sestoName && specificImgSrc) { 
-                      addToCart({ type: productType, name: sestoName, price: price, image: specificImgSrc }, event); 
-                      const originalText = targetButton.textContent;
-                      targetButton.textContent = 'Ajouté!';
-                      targetButton.disabled = true; 
-                      setTimeout(() => { 
-                          targetButton.textContent = originalText; 
-                          targetButton.disabled = false; 
-                      }, 1500);
-                  } else { console.error("Sesto name or image source not found on button for adding to cart."); }
-              }
-          });
-      }
-
-       if (cartItemsList) { 
-           cartItemsList.addEventListener('click', (event) => {
-               const removeButton = event.target.closest('.remove-item-btn');
-               if (removeButton) {
-                   const itemId = removeButton.getAttribute('data-item-id');
-                   removeFromCart(itemId);
-               }
-           });
-       }
-
-      if (clearCartBtn) { 
-          clearCartBtn.addEventListener('click', clearCart);
-      }
-      
-      // Cart Modal: Checkout Button - Longer loading duration
-      if (checkoutBtn && clearCartBtn && checkoutBtnText && checkoutSpinner) {
-          const sillyMessages = [
-              "Consultation de l'oracle sesto...",
-              "Recalibrage du sesto-mètre...",
-              "Vérification du niveau d'absurdité...",
-              "Application du vernis à sesterie...",
-              "Recherche de chaussettes perdues...",
-              "Polissage de la boule de cristal...",
-              "Presque là, courage !"
-          ];
-          let messageInterval = null; 
-
-          checkoutBtn.addEventListener('click', () => {
-              if (cart.length === 0) {
-                  alert('Votre panier est vide !'); 
-                  return; 
-              }
-              checkoutBtn.disabled = true;
-              clearCartBtn.disabled = true;
-              checkoutSpinner.style.display = 'inline-block';
-              let messageIndex = 0;
-              checkoutBtnText.textContent = sillyMessages[messageIndex]; 
-              checkoutBtnText.style.display = 'inline-block';
-              
-              if (messageInterval) clearInterval(messageInterval); 
-              messageInterval = setInterval(() => {
-                  messageIndex = (messageIndex + 1) % sillyMessages.length;
-                  checkoutBtnText.textContent = sillyMessages[messageIndex];
-              }, 1000); 
-              
-              setTimeout(() => { 
-                  clearInterval(messageInterval); 
-                  checkoutSpinner.style.display = 'none';
-                  checkoutBtnText.innerHTML = 'Ben non, t\'es juste un sesto 🙃😘'; 
-                  setTimeout(() => {
-                      checkoutBtnText.textContent = 'Passer la commande'; 
-                      checkoutBtn.disabled = false; 
-                      clearCartBtn.disabled = false;
-                  }, 3500); 
-              }, 6000); 
-          });
-      } else {
-          console.error("Required elements for checkout simulation not found.");
-      }
-
-      // --- Initial Load ---
-      document.addEventListener('DOMContentLoaded', () => {
-          loadCart(); 
-          setRandomSestoTitle(); 
+          if (messageInterval) clearInterval(messageInterval); 
+          messageInterval = setInterval(() => {
+              messageIndex = (messageIndex + 1) % sillyMessages.length;
+              checkoutBtnText.textContent = sillyMessages[messageIndex];
+          }, 1000); 
+          
+          setTimeout(() => { 
+              clearInterval(messageInterval); 
+              checkoutSpinner.style.display = 'none';
+              checkoutBtnText.innerHTML = 'Ben non, t\'es juste un sesto 🙃😘'; 
+              setTimeout(() => {
+                  checkoutBtnText.textContent = 'Passer la commande'; 
+                  checkoutBtn.disabled = false; 
+                  clearCartBtn.disabled = false;
+              }, 3500); 
+          }, 6000); 
       });
-      
-      console.log('Page loaded! Cart script ready.');
-    </script>
+  } else {
+      console.error("Required elements for checkout simulation not found.");
+  }
+
+  // Theme toggle event listener
+  if (themeToggle) {
+      themeToggle.addEventListener('click', toggleTheme);
+  }
+  
+  // Copy link button
+  const copyLinkBtn = document.getElementById('copyLinkBtn');
+  if (copyLinkBtn) {
+    copyLinkBtn.addEventListener('click', copyLinkWithInsult);
+  }
+
+// Phrase Generator
+const sestoPhrases = [
+  "J'ai mis mes chaussettes dans le micro-ondes pour les réchauffer... je me demande pourquoi ça sent le brûlé.",
+  "J'ai cherché mon téléphone pendant 20 minutes... en utilisant la lampe torche de mon téléphone.",
+  "Je viens de réaliser que j'ai mis du dentifrice sur ma brosse à cheveux ce matin.",
+  "J'ai essayé de déverrouiller ma maison avec la télécommande de ma voiture.",
+  "J'ai mis mes céréales dans le réfrigérateur et le lait dans le placard.",
+  "J'ai envoyé un message à quelqu'un pour lui demander où était mon téléphone.",
+  "J'ai essayé de faire défiler une page dans un livre papier avec mon doigt.",
+  "J'ai mis mes lunettes sur ma tête et j'ai passé une heure à les chercher.",
+  "J'ai mis mon café dans le micro-ondes pour le réchauffer et je l'ai oublié... trois fois de suite.",
+  "J'ai essayé de prendre une photo d'un arc-en-ciel avec ma calculatrice.",
+  "J'ai mis mes clés dans le congélateur en rangeant les courses.",
+  "J'ai appelé mon ami pour lui dire que j'avais perdu mon téléphone.",
+  "J'ai essayé de zoomer sur une photo dans un magazine papier.",
+  "J'ai mis ma télécommande dans le réfrigérateur et mon beurre sur le canapé.",
+  "J'ai essayé de déverrouiller ma porte d'entrée avec ma carte bancaire."
+];
+
+function generateSestoPhrase() {
+  const phraseElement = document.getElementById('sestoPhrase');
+  const randomIndex = Math.floor(Math.random() * sestoPhrases.length);
+  phraseElement.textContent = sestoPhrases[randomIndex];
+  
+  // Add a little confetti for fun
+  triggerConfetti();
+}
+
+// Function to trigger confetti
+function triggerConfetti(event) {
+  if (typeof confetti === 'function') {
+    let origin = { y: 0.6, x: 0.5 }; 
+    if (event && event.clientX !== undefined && event.clientY !== undefined) { 
+      const clickX = event.clientX;
+      const clickY = event.clientY;
+      const windowWidth = window.innerWidth;
+      const windowHeight = window.innerHeight;
+      if (windowWidth > 0 && windowHeight > 0) { 
+        origin = { 
+          x: Math.max(0, Math.min(1, clickX / windowWidth)), 
+          y: Math.max(0, Math.min(1, clickY / windowHeight)) 
+        };
+      }
+    }
+    
+    // Create confetti container if it doesn't exist
+    let confettiContainer = document.querySelector('.confetti-container');
+    if (!confettiContainer) {
+      confettiContainer = document.createElement('div');
+      confettiContainer.className = 'confetti-container';
+      document.body.appendChild(confettiContainer);
+    }
+    
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: origin,
+      zIndex: 9999,
+      appendTo: confettiContainer
+    });
+    
+    console.log("Confetti triggered!", origin);
+  } else {
+    console.error('Confetti function not found');
+  }
+}
+
+// Event listeners for quiz and phrase generator
+document.addEventListener('DOMContentLoaded', function() {
+  // Test confetti on load
+  setTimeout(() => {
+    triggerConfetti();
+    console.log("Initial confetti test");
+  }, 1000);
+  
+  const generatePhraseBtn = document.getElementById('generatePhraseBtn');
+  if (generatePhraseBtn) {
+    generatePhraseBtn.addEventListener('click', generateSestoPhrase);
+    // Generate a phrase on page load
+    generateSestoPhrase();
+  }
+  
+  // Ajouter des confettis à tous les boutons
+  const allButtons = document.querySelectorAll('button, .btn');
+  allButtons.forEach(button => {
+    button.addEventListener('click', function(event) {
+      triggerConfetti(event);
+    });
+  });
+  
+  // Initial setup
+  loadCart();
+  loadTheme();
+  setRandomSestoTitle();
+  loadSestoCount();
+});
+</script>
 <script>
   // Add random sesto emojis floating around
   document.addEventListener('DOMContentLoaded', function() {
