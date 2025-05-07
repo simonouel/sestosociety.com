@@ -1048,7 +1048,7 @@ html[data-bs-theme="light"] .phrase-generator-card {
            class="sesto-card-img" 
            alt="Jean-Gilebert :: Sesto Philosophe 3" 
            onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';" 
-           data-bs-toggle="modal" 
+           data-bs-toggle="modal"
            data-bs-target="#imageModal"
            data-img-src="https://sestosociety.com/images/Gilebert_03.png" 
            data-img-name="Jean-Gilebert :: Sesto Philosophe"
@@ -1166,7 +1166,7 @@ html[data-bs-theme="light"] .phrase-generator-card {
   const modalDescription = document.getElementById('modalDescription'); 
   const btnPrint = document.getElementById('btnModalPrint');
   const btnTshirt = document.getElementById('btnModalTshirt');
-  const btnCap = document.getElementById('btnModalCap');
+  const btnCap = document.getElementById('btnCap');
   const cartModalElement = document.getElementById('cartModal');
   const cartCountBadge = document.getElementById('cart-count');
   const cartItemsList = document.getElementById('cartItemsList');
@@ -1204,9 +1204,9 @@ html[data-bs-theme="light"] .phrase-generator-card {
       console.log('Added to cart:', item);
       saveCart();
       updateCartDisplay();
-  // Add confetti
-  triggerConfetti(event);
-}
+      // Add confetti
+      launchConfetti(event);
+  }
   function removeFromCart(itemId) { 
       console.log('Removing item with ID:', itemId);
       const idToRemove = parseFloat(itemId); 
@@ -1329,7 +1329,7 @@ function copyLinkWithInsult() {
     }, 2000);
     
     // Ajouter des confettis
-    triggerConfetti();
+    launchConfetti(event);
   }).catch(err => {
     console.error('Erreur lors de la copie du lien: ', err);
   });
@@ -1378,8 +1378,8 @@ function copyLinkWithInsult() {
       localStorage.setItem(THEME_STORAGE_KEY, newTheme);
       
       // Add confetti
-  triggerConfetti();
-}
+      launchConfetti(event);
+  }
 
   // Load theme from localStorage
   function loadTheme() {
@@ -1402,38 +1402,41 @@ function copyLinkWithInsult() {
               // Filter sestos
               const category = button.getAttribute('data-filter');
               filterSestos(category);
+              
+              // Add confetti
+              launchConfetti(event);
           });
       });
   }
 
   // Sesto Counter
   function incrementSestoCount() {
-  sestoCount++;
-  if (sestoCountElement) {
-    sestoCountElement.textContent = sestoCount;
+    sestoCount++;
+    if (sestoCountElement) {
+      sestoCountElement.textContent = sestoCount;
+    }
+    localStorage.setItem(SESTO_COUNT_KEY, sestoCount);
+    
+    // Afficher un message moqueur
+    const sestoCountMessage = document.getElementById('sestoCountMessage');
+    if (sestoCountMessage) {
+      const messages = [
+        "T'es un vrai sesto de perdre ton temps ici!",
+        "Encore un sesto de plus? Tu n'as rien de mieux à faire?",
+        "Wow, tu continues à regarder? Sesto confirmé!",
+        "Ton niveau de sesterie augmente avec chaque clic!",
+        "Tu collectionnes les sestos comme d'autres collectionnent les timbres!"
+      ];
+      sestoCountMessage.textContent = messages[Math.floor(Math.random() * messages.length)];
+      sestoCountMessage.classList.remove('d-none');
+      setTimeout(() => {
+        sestoCountMessage.classList.add('d-none');
+      }, 3000);
+    }
+    
+    // Ajouter des confettis
+    launchConfetti(event);
   }
-  localStorage.setItem(SESTO_COUNT_KEY, sestoCount);
-  
-  // Afficher un message moqueur
-  const sestoCountMessage = document.getElementById('sestoCountMessage');
-  if (sestoCountMessage) {
-    const messages = [
-      "T'es un vrai sesto de perdre ton temps ici!",
-      "Encore un sesto de plus? Tu n'as rien de mieux à faire?",
-      "Wow, tu continues à regarder? Sesto confirmé!",
-      "Ton niveau de sesterie augmente avec chaque clic!",
-      "Tu collectionnes les sestos comme d'autres collectionnent les timbres!"
-    ];
-    sestoCountMessage.textContent = messages[Math.floor(Math.random() * messages.length)];
-    sestoCountMessage.classList.remove('d-none');
-    setTimeout(() => {
-      sestoCountMessage.classList.add('d-none');
-    }, 3000);
-  }
-  
-  // Ajouter des confettis
-  triggerConfetti();
-}
 
   function loadSestoCount() {
       const savedCount = localStorage.getItem(SESTO_COUNT_KEY);
@@ -1473,7 +1476,7 @@ function copyLinkWithInsult() {
       incrementSestoCount();
       
       // Trigger confetti
-      triggerConfetti();
+      launchConfetti(event);
     });
      imageModalElement.addEventListener('hide.bs.modal', event => {
          if (modalImage) modalImage.src = ''; 
@@ -1605,54 +1608,109 @@ function generateSestoPhrase() {
   phraseElement.textContent = sestoPhrases[randomIndex];
   
   // Add a little confetti for fun
-  triggerConfetti();
+  launchConfetti(event);
 }
 
-// Function to trigger confetti
-function triggerConfetti(event) {
-  if (typeof confetti === 'function') {
-    let origin = { y: 0.6, x: 0.5 }; 
-    if (event && event.clientX !== undefined && event.clientY !== undefined) { 
-      const clickX = event.clientX;
-      const clickY = event.clientY;
-      const windowWidth = window.innerWidth;
-      const windowHeight = window.innerHeight;
-      if (windowWidth > 0 && windowHeight > 0) { 
-        origin = { 
-          x: Math.max(0, Math.min(1, clickX / windowWidth)), 
-          y: Math.max(0, Math.min(1, clickY / windowHeight)) 
-        };
-      }
+// NOUVELLE IMPLÉMENTATION DES CONFETTIS
+function launchConfetti(event) {
+  console.log("Lancement des confettis...");
+  
+  // Déterminer l'origine (position du curseur)
+  let origin = { y: 0.5, x: 0.5 }; // Valeur par défaut (centre de l'écran)
+  
+  if (event && event.clientX !== undefined && event.clientY !== undefined) {
+    // Convertir les coordonnées du curseur en pourcentage de la fenêtre
+    origin.x = event.clientX / window.innerWidth;
+    origin.y = event.clientY / window.innerHeight;
+    console.log("Origine des confettis:", origin);
+  }
+  
+  // Créer un conteneur pour les confettis s'il n'existe pas déjà
+  let confettiContainer = document.querySelector('.confetti-container');
+  if (!confettiContainer) {
+    confettiContainer = document.createElement('div');
+    confettiContainer.className = 'confetti-container';
+    confettiContainer.style.position = 'fixed';
+    confettiContainer.style.top = '0';
+    confettiContainer.style.left = '0';
+    confettiContainer.style.width = '100%';
+    confettiContainer.style.height = '100%';
+    confettiContainer.style.pointerEvents = 'none';
+    confettiContainer.style.zIndex = '9999';
+    document.body.appendChild(confettiContainer);
+  }
+  
+  // Créer nos propres confettis si la bibliothèque ne fonctionne pas
+  try {
+    if (typeof confetti === 'function') {
+      confetti({
+        particleCount: 200,
+        spread: 90,
+        origin: origin,
+        zIndex: 9999
+      });
+      console.log("Confettis lancés avec la bibliothèque canvas-confetti");
+    } else {
+      throw new Error("La fonction confetti n'est pas disponible");
     }
+  } catch (error) {
+    console.warn("Utilisation des confettis de secours:", error);
+    createFallbackConfetti(confettiContainer, origin);
+  }
+}
+
+// Confettis de secours si la bibliothèque ne fonctionne pas
+function createFallbackConfetti(container, origin) {
+  const colors = ['#f44336', '#e91e63', '#9c27b0', '#673ab7', '#3f51b5', '#2196f3', '#03a9f4', '#00bcd4', '#009688', '#4CAF50', '#8BC34A', '#CDDC39', '#FFEB3B', '#FFC107', '#FF9800', '#FF5722'];
+  
+  // Convertir l'origine en pixels
+  const startX = origin.x * window.innerWidth;
+  const startY = origin.y * window.innerHeight;
+  
+  for (let i = 0; i < 200; i++) {
+    const confetti = document.createElement('div');
+    const color = colors[Math.floor(Math.random() * colors.length)];
     
-    // Create confetti container if it doesn't exist
-    let confettiContainer = document.querySelector('.confetti-container');
-    if (!confettiContainer) {
-      confettiContainer = document.createElement('div');
-      confettiContainer.className = 'confetti-container';
-      document.body.appendChild(confettiContainer);
-    }
+    confetti.style.position = 'absolute';
+    confetti.style.width = Math.random() * 10 + 5 + 'px';
+    confetti.style.height = Math.random() * 10 + 5 + 'px';
+    confetti.style.backgroundColor = color;
+    confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+    confetti.style.opacity = Math.random() + 0.5;
+    confetti.style.left = startX + 'px';
+    confetti.style.top = startY + 'px';
+    confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
     
-    confetti({
-      particleCount: 100,
-      spread: 70,
-      origin: origin,
-      zIndex: 9999,
-      appendTo: confettiContainer
+    container.appendChild(confetti);
+    
+    // Animation de chute
+    const duration = Math.random() * 3 + 2;
+    const delay = Math.random() * 0.5;
+    
+    confetti.animate([
+      { transform: `translate(0, 0) rotate(0deg)`, opacity: 1 },
+      { transform: `translate(${Math.random() * 200 - 100}px, ${Math.random() * 200 + 100}px) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+    ], {
+      duration: duration * 1000,
+      delay: delay * 1000,
+      easing: 'cubic-bezier(0.215, 0.61, 0.355, 1)'
     });
     
-    console.log("Confetti triggered!", origin);
-  } else {
-    console.error('Confetti function not found');
+    // Supprimer après l'animation
+    setTimeout(() => {
+      confetti.remove();
+    }, (duration + delay) * 1000);
   }
+  
+  console.log("Confettis de secours créés à la position:", startX, startY);
 }
 
 // Event listeners for quiz and phrase generator
 document.addEventListener('DOMContentLoaded', function() {
   // Test confetti on load
   setTimeout(() => {
-    triggerConfetti();
-    console.log("Initial confetti test");
+    launchConfetti();
+    console.log("Test initial des confettis");
   }, 1000);
   
   const generatePhraseBtn = document.getElementById('generatePhraseBtn');
@@ -1666,7 +1724,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const allButtons = document.querySelectorAll('button, .btn');
   allButtons.forEach(button => {
     button.addEventListener('click', function(event) {
-      triggerConfetti(event);
+      launchConfetti(event);
     });
   });
   
@@ -1680,10 +1738,10 @@ document.addEventListener('DOMContentLoaded', function() {
 <script>
   // Add random sesto emojis floating around
   document.addEventListener('DOMContentLoaded', function() {
-    const emojis = ['🤪', '🙃', '😵‍💫', '🫠', '🥴'];
+    const emojis = ['🤪', '🙃', '😵‍💫', '🫠', '🥴', '😜', '🤣', '😂', '😆', '😁', '😄', '🤓', '🤡', '😎', '🤠'];
     const container = document.body;
     
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 15; i++) {
       setTimeout(() => {
         const emoji = document.createElement('div');
         emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
@@ -1700,6 +1758,13 @@ document.addEventListener('DOMContentLoaded', function() {
         container.appendChild(emoji);
       }, i * 1000);
     }
+    
+    // Lancer des confettis au chargement de la page
+    setTimeout(() => {
+      if (typeof launchConfetti === 'function') {
+        launchConfetti();
+      }
+    }, 500);
   });
   
   // Add wobble effect to buttons on hover
@@ -1714,6 +1779,88 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
   });
+</script>
+<script>
+// Solution de confettis alternative
+document.addEventListener('DOMContentLoaded', function() {
+  // Créer une fonction globale pour les confettis
+  window.createConfetti = function(event) {
+    const colors = ['#f44336', '#e91e63', '#9c27b0', '#673ab7', '#3f51b5', '#2196f3', '#03a9f4', '#00bcd4', '#009688', '#4CAF50', '#8BC34A', '#CDDC39', '#FFEB3B', '#FFC107', '#FF9800', '#FF5722'];
+    const container = document.createElement('div');
+    container.style.position = 'fixed';
+    container.style.top = '0';
+    container.style.left = '0';
+    container.style.width = '100%';
+    container.style.height = '100%';
+    container.style.pointerEvents = 'none';
+    container.style.zIndex = '9999';
+    document.body.appendChild(container);
+    
+    // Déterminer la position de départ (position du curseur)
+    let startX = window.innerWidth / 2;
+    let startY = window.innerHeight / 2;
+    
+    if (event && event.clientX !== undefined && event.clientY !== undefined) {
+      startX = event.clientX;
+      startY = event.clientY;
+    }
+    
+    for (let i = 0; i < 200; i++) {
+      const confetti = document.createElement('div');
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      
+      confetti.style.position = 'absolute';
+      confetti.style.width = Math.random() * 10 + 5 + 'px';
+      confetti.style.height = Math.random() * 10 + 5 + 'px';
+      confetti.style.backgroundColor = color;
+      confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+      confetti.style.opacity = Math.random() + 0.5;
+      confetti.style.left = startX + 'px';
+      confetti.style.top = startY + 'px';
+      confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+      
+      container.appendChild(confetti);
+      
+      // Animation de chute
+      const duration = Math.random() * 3 + 2;
+      const delay = Math.random() * 0.5;
+      
+      confetti.animate([
+        { transform: `translate(0, 0) rotate(0deg)`, opacity: 1 },
+        { transform: `translate(${Math.random() * 200 - 100}px, ${Math.random() * 200 + 100}px) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+      ], {
+        duration: duration * 1000,
+        delay: delay * 1000,
+        easing: 'cubic-bezier(0.215, 0.61, 0.355, 1)'
+      });
+      
+      // Supprimer après l'animation
+      setTimeout(() => {
+        confetti.remove();
+      }, (duration + delay) * 1000);
+    }
+    
+    console.log("Confettis alternatifs créés à la position:", startX, startY);
+    
+    // Supprimer le conteneur après que tous les confettis sont partis
+    setTimeout(() => {
+      container.remove();
+    }, 5000);
+  };
+  
+  // Lancer des confettis au chargement
+  setTimeout(() => {
+    window.createConfetti();
+  }, 1000);
+  
+  // Ajouter des confettis à tous les boutons
+  const allButtons = document.querySelectorAll('button, .btn');
+  allButtons.forEach(button => {
+    button.addEventListener('click', function(event) {
+      window.createConfetti(event);
+    });
+  });
+});
 </script>
   </body>
 </html>
