@@ -13,337 +13,824 @@
     <title>Sesto Society - Les Sestos</title>
 
     <style>
-      /* Apply Nunito font to the body, add padding for sticky top */
-      body {
-        font-family: 'Nunito', sans-serif;
-        padding-top: 80px; /* Adjust if banner height changes */
-      }
-      html[data-bs-theme="dark"] body {
-        background-color: var(--bs-body-bg); 
-      }
+/* Apply Nunito font to the body, add padding for sticky top */
+body {
+  font-family: 'Nunito', sans-serif;
+  padding-top: 80px; /* Adjust if banner height changes */
+}
+html[data-bs-theme="dark"] body {
+  background-color: #121212;
+}
 
-      .sesto-card-img {
-        height: 250px; 
-        object-fit: cover; 
-        cursor: pointer; 
-         border-radius: var(--bs-card-inner-border-radius); 
-      }
-      
-      .card {
-        transition: transform 0.15s ease-in-out; 
-         background-color: var(--bs-card-bg); 
-         border-radius: var(--bs-card-border-radius);
-         overflow: hidden; 
-      }
-      .row[id^='sestoGrid'] .col:nth-child(3n+1) .card {
-          background-color: var(--bs-gray-800); 
-      }
-      .row[id^='sestoGrid'] .col:nth-child(3n+2) .card {
-          background-color: var(--bs-gray-700); 
-      }
-      .row[id^='sestoGrid'] .col:nth-child(3n+3) .card {
-          background-color: var(--bs-card-bg); 
-      }
+/* Header styling */
+.site-header {
+  background: linear-gradient(135deg, #2b2b2b 0%, #1a1a1a 100%);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  padding: 1rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1030;
+  overflow: hidden;
+}
+.site-header::before {
+  content: "🤪";
+  position: absolute;
+  font-size: 120px;
+  opacity: 0.03;
+  right: -20px;
+  top: -30px;
+  transform: rotate(15deg);
+}
+.site-title {
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  background: linear-gradient(90deg, #f8f9fa, #e2e2e2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
 
-      /* Card Tilt */
-      .col:nth-child(odd) .card {
-          transform: rotate(-1.5deg);
-          transition: transform 0.2s ease-in-out; 
-      }
-      .col:nth-child(even) .card {
-          transform: rotate(1.5deg);
-           transition: transform 0.2s ease-in-out;
-      }
+/* Card styling */
+.sesto-card {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  background-color: var(--bs-card-bg);
+  border: none;
+  height: 100%;
+  position: relative;
+}
+/* Card Tilt */
+.col:nth-child(odd) .sesto-card {
+  transform: rotate(-1.5deg);
+  transition: transform 0.2s ease-in-out; 
+}
+.col:nth-child(even) .sesto-card {
+  transform: rotate(1.5deg);
+  transition: transform 0.2s ease-in-out;
+}
+/* Wobble Keyframes */
+@keyframes wobble {
+  0%, 100% { transform: translateX(0%) rotate(var(--base-rotate, 0deg)); } 
+  15% { transform: translateX(-4px) rotate(calc(var(--base-rotate, 0deg) - 3deg)); }
+  30% { transform: translateX(3px) rotate(calc(var(--base-rotate, 0deg) + 2deg)); }
+  45% { transform: translateX(-3px) rotate(calc(var(--base-rotate, 0deg) - 1deg)); }
+  60% { transform: translateX(2px) rotate(var(--base-rotate, 0deg)); }
+  75% { transform: translateX(-1px) rotate(calc(var(--base-rotate, 0deg) + 1deg)); }
+}
+.col:nth-child(odd) .sesto-card:hover { 
+  --base-rotate: -1.5deg; 
+  animation: wobble 0.6s ease-in-out; 
+  transform: scale(1.02) rotate(-1.5deg); 
+  z-index: 10; 
+  position: relative; 
+}
+.col:nth-child(even) .sesto-card:hover { 
+  --base-rotate: 1.5deg; 
+  animation: wobble 0.6s ease-in-out; 
+  transform: scale(1.02) rotate(1.5deg); 
+  z-index: 10; 
+  position: relative; 
+}
+.sesto-card-img {
+  height: 280px; 
+  width: 100%;
+  object-fit: cover; 
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: block;
+}
+.sesto-card-img:hover {
+  filter: brightness(1.1);
+}
+.sesto-card-body {
+  padding: 1.25rem;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  text-align: center;
+}
+.sesto-card-text {
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--bs-secondary-color);
+}
+.row[id^='sestoGrid'] .col:nth-child(3n+1) .sesto-card {
+  background-color: var(--bs-gray-800); 
+}
+.row[id^='sestoGrid'] .col:nth-child(3n+2) .sesto-card {
+  background-color: var(--bs-gray-700); 
+}
+.row[id^='sestoGrid'] .col:nth-child(3n+3) .sesto-card {
+  background-color: var(--bs-card-bg); 
+}
 
-      /* Wobble Keyframes */
-      @keyframes wobble {
-        0%, 100% { transform: translateX(0%) rotate(var(--base-rotate, 0deg)); } 
-        15% { transform: translateX(-4px) rotate(calc(var(--base-rotate, 0deg) - 3deg)); }
-        30% { transform: translateX(3px) rotate(calc(var(--base-rotate, 0deg) + 2deg)); }
-        45% { transform: translateX(-3px) rotate(calc(var(--base-rotate, 0deg) - 1deg)); }
-        60% { transform: translateX(2px) rotate(var(--base-rotate, 0deg)); }
-        75% { transform: translateX(-1px) rotate(calc(var(--base-rotate, 0deg) + 1deg)); }
-      }
+/* Section styling */
+.section-heading {
+  font-family: 'Caveat', cursive; 
+  font-size: 3rem; 
+  color: var(--bs-body-color);
+  font-weight: 500;
+  position: relative;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+.section-heading::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #6c757d, transparent);
+  border-radius: 2px;
+}
+.sesto-main-title {
+  font-family: 'Caveat', cursive;
+  font-weight: 500; 
+  font-size: 3.5rem; 
+  color: var(--bs-body-color);
+  text-align: center;
+  margin-bottom: 2rem;
+  position: relative;
+  display: inline-block;
+}
+.sesto-main-title::before {
+  content: "🤪";
+  position: absolute;
+  font-size: 30px;
+  left: -40px;
+  top: 50%;
+  transform: translateY(-50%);
+  animation: float 3s ease-in-out infinite;
+}
+.sesto-main-title::after {
+  content: "🤪";
+  position: absolute;
+  font-size: 30px;
+  right: -40px;
+  top: 50%;
+  transform: translateY(-50%) scaleX(-1);
+  animation: float 3s ease-in-out infinite 1.5s;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(-50%); }
+  50% { transform: translateY(-70%); }
+}
+.sesto-of-hour-thumb {
+  height: 40px;
+  width: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+  vertical-align: middle; 
+  margin-left: 0.3em;
+  margin-right: 0.2em;
+  background-color: var(--bs-secondary-bg);
+  border: 2px solid var(--bs-border-color);
+  display: inline-block;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
 
-       .col:nth-child(odd) .card:hover { --base-rotate: -1.5deg; animation: wobble 0.6s ease-in-out; transform: scale(1.02); z-index: 10; position: relative; }
-       .col:nth-child(even) .card:hover { --base-rotate: 1.5deg; animation: wobble 0.6s ease-in-out; transform: scale(1.02); z-index: 10; position: relative; }
+/* Introduction text */
+.intro-text {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  max-width: 800px;
+  margin: 0 auto 3rem;
+  padding: 2rem;
+  border-radius: 16px;
+  background-color: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+.intro-text::before {
+  content: "🤪";
+  position: absolute;
+  font-size: 100px;
+  opacity: 0.05;
+  right: -20px;
+  bottom: -30px;
+  transform: rotate(-15deg);
+}
 
+/* Modal styling */
+.modal-content {
+  border-radius: 16px;
+  border: none;
+  overflow: hidden;
+  background-color: var(--bs-body-bg);
+  min-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+}
+#cartModal .modal-content, #sestoMessageModal .modal-content {
+  min-height: auto;
+}
+.modal-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1.5rem;
+}
+.modal-body {
+  overflow-y: auto;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  flex-direction: column;
+}
+#cartModal .modal-body {
+  display: block;
+  align-items: normal;
+  justify-content: normal;
+}
+.modal-footer {
+  flex-shrink: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1.5rem;
+}
+#modalImage {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  max-height: calc(80vh - 150px);
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+@keyframes scale-fade-in {
+  0% { transform: scale(0.7); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+#imageModal.modal.show .modal-dialog {
+  animation: scale-fade-in 0.5s ease-out;
+}
 
-      @keyframes scale-fade-in { 0% { transform: scale(0.7); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
-      #imageModal.modal.show .modal-dialog { 
-          animation: scale-fade-in 0.5s ease-out; 
-      } 
+/* Cart styling */
+#cart-count {
+  font-size: 0.7em;
+}
+#cartModalBody ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 0;
+}
+#cartModalBody li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+#cartModalBody li:last-child {
+  border-bottom: none;
+}
+.cart-item-thumbnail {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 1rem;
+  flex-shrink: 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+.cart-item-details {
+  flex-grow: 1;
+  margin-right: 1rem;
+  word-break: break-word;
+}
+.remove-item-btn {
+  flex-shrink: 0;
+}
+#checkoutBtn .spinner-border {
+  vertical-align: text-bottom;
+}
 
-      #modalImage {
-          width: 100%; height: auto; display: block; margin: 0 auto; 
-          max-height: calc(80vh - 150px); 
-          object-fit: contain; 
-      }
-       .modal-content {
-           overflow: hidden; background-color: var(--bs-body-bg); 
-           min-height: 85vh; display: flex; flex-direction: column;
-       }
-       #cartModal .modal-content {
-           min-height: auto; 
-       }
-       .modal-body {
-            overflow-y: auto; flex-grow: 1; display: flex; 
-            align-items: center; justify-content: center; padding: 1rem; 
-            flex-direction: column; 
-       }
-       #cartModal .modal-body {
-           display: block; 
-           align-items: normal;
-           justify-content: normal;
-       }
-        .modal-footer {
-            flex-shrink: 0; border-top: 1px solid var(--bs-border-color-translucent); 
-            padding-top: 1rem; padding-bottom: 1rem;
-        }
-       
-       /* Heading Styles */
-       .sesto-main-title { 
-           font-family: 'Caveat', cursive;
-           font-weight: 500; 
-           font-size: 3rem; 
-           color: var(--bs-body-color); 
-           display: flex;
-           align-items: center;
-           justify-content: center;
-           flex-wrap: wrap; 
-       }
-       .section-heading {
-           font-family: 'Caveat', cursive; 
-           font-size: 2.5rem; 
-           border-bottom: 1px solid var(--bs-border-color-translucent); 
-           padding-bottom: 0.5rem;
-           color: var(--bs-body-color); 
-           font-weight: 500; 
-       }
-       /* Style for the thumbnail in the main title */
-       .sesto-of-hour-thumb {
-           height: 32px; /* Fixed size */
-           width: 32px;  /* Fixed size */
-           object-fit: cover;
-           border-radius: 50%; 
-           vertical-align: middle; /* Align with text */
-           margin-left: 0.3em;
-           margin-right: 0.2em;
-           background-color: var(--bs-secondary-bg); 
-           border: 1px solid var(--bs-border-color); 
-           /* display is handled by JS via d-none */
-       }
+/* Footer styling */
+.site-footer {
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 3rem 0;
+  margin-top: 5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+.site-footer::before {
+  content: "🤪";
+  position: absolute;
+  font-size: 80px;
+  opacity: 0.05;
+  left: 10%;
+  top: 10px;
+  transform: rotate(-15deg);
+}
+.site-footer::after {
+  content: "🤪";
+  position: absolute;
+  font-size: 80px;
+  opacity: 0.05;
+  right: 10%;
+  top: 10px;
+  transform: rotate(15deg);
+}
+.gemini-mention {
+  font-size: 0.7rem;
+  opacity: 0.7;
+}
 
+/* Button styling */
+.btn-sesto {
+  background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+  border: none;
+  color: white;
+  font-weight: 600;
+  padding: 0.6rem 1.5rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+.btn-sesto::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: all 0.6s ease;
+}
+.btn-sesto:hover::before {
+  left: 100%;
+}
+.btn-sesto:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(135deg, #495057 0%, #343a40 100%);
+  color: white;
+}
+.btn-cart {
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  position: relative;
+}
+.btn-cart:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: scale(1.1) rotate(5deg);
+}
+.btn-cart svg {
+  transition: all 0.3s ease;
+}
+.btn-cart:hover svg {
+  transform: scale(1.1);
+}
 
-       /* Cart Styles */
-       #cart-count { font-size: 0.7em; }
-       #cartModalBody ul { list-style: none; padding: 0; margin-bottom: 0;} 
-       #cartModalBody li { display: flex; 
-                           justify-content: space-between; 
-                           align-items: center; 
-                           padding: 0.75rem 0; 
-                           border-bottom: 1px solid var(--bs-border-color-translucent); }
-       #cartModalBody li:last-child { border-bottom: none; }
-       .cart-item-thumbnail { 
-           width: 50px; height: 50px; object-fit: cover;
-           border-radius: 0.25rem; margin-right: 1rem; 
-           flex-shrink: 0; 
-       }
-       .cart-item-details { flex-grow: 1; margin-right: 1rem; word-break: break-word; } 
-       .remove-item-btn { flex-shrink: 0; } 
-       #checkoutBtn .spinner-border { vertical-align: text-bottom; }
-       
-       .gemini-mention {
-           font-size: 0.7rem; 
-           opacity: 0.7; 
-       }
+/* Sticky Cookie Styles */
+#cookieBtn {
+  width: 60px;
+  height: 60px;
+  font-size: 1.8rem; /* Adjust emoji size */
+  padding: 0; 
+  line-height: 1; /* Center emoji better */
+  /* Ensure it's above other content but below modals */
+  z-index: 1035; 
+}
+/* Shake animation for cookie */
+@keyframes shake {
+  10%, 90% { transform: translate3d(-1px, 0, 0) rotate(-1deg); }
+  20%, 80% { transform: translate3d(2px, 0, 0) rotate(2deg); }
+  30%, 50%, 70% { transform: translate3d(-3px, 0, 0) rotate(-3deg); }
+  40%, 60% { transform: translate3d(3px, 0, 0) rotate(3deg); }
+}
+.is-shaking {
+  animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+}
 
-
-      /* --- Mobile Specific Styles --- */
-      @media (max-width: 575.98px) {
-        body { padding-top: 70px; } 
-        .sesto-card-img { height: 150px; }
-        .display-4 { font-size: 2.25rem; }
-         .sesto-main-title { font-size: 1.8rem; } 
-         h3.section-heading { 
-             font-size: 2rem; 
-             margin-top: 2rem !important; 
-         }
-         /* Disable tilt on mobile */
-         .col:nth-child(odd) .card, .col:nth-child(even) .card { transform: rotate(0deg); }
-         .col:nth-child(odd) .card:hover, .col:nth-child(even) .card:hover { animation: none; transform: scale(1.03); }
-
-         #imageModal .modal-footer { flex-direction: column; align-items: stretch; }
-         #imageModal .modal-footer .btn { margin-top: 0.5rem; margin-bottom: 0; margin-left: 0 !important; margin-right: 0 !important; }
-         #imageModal .modal-footer .btn:first-child { margin-top: 0; } 
-          #modalImage { max-height: calc(70vh - 160px); } 
-          #cartModalFooter { flex-direction: column; align-items: stretch; }
-          #cartModalFooter > div:first-child { margin-bottom: 0.5rem; text-align: center;}
-          #cartModalFooter > div:last-child { display: flex; flex-direction: column; }
-          #cartModalFooter > div:last-child .btn { margin-top: 0.5rem;}
-          #cartModalFooter > div:last-child .btn:first-child { margin-top: 0;}
-          .sesto-of-hour-thumb { height: 24px; width: 24px; } 
-      }
+/* --- Mobile Specific Styles --- */
+@media (max-width: 575.98px) {
+  body {
+    padding-top: 70px;
+  }
+  .sesto-card-img {
+    height: 200px;
+  }
+  .site-title {
+    font-size: 2rem;
+  }
+  .sesto-main-title {
+    font-size: 2.2rem;
+  }
+  .sesto-main-title::before,
+  .sesto-main-title::after {
+    display: none;
+  }
+  .section-heading {
+    font-size: 2.2rem;
+    margin-top: 2rem !important;
+  }
+  /* Disable tilt on mobile */
+  .col:nth-child(odd) .sesto-card, 
+  .col:nth-child(even) .sesto-card { 
+    transform: rotate(0deg); 
+  }
+  .col:nth-child(odd) .sesto-card:hover, 
+  .col:nth-child(even) .sesto-card:hover { 
+    animation: none; 
+    transform: scale(1.03); 
+  }
+  #imageModal .modal-footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  #imageModal .modal-footer .btn {
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  #imageModal .modal-footer .btn:first-child {
+    margin-top: 0;
+  }
+  #modalImage {
+    max-height: calc(70vh - 160px);
+  }
+  #cartModalFooter {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  #cartModalFooter > div:first-child {
+    margin-bottom: 0.5rem;
+    text-center;
+  }
+  #cartModalFooter > div:last-child {
+    display: flex;
+    flex-direction: column;
+  }
+  #cartModalFooter > div:last-child .btn {
+    margin-top: 0.5rem;
+  }
+  #cartModalFooter > div:last-child .btn:first-child {
+    margin-top: 0;
+  }
+  .sesto-of-hour-thumb {
+    height: 30px;
+    width: 30px;
+  }
+  .intro-text {
+    padding: 1.5rem;
+    font-size: 1rem;
+  }
+}
     </style>
   </head>
   <body>
 
-    <div class="bg-dark text-white p-3 text-center mb-4 sticky-top"> 
-      <h1 class="display-4">SestoSociety.com</h1> 
-      <div class="position-absolute top-50 end-0 translate-middle-y pe-3">
-          <button type="button" class="btn btn-outline-light position-relative border-0" data-bs-toggle="modal" data-bs-target="#cartModal" aria-label="Voir le panier">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
-              <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="display: none;">0</span>
-          </button>
+    <header class="site-header text-white p-3 text-center mb-5 position-fixed w-100" style="top: 0; left: 0; z-index: 1030;"> 
+  <h1 class="site-title mb-0">SestoSociety.com</h1> 
+  <div class="position-absolute top-50 end-0 translate-middle-y pe-3">
+    <button type="button" class="btn-cart position-relative" data-bs-toggle="modal" data-bs-target="#cartModal" aria-label="Voir le panier">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+      <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="display: none;">0</span>
+    </button>
+  </div>
+</header>
+
+    <div class="container text-center my-5"> 
+  <p class="intro-text fst-italic">
+    Salut gang de Sestos (et futurs Sestos) ! Ce site, c'est un peu comme un party de famille qui dérape juste assez pour être drôle. Le mot 'sesto'? Une invention brillante (ou juste chanceuse?) d'un cousin pour traiter affectueusement quelqu'un de... disons... pas le pogo le plus dégelé de la boîte. C'est cette seconde où tu fais ou dis un truc tellement épais que ça en devient magnifique. Ici, on archive ces moments de gloire. Explorez la galerie ci-dessous, gracieuseté du 'MasterMind' Jean-Simon. Pis si tu te reconnais, ben... t'es juste un sesto, pis c'est correct !
+  </p>
+</div>
+
+    <div class="text-center mb-5"> 
+  <h2 class="sesto-main-title d-flex align-items-center justify-content-center flex-wrap"> 
+    <span id="sestoOfTheHourBaseTitle">Le Panthéon des Sestos</span>
+    <span class="text-info ms-2 d-none" id="sestoOfTheHourDynamicPart"> 
+      (<span id="sestoOfTheHourLabel">Du moment</span> : 
+      <img src="/placeholder.svg" alt="" id="sestoOfTheHourImg" class="sesto-of-hour-thumb d-none"> 
+      <span id="sestoOfTheHourName"></span> !)
+    </span>
+  </h2> 
+</div>
+
+    <div class="container mt-5"> 
+  <h3 class="section-heading">Jean-Christophe :: Sesto Typic</h3>
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 g-md-5" id="sestoGridChris"> 
+    <div class="col"> 
+      <div class="sesto-card"> 
+        <img src="https://sestosociety.com/images/Chris_01.png" 
+             class="sesto-card-img" 
+             alt="Jean-Christophe :: Sesto Typic 1" 
+             onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';" 
+             data-bs-toggle="modal" 
+             data-bs-target="#imageModal" 
+             data-img-src="https://sestosociety.com/images/Chris_01.png" 
+             data-img-name="Jean-Christophe :: Sesto Typic" 
+             data-img-desc="Le gars qui demande 'C'est quoi?' quand on explique le concept. Il EST le concept. L'étalon-or, la référence de base pour mesurer le niveau de sesterie ambiant. Fiable dans sa 'sestitude'."> 
+        <div class="sesto-card-body text-center"> 
+          <p class="sesto-card-text">Le Standard Sesto.</p>
+        </div> 
+      </div> 
+    </div>
+    <div class="col"> 
+      <div class="sesto-card"> 
+        <img src="https://sestosociety.com/images/Chris_02.png" 
+             class="sesto-card-img" 
+             alt="Jean-Christophe :: Sesto Typic 2" 
+             onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';" 
+             data-bs-toggle="modal" 
+             data-bs-target="#imageModal" 
+             data-img-src="https://sestosociety.com/images/Chris_02.png" 
+             data-img-name="Jean-Christophe :: Sesto Typic" 
+             data-img-desc="Ce regard profond qui fixe l'infini... ou juste le mur d'en face parce qu'il a oublié ce qu'il cherchait en entrant dans la pièce. Un classique Sesto Typic."> 
+        <div class="sesto-card-body text-center">
+          <p class="sesto-card-text">Regard... Vide ?</p>
+        </div> 
+      </div> 
+    </div>
+    <div class="col"> 
+      <div class="sesto-card"> 
+        <img src="https://sestosociety.com/images/Chris_03.png" 
+             class="sesto-card-img" 
+             alt="Jean-Christophe :: Sesto Typic 3" 
+             onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';" 
+             data-bs-toggle="modal" 
+             data-bs-target="#imageModal" 
+             data-img-src="https://sestosociety.com/images/Chris_03.png" 
+             data-img-name="Jean-Christophe :: Sesto Typic" 
+             data-img-desc="Est-ce qu'il réfléchit à la complexité de l'univers, à la recette de pâté chinois, ou à s'il a laissé le gaz ouvert ? Le mystère reste entier. Probablement la deuxième option."> 
+        <div class="sesto-card-body text-center">
+          <p class="sesto-card-text">Il pense (peut-être).</p>
+        </div> 
+      </div> 
+    </div>
+  </div>
+
+<h3 class="section-heading mt-5">Jean-Dominique :: Ultra Sess</h3>
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 g-md-5" id="sestoGridDom">
+  <div class="col"> 
+    <div class="sesto-card"> 
+      <img src="https://sestosociety.com/images/Dom_01.png" 
+           class="sesto-card-img" 
+           alt="Jean-Dominique :: Ultra Sess 1" 
+           onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';" 
+           data-bs-toggle="modal" 
+           data-bs-target="#imageModal" 
+           data-img-src="https://sestosociety.com/images/Dom_01.png" 
+           data-img-name="Jean-Dominique :: Ultra Sess"
+           data-img-desc="Le Big Bang de la Society. L'étincelle initiale qui a tout démarré. On ne sait pas encore s'il faut le remercier ou lui envoyer la facture du psy collectif."> 
+      <div class="sesto-card-body text-center">
+        <p class="sesto-card-text">Le Big Bang originel.</p>
+      </div> 
+    </div> 
+  </div>
+  <div class="col"> 
+    <div class="sesto-card"> 
+      <img src="https://sestosociety.com/images/Dom_02.png" 
+           class="sesto-card-img" 
+           alt="Jean-Dominique :: Ultra Sess 2" 
+           onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';" 
+           data-bs-toggle="modal" 
+           data-bs-target="#imageModal" 
+           data-img-src="https://sestosociety.com/images/Dom_02.png" 
+           data-img-name="Jean-Dominique :: Ultra Sess"
+           data-img-desc="L'Ultra Sess dans son habitat naturel : en pleine réflexion intense sur des concepts probablement... sesto."> 
+      <div class="sesto-card-body text-center">
+        <p class="sesto-card-text">Attention, ça réfléchit fort.</p>
+      </div> 
+    </div> 
+  </div>
+  <div class="col"> 
+    <div class="sesto-card"> 
+      <img src="https://sestosociety.com/images/Dom_03.png" 
+           class="sesto-card-img" 
+           alt="Jean-Dominique :: Ultra Sess 3" 
+           onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';" 
+           data-bs-toggle="modal" 
+           data-bs-target="#imageModal" 
+           data-img-src="https://sestosociety.com/images/Dom_03.png" 
+           data-img-name="Jean-Dominique :: Ultra Sess"
+           data-img-desc="Ce niveau de concentration ne peut signifier qu'une chose : une idée sesto de génie est sur le point d'émerger."> 
+      <div class="sesto-card-body text-center">
+        <p class="sesto-card-text">La concentration est palpable.</p>
+      </div> 
+    </div> 
+  </div>
+</div>
+
+<h3 class="section-heading mt-5">Jean-Benîto :: Sesto fondateur</h3> 
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 g-md-5" id="sestoGridBenito">
+  <div class="col"> 
+    <div class="sesto-card"> 
+      <img src="https://sestosociety.com/images/Benito_01.png" 
+           class="sesto-card-img" 
+           alt="Jean-Benîto :: Sesto fondateur" 
+           onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';" 
+           data-bs-toggle="modal" 
+           data-bs-target="#imageModal" 
+           data-img-src="https://sestosociety.com/images/Benito_01.png" 
+           data-img-name="Jean-Benîto :: Sesto fondateur"
+           data-img-desc="Le Sesto Fondateur. A probablement découvert le mot 'sesto' en essayant de commander une poutine extra fromage sans bégayer. Mission accomplie... à moitié."> 
+      <div class="sesto-card-body text-center">
+        <p class="sesto-card-text">Inventeur (par accident?).</p>
+      </div> 
+    </div> 
+  </div>
+</div>
+
+<h3 class="section-heading mt-5">Jean-Arthur :: Ti-Sess</h3>
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 g-md-5" id="sestoGridArthur">
+  <div class="col"> 
+    <div class="sesto-card"> 
+      <img src="https://sestosociety.com/images/Arthur_01.png" 
+           class="sesto-card-img" 
+           alt="Jean-Arthur :: Ti-Sess 1" 
+           onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/ :: Ti-Sess 1"
+           onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';" 
+           data-bs-toggle="modal" 
+           data-bs-target="#imageModal" 
+           data-img-src="https://sestosociety.com/images/Arthur_01.png" 
+           data-img-name="Jean-Arthur :: Ti-Sess"
+           data-img-desc="La relève est là. Il apprend vite les rudiments de la sesterie, comme mettre ses souliers dans les mauvaises pieds ou chercher ses lunettes alors qu'elles sont sur sa tête. Un prodige."> 
+      <div class="sesto-card-body text-center">
+        <p class="sesto-card-text">Petit mais sesto.</p>
       </div>
-    </div>
+    </div> 
+  </div>
+  <div class="col"> 
+    <div class="sesto-card"> 
+      <img src="https://sestosociety.com/images/Arthur_02.png" 
+           class="sesto-card-img" 
+           alt="Jean-Arthur :: Ti-Sess 2" 
+           onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';" 
+           data-bs-toggle="modal" 
+           data-bs-target="#imageModal" 
+           data-img-src="https://sestosociety.com/images/Arthur_02.png" 
+           data-img-name="Jean-Arthur :: Ti-Sess"
+           data-img-desc="Ce sourire ? C'est juste avant de demander pour la 5ème fois si le micro-ondes peut réchauffer la crème glacée. Adorable... et un peu inquiétant pour l'avenir."> 
+      <div class="sesto-card-body text-center">
+        <p class="sesto-card-text">Sesto en formation.</p>
+      </div> 
+    </div> 
+  </div>
+</div>
 
-    <div class="container text-center my-4 my-md-5"> 
-        <p class="lead fst-italic col-lg-8 mx-auto">
-            Salut gang de Sestos (et futurs Sestos) ! Ce site, c'est un peu comme un party de famille qui dérape juste assez pour être drôle. Le mot 'sesto'? Une invention brillante (ou juste chanceuse?) d'un cousin pour traiter affectueusement quelqu'un de... disons... pas le pogo le plus dégelé de la boîte. C'est cette seconde où tu fais ou dis un truc tellement épais que ça en devient magnifique. Ici, on archive ces moments de gloire. Explorez la galerie ci-dessous, gracieuseté du 'MasterMind' Jean-Simon. Pis si tu te reconnais, ben... t'es juste un sesto, pis c'est correct !
-        </p>
-    </div>
+<h3 class="section-heading mt-5">Jean-Ben :: Pépé-Sesto</h3>
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 g-md-5" id="sestoGridBen">
+  <div class="col"> 
+    <div class="sesto-card"> 
+      <img src="https://sestosociety.com/images/Ben_01.png" 
+           class="sesto-card-img" 
+           alt="Jean-Ben :: Pépé-Sesto" 
+           onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';" 
+           data-bs-toggle="modal" 
+           data-bs-target="#imageModal" 
+           data-img-src="https://sestosociety.com/images/Ben_01.png" 
+           data-img-name="Jean-Ben :: Pépé-Sesto"
+           data-img-desc="Le Pépé-Sesto, la force tranquille. Il a l'expérience, la sagesse... et parfois, il cherche ses lunettes pendant 10 minutes alors qu'elles sont sur son nez. Une légende."> 
+      <div class="sesto-card-body text-center">
+        <p class="sesto-card-text">Sagesse & Sesterie.</p>
+      </div> 
+    </div> 
+  </div>
+</div>
 
-    <div class="text-center mb-4"> 
-       <h2 class="sesto-main-title d-flex align-items-center justify-content-center flex-wrap"> 
-           <span id="sestoOfTheHourBaseTitle">Le Panthéon des Sestos</span>
-           <span class="text-info ms-2 d-none" id="sestoOfTheHourDynamicPart"> (<span id="sestoOfTheHourLabel">Du moment</span> : 
-               <img src="" alt="" id="sestoOfTheHourImg" class="sesto-of-hour-thumb d-none"> <span id="sestoOfTheHourName"></span> !)
-           </span>
-       </h2> 
-    </div>
+<h3 class="section-heading mt-5">Jean-Gilebert :: Sesto Philosophe</h3>
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 g-md-5" id="sestoGridGilebert">
+  <div class="col"> 
+    <div class="sesto-card"> 
+      <img src="https://sestosociety.com/images/Gilebert_01.png" 
+           class="sesto-card-img" 
+           alt="Jean-Gilebert :: Sesto Philosophe 1" 
+           onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';" 
+           data-bs-toggle="modal" 
+           data-bs-target="#imageModal" 
+           data-img-src="https://sestosociety.com/images/Gilebert_01.png" 
+           data-img-name="Jean-Gilebert :: Sesto Philosophe"
+           data-img-desc="Le Sesto Philosophe dans toute sa splendeur. A passé 20 minutes à chercher pourquoi sa voiture ne démarrait pas avant de réaliser qu'il était assis dans la mauvaise voiture. 'C'est pas ma faute, elles sont toutes grises maintenant!'"> 
+      <div class="sesto-card-body text-center">
+        <p class="sesto-card-text">Méditation profonde.</p>
+      </div> 
+    </div> 
+  </div>
+  <div class="col"> 
+    <div class="sesto-card"> 
+      <img src="https://sestosociety.com/images/Gilebert_02.png" 
+           class="sesto-card-img" 
+           alt="Jean-Gilebert :: Sesto Philosophe 2" 
+           onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';" 
+           data-bs-toggle="modal" 
+           data-bs-target="#imageModal" 
+           data-img-src="https://sestosociety.com/images/Gilebert_02.png" 
+           data-img-name="Jean-Gilebert :: Sesto Philosophe"
+           data-img-desc="A un jour expliqué pendant 15 minutes pourquoi les toasts tombent toujours côté beurre, avant de conclure que 'c'est une conspiration des fabricants de tapis'. Un génie incompris de notre temps."> 
+      <div class="sesto-card-body text-center">
+        <p class="sesto-card-text">Théories du complot.</p>
+      </div> 
+    </div> 
+  </div>
+  <div class="col"> 
+    <div class="sesto-card"> 
+      <img src="https://sestosociety.com/images/Gilebert_03.png" 
+           class="sesto-card-img" 
+           alt="Jean-Gilebert :: Sesto Philosophe 3" 
+           onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';" 
+           data-bs-toggle="modal" 
+           data-bs-target="#imageModal" 
+           data-img-src="https://sestosociety.com/images/Gilebert_03.png" 
+           data-img-name="Jean-Gilebert :: Sesto Philosophe"
+           data-img-desc="Sa plus grande réalisation : avoir convaincu tout le monde à une fête qu'il était expert en vins, alors qu'il buvait du jus de raisin toute la soirée. 'Le goût est dans la tête, pas dans la bouteille!'"> 
+      <div class="sesto-card-body text-center">
+        <p class="sesto-card-text">Sommelier autoproclamé.</p>
+      </div> 
+    </div> 
+  </div>
+</div>
 
-    <div class="container mt-4"> 
-      <h3 class="mb-3 mt-4 section-heading">Jean-Christophe :: Sesto Typic</h3>
-      <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 g-3 g-sm-5" id="sestoGridChris"> 
-        <div class="col"> <div class="card h-100"> <img src="https://sestosociety.com/images/Chris_01.png" class="card-img-top sesto-card-img" alt="Jean-Christophe :: Sesto Typic 1" onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';" data-bs-toggle="modal" data-bs-target="#imageModal" data-img-src="https://sestosociety.com/images/Chris_01.png" data-img-name="Jean-Christophe :: Sesto Typic" data-img-desc="Le gars qui demande 'C'est quoi?' quand on explique le concept. Il EST le concept. L'étalon-or, la référence de base pour mesurer le niveau de sesterie ambiant. Fiable dans sa 'sestitude'."> <div class="card-body text-center py-2"> <p class="card-text small text-body-secondary fst-italic">Le Standard Sesto.</p></div> </div> </div>
-        <div class="col"> <div class="card h-100"> <img src="https://sestosociety.com/images/Chris_02.png" class="card-img-top sesto-card-img" alt="Jean-Christophe :: Sesto Typic 2" onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';" data-bs-toggle="modal" data-bs-target="#imageModal" data-img-src="https://sestosociety.com/images/Chris_02.png" data-img-name="Jean-Christophe :: Sesto Typic" data-img-desc="Ce regard profond qui fixe l'infini... ou juste le mur d'en face parce qu'il a oublié ce qu'il cherchait en entrant dans la pièce. Un classique Sesto Typic."> <div class="card-body text-center py-2"><p class="card-text small text-body-secondary fst-italic">Regard... Vide ?</p></div> </div> </div>
-        <div class="col"> <div class="card h-100"> <img src="https://sestosociety.com/images/Chris_03.png" class="card-img-top sesto-card-img" alt="Jean-Christophe :: Sesto Typic 3" onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';" data-bs-toggle="modal" data-bs-target="#imageModal" data-img-src="https://sestosociety.com/images/Chris_03.png" data-img-name="Jean-Christophe :: Sesto Typic" data-img-desc="Est-ce qu'il réfléchit à la complexité de l'univers, à la recette de pâté chinois, ou à s'il a laissé le gaz ouvert ? Le mystère reste entier. Probablement la deuxième option."> <div class="card-body text-center py-2"><p class="card-text small text-body-secondary fst-italic">Il pense (peut-être).</p></div> </div> </div>
+<h3 class="section-heading mt-5">Jean-Emilie :: Sesto Créatif</h3>
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 g-md-5" id="sestoGridEmilie">
+  <div class="col"> 
+    <div class="sesto-card"> 
+      <img src="https://sestosociety.com/images/Emilie_01.png" 
+           class="sesto-card-img" 
+           alt="Jean-Emilie :: Sesto Créatif 1" 
+           onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';" 
+           data-bs-toggle="modal" 
+           data-bs-target="#imageModal" 
+           data-img-src="https://sestosociety.com/images/Emilie_01.png" 
+           data-img-name="Jean-Emilie :: Sesto Créatif"
+           data-img-desc="Le Sesto Créatif par excellence. A passé trois heures à chercher son téléphone en utilisant la lampe de poche... de son téléphone. 'J'étais tellement concentré sur ma recherche que j'ai pas fait le lien!'"> 
+      <div class="sesto-card-body text-center">
+        <p class="sesto-card-text">Concentration extrême.</p>
       </div> 
-      <h3 class="mb-3 mt-5 section-heading">Jean-Dominique :: Ultra Sess</h3>
-      <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 g-3 g-sm-5" id="sestoGridDom">
-         <div class="col"> 
-           <div class="card h-100"> 
-             <img 
-                src="https://sestosociety.com/images/Dom_01.png" 
-                class="card-img-top sesto-card-img" 
-                alt="Jean-Dominique :: Ultra Sess 1" 
-                onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';" 
-                data-bs-toggle="modal" 
-                data-bs-target="#imageModal" 
-                data-img-src="https://sestosociety.com/images/Dom_01.png" 
-                data-img-name="Jean-Dominique :: Ultra Sess"
-                data-img-desc="Le Big Bang de la Society. L'étincelle initiale qui a tout démarré. On ne sait pas encore s'il faut le remercier ou lui envoyer la facture du psy collectif." 
-              > 
-             <div class="card-body text-center py-2"><p class="card-text small text-body-secondary fst-italic">Le Big Bang originel.</p></div> </div> 
-         </div>
-         <div class="col"> 
-           <div class="card h-100"> 
-             <img 
-                src="https://sestosociety.com/images/Dom_02.png" 
-                class="card-img-top sesto-card-img" 
-                alt="Jean-Dominique :: Ultra Sess 2" 
-                onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';" 
-                data-bs-toggle="modal" 
-                data-bs-target="#imageModal" 
-                data-img-src="https://sestosociety.com/images/Dom_02.png" 
-                data-img-name="Jean-Dominique :: Ultra Sess"
-                data-img-desc="L'Ultra Sess dans son habitat naturel : en pleine réflexion intense sur des concepts probablement... sesto." > 
-             <div class="card-body text-center py-2"><p class="card-text small text-body-secondary fst-italic">Attention, ça réfléchit fort.</p></div> </div> 
-         </div>
-         <div class="col"> 
-           <div class="card h-100"> 
-             <img 
-                src="https://sestosociety.com/images/Dom_03.png" 
-                class="card-img-top sesto-card-img" 
-                alt="Jean-Dominique :: Ultra Sess 3" 
-                onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';" 
-                data-bs-toggle="modal" 
-                data-bs-target="#imageModal" 
-                data-img-src="https://sestosociety.com/images/Dom_03.png" 
-                data-img-name="Jean-Dominique :: Ultra Sess"
-                data-img-desc="Ce niveau de concentration ne peut signifier qu'une chose : une idée sesto de génie est sur le point d'émerger." > 
-             <div class="card-body text-center py-2"><p class="card-text small text-body-secondary fst-italic">La concentration est palpable.</p></div> </div> 
-         </div>
+    </div> 
+  </div>
+  <div class="col"> 
+    <div class="sesto-card"> 
+      <img src="https://sestosociety.com/images/Emilie_02.png" 
+           class="sesto-card-img" 
+           alt="Jean-Emilie :: Sesto Créatif 2" 
+           onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';" 
+           data-bs-toggle="modal" 
+           data-bs-target="#imageModal" 
+           data-img-src="https://sestosociety.com/images/Emilie_02.png" 
+           data-img-name="Jean-Emilie :: Sesto Créatif"
+           data-img-desc="A un jour cuisiné des pâtes sans eau parce que 'ça prend trop de temps à bouillir'. Le détecteur de fumée a sonné l'alarme, mais au moins 'les pâtes étaient al dente... très al dente'."> 
+      <div class="sesto-card-body text-center">
+        <p class="sesto-card-text">Chef innovant.</p>
       </div> 
-      <h3 class="mb-3 mt-5 section-heading">Jean-Benîto :: Sesto fondateur</h3> 
-       <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 g-3 g-sm-5" id="sestoGridBenito">
-         <div class="col"> 
-           <div class="card h-100"> 
-             <img 
-                src="https://sestosociety.com/images/Benito_01.png" 
-                class="card-img-top sesto-card-img" 
-                alt="Jean-Benîto :: Sesto fondateur" 
-                onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';" 
-                data-bs-toggle="modal" 
-                data-bs-target="#imageModal" 
-                data-img-src="https://sestosociety.com/images/Benito_01.png" 
-                data-img-name="Jean-Benîto :: Sesto fondateur"
-                data-img-desc="Le Sesto Fondateur. A probablement découvert le mot 'sesto' en essayant de commander une poutine extra fromage sans bégayer. Mission accomplie... à moitié." > 
-             <div class="card-body text-center py-2"><p class="card-text small text-body-secondary fst-italic">Inventeur (par accident?).</p></div> </div> 
-         </div>
+    </div> 
+  </div>
+  <div class="col"> 
+    <div class="sesto-card"> 
+      <img src="https://sestosociety.com/images/Emilie_03.png" 
+           class="sesto-card-img" 
+           alt="Jean-Emilie :: Sesto Créatif 3" 
+           onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';" 
+           data-bs-toggle="modal" 
+           data-bs-target="#imageModal" 
+           data-img-src="https://sestosociety.com/images/Emilie_03.png" 
+           data-img-name="Jean-Emilie :: Sesto Créatif"
+           data-img-desc="A réussi à se perdre en suivant le GPS... dans sa propre ville natale. 'Le GPS disait de tourner à droite, mais mon instinct disait gauche. Mon instinct avait tort, mais j'ai découvert un nouveau café sympa!'"> 
+      <div class="sesto-card-body text-center">
+        <p class="sesto-card-text">Explorateur accidentel.</p>
       </div> 
-      <h3 class="mb-3 mt-5 section-heading">Jean-Arthur :: Ti-Sess</h3>
-       <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 g-3 g-sm-5" id="sestoGridArthur">
-         <div class="col"> 
-           <div class="card h-100"> 
-             <img 
-                src="https://sestosociety.com/images/Arthur_01.png" 
-                class="card-img-top sesto-card-img" 
-                alt="Jean-Arthur :: Ti-Sess 1" 
-                onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';" 
-                data-bs-toggle="modal" 
-                data-bs-target="#imageModal" 
-                data-img-src="https://sestosociety.com/images/Arthur_01.png" 
-                data-img-name="Jean-Arthur :: Ti-Sess"
-                data-img-desc="La relève est là. Il apprend vite les rudiments de la sesterie, comme mettre ses souliers dans les mauvaises pieds ou chercher ses lunettes alors qu'elles sont sur sa tête. Un prodige."
-              > 
-             <div class="card-body text-center py-2"><p class="card-text small text-body-secondary fst-italic">Petit mais sesto.</p></div>
-           </div> 
-         </div>
-         <div class="col"> 
-           <div class="card h-100"> 
-             <img 
-                src="https://sestosociety.com/images/Arthur_02.png" 
-                class="card-img-top sesto-card-img" 
-                alt="Jean-Arthur :: Ti-Sess 2" 
-                onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';" 
-                data-bs-toggle="modal" 
-                data-bs-target="#imageModal" 
-                data-img-src="https://sestosociety.com/images/Arthur_02.png" 
-                data-img-name="Jean-Arthur :: Ti-Sess"
-                data-img-desc="Ce sourire ? C'est juste avant de demander pour la 5ème fois si le micro-ondes peut réchauffer la crème glacée. Adorable... et un peu inquiétant pour l'avenir." 
-              > 
-             <div class="card-body text-center py-2"><p class="card-text small text-body-secondary fst-italic">Sesto en formation.</p></div> </div> 
-         </div>
-      </div> 
-      <h3 class="mb-3 mt-5 section-heading">Jean-Ben :: Pépé-Sesto</h3>
-       <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 g-3 g-sm-5" id="sestoGridBen">
-         <div class="col"> 
-           <div class="card h-100"> 
-             <img 
-                src="https://sestosociety.com/images/Ben_01.png" 
-                class="card-img-top sesto-card-img" 
-                alt="Jean-Ben :: Pépé-Sesto" 
-                onerror="this.onerror=null; this.src='https://placehold.co/400x150/cccccc/000000?text=Image+Indisponible';" 
-                data-bs-toggle="modal" 
-                data-bs-target="#imageModal" 
-                data-img-src="https://sestosociety.com/images/Ben_01.png" 
-                data-img-name="Jean-Ben :: Pépé-Sesto"
-                data-img-desc="Le Pépé-Sesto, la force tranquille. Il a l'expérience, la sagesse... et parfois, il cherche ses lunettes pendant 10 minutes alors qu'elles sont sur son nez. Une légende." > 
-             <div class="card-body text-center py-2"><p class="card-text small text-body-secondary fst-italic">Sagesse & Sesterie.</p></div> </div> 
-         </div>
-      </div> 
+    </div> 
+  </div>
+</div>
        
     </div> 
 
-     <footer class="py-4 mt-5 text-center text-body-secondary"> 
-        <p class="mb-1">&copy; 2025 Sesto Society - Fait avec amour et beaucoup de sesterie.</p> 
-        <p class="mb-0 small gemini-mention">Site généré avec l'aide de Gemini</p> 
-     </footer>
+     <footer class="site-footer text-center text-body-secondary"> 
+  <p class="mb-1">&copy; 2025 Sesto Society - Fait avec amour et beaucoup de sesterie.</p> 
+  <p class="mb-0 small gemini-mention">Site généré avec l'aide de Gemini</p> 
+</footer>
 
-    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true"> <div class="modal-dialog modal-xl modal-dialog-centered"> <div class="modal-content"> <div class="modal-header"> <h5 class="modal-title" id="imageModalLabel">Image Sesto</h5> <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> </div> <div class="modal-body text-center"> <img src="" id="modalImage" class="img-fluid" alt="Image agrandie"> <p id="modalDescription" class="mt-3 mb-0 text-body-secondary"></p> </div> <div class="modal-footer justify-content-center border-top pt-3"> <a href="#" id="btnModalPrint" class="btn btn-warning mx-1 mx-sm-2" data-product-type="Print" data-price="14.99">Ajouter Print au panier</a> <a href="#" id="btnModalTshirt" class="btn btn-warning mx-1 mx-sm-2" data-product-type="T-Shirt" data-price="24.99">Ajouter T-Shirt au panier</a> <a href="#" id="btnModalCap" class="btn btn-warning mx-1 mx-sm-2" data-product-type="Casquette" data-price="19.99">Ajouter Casquette au panier</a> </div> </div> </div> </div>
-    <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true"> <div class="modal-dialog modal-lg modal-dialog-scrollable"> <div class="modal-content"> <div class="modal-header"> <h5 class="modal-title" id="cartModalLabel">Votre Panier Sesto</h5> <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> </div> <div class="modal-body" id="cartModalBody"> <p id="emptyCartMsg">Votre panier est vide.</p> <ul id="cartItemsList"></ul> </div> <div class="modal-footer flex-column flex-sm-row justify-content-between" id="cartModalFooter"> <div class="mb-2 mb-sm-0 text-center text-sm-start"> <strong>Total: <span id="cartTotal">0.00</span> $</strong> </div> <div class="d-flex flex-column flex-sm-row justify-content-end w-100 w-sm-auto"> <button type="button" class="btn btn-outline-secondary mb-2 mb-sm-0 me-sm-2" id="clearCartBtn">Vider le Panier</button> <button type="button" class="btn btn-success" id="checkoutBtn"> <span class="checkout-text">Passer la commande</span> <span class="spinner-border spinner-border-sm checkout-spinner" role="status" aria-hidden="true" style="display: none;"></span> </button> </div> </div> </div> </div> </div>
+    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true"> <div class="modal-dialog modal-xl modal-dialog-centered"> <div class="modal-content"> <div class="modal-header"> <h5 class="modal-title" id="imageModalLabel">Image Sesto</h5> <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> </div> <div class="modal-body text-center"> <img src="/placeholder.svg" id="modalImage" class="img-fluid" alt="Image agrandie"> <p id="modalDescription" class="mt-3 mb-0 text-body-secondary"></p> </div> <div class="modal-footer justify-content-center border-top pt-3"> 
+  <a href="#" id="btnModalPrint" class="btn btn-sesto mx-1 mx-sm-2" data-product-type="Print" data-price="14.99">Ajouter Print au panier</a> 
+  <a href="#" id="btnModalTshirt" class="btn btn-sesto mx-1 mx-sm-2" data-product-type="T-Shirt" data-price="24.99">Ajouter T-Shirt au panier</a> 
+  <a href="#" id="btnModalCap" class="btn btn-sesto mx-1 mx-sm-2" data-product-type="Casquette" data-price="19.99">Ajouter Casquette au panier</a> 
+</div> </div> </div> </div>
+    <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true"> <div class="modal-dialog modal-lg modal-dialog-scrollable"> <div class="modal-content"> <div class="modal-header"> <h5 class="modal-title" id="cartModalLabel">Votre Panier Sesto</h5> <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> </div> <div class="modal-body" id="cartModalBody"> <p id="emptyCartMsg">Votre panier est vide.</p> <ul id="cartItemsList"></ul> </div> <div class="modal-footer flex-column flex-sm-row justify-content-between" id="cartModalFooter"> <div class="mb-2 mb-sm-0 text-center text-sm-start"> <strong>Total: <span id="cartTotal">0.00</span> $</strong> </div> <div class="d-flex flex-column flex-sm-row justify-content-end w-100 w-sm-auto"> 
+  <button type="button" class="btn btn-outline-secondary mb-2 mb-sm-0 me-sm-2" id="clearCartBtn">Vider le Panier</button> 
+  <button type="button" class="btn btn-sesto" id="checkoutBtn"> 
+    <span class="checkout-text">Passer la commande</span> 
+    <span class="spinner-border spinner-border-sm checkout-spinner" role="status" aria-hidden="true" style="display: none;"></span> 
+  </button> 
+</div> </div> </div> </div> </div>
      
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     
@@ -369,11 +856,11 @@
       const checkoutBtnText = checkoutBtn ? checkoutBtn.querySelector('.checkout-text') : null;
       const checkoutSpinner = checkoutBtn ? checkoutBtn.querySelector('.checkout-spinner') : null;
       const sestoOfTheHourTitle = document.getElementById('sestoOfTheHourTitle'); 
-      const baseTitleEl = document.getElementById('sestoOfTheHourBaseTitle'); // Added selector
-      const dynamicPartEl = document.getElementById('sestoOfTheHourDynamicPart'); // Added selector
-      const labelEl = document.getElementById('sestoOfTheHourLabel'); // Added selector
-      const imgEl = document.getElementById('sestoOfTheHourImg'); // Added selector
-      const nameEl = document.getElementById('sestoOfTheHourName'); // Added selector
+      const baseTitleEl = document.getElementById('sestoOfTheHourBaseTitle'); 
+      const dynamicPartEl = document.getElementById('sestoOfTheHourDynamicPart'); 
+      const labelEl = document.getElementById('sestoOfTheHourLabel'); 
+      const imgEl = document.getElementById('sestoOfTheHourImg'); 
+      const nameEl = document.getElementById('sestoOfTheHourName'); 
       let cart = [];
 
       // --- Functions ---
@@ -458,10 +945,7 @@
                cartTotalSpan.textContent = total.toFixed(2);
           }
       }
-      // UPDATED: Function to set random Sesto title using class toggling
       function setRandomSestoTitle() {
-          // Elements already selected globally
-
           if (!baseTitleEl || !dynamicPartEl || !labelEl || !imgEl || !nameEl) {
               console.error("One or more title elements not found");
               return; 
@@ -524,7 +1008,6 @@
          });
       } else { console.error("Image Modal element #imageModal not found."); }
 
-      // Add to Cart Button Clicks - Pass event to addToCart
       const imageModalFooter = document.querySelector('#imageModal .modal-footer');
       if (imageModalFooter) { 
           imageModalFooter.addEventListener('click', (event) => { 
@@ -618,5 +1101,43 @@
       
       console.log('Page loaded! Cart script ready.');
     </script>
+<script>
+  // Add random sesto emojis floating around
+  document.addEventListener('DOMContentLoaded', function() {
+    const emojis = ['🤪', '🙃', '😵‍💫', '🫠', '🥴'];
+    const container = document.body;
+    
+    for (let i = 0; i < 5; i++) {
+      setTimeout(() => {
+        const emoji = document.createElement('div');
+        emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        emoji.style.position = 'fixed';
+        emoji.style.fontSize = Math.floor(Math.random() * 20 + 15) + 'px';
+        emoji.style.left = Math.floor(Math.random() * 90 + 5) + 'vw';
+        emoji.style.top = Math.floor(Math.random() * 90 + 5) + 'vh';
+        emoji.style.opacity = '0.2';
+        emoji.style.zIndex = '1000';
+        emoji.style.pointerEvents = 'none';
+        emoji.style.transform = `rotate(${Math.floor(Math.random() * 40 - 20)}deg)`;
+        emoji.style.animation = `float ${Math.floor(Math.random() * 5 + 8)}s ease-in-out infinite`;
+        
+        container.appendChild(emoji);
+      }, i * 1000);
+    }
+  });
+  
+  // Add wobble effect to buttons on hover
+  document.addEventListener('DOMContentLoaded', function() {
+    const buttons = document.querySelectorAll('.btn-sesto');
+    buttons.forEach(button => {
+      button.addEventListener('mouseenter', function() {
+        this.classList.add('is-shaking');
+        setTimeout(() => {
+          this.classList.remove('is-shaking');
+        }, 500);
+      });
+    });
+  });
+</script>
   </body>
 </html>
